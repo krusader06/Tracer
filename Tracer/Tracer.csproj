@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5F9B4E9F-EFAE-4242-927D-5E2F65CDC0A8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Tracer</RootNamespace>
+    <AssemblyName>Tracer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\Classes\DataAccess\EngineeringDataAccess.cs" />
+    <Compile Include="Forms\Classes\DatabaseTables\ActiveQuotes.cs" />
+    <Compile Include="Forms\Classes\DataAccess\SalesDataAccess.cs" />
+    <Compile Include="Forms\Classes\DatabaseTables\LotNumbers.cs" />
+    <Compile Include="Forms\Classes\DatabaseTables\LotPurchasingStatus.cs" />
+    <Compile Include="Forms\Classes\DatabaseTables\LotStatus.cs" />
+    <Compile Include="Forms\Classes\DatabaseTables\LotTimeTracking.cs" />
+    <Compile Include="Forms\Classes\DatabaseTables\PurchasingTimeTracking.cs" />
+    <Compile Include="Forms\Classes\DatabaseTables\QuoteStatus.cs" />
+    <Compile Include="Forms\Classes\DatabaseTables\WorkOrders.cs" />
+    <Compile Include="Forms\Classes\Helper.cs" />
+    <Compile Include="Forms\Classes\StatusCalculation.cs" />
+    <Compile Include="Forms\Classes\LotTask.cs" />
+    <Compile Include="Forms\Views\Default\ucDefaultDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Default\ucDefaultDashboard.Designer.cs">
+      <DependentUpon>ucDefaultDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Default\ucDefaultMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Default\ucDefaultMenu.Designer.cs">
+      <DependentUpon>ucDefaultMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Engineering\ucEngineeringTasks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Engineering\ucEngineeringTasks.Designer.cs">
+      <DependentUpon>ucEngineeringTasks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Executive\ucExecutiveMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Executive\ucExecutiveMenu.Designer.cs">
+      <DependentUpon>ucExecutiveMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Production\ucProductionMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Production\ucProductionMenu.Designer.cs">
+      <DependentUpon>ucProductionMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Purchasing\ucPurchasingMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Purchasing\ucPurchasingMenu.Designer.cs">
+      <DependentUpon>ucPurchasingMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainWrapper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainWrapper.Designer.cs">
+      <DependentUpon>MainWrapper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Engineering\ucEngineeringDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Engineering\ucEngineeringDashboard.Designer.cs">
+      <DependentUpon>ucEngineeringDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Engineering\ucProcessMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Engineering\ucProcessMenu.Designer.cs">
+      <DependentUpon>ucProcessMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Engineering\ucProcessTask.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Engineering\ucProcessTask.Designer.cs">
+      <DependentUpon>ucProcessTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucAddLot.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucAddLot.Designer.cs">
+      <DependentUpon>ucAddLot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucAddEditQuote.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucAddEditQuote.Designer.cs">
+      <DependentUpon>ucAddEditQuote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucEditLot.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucEditLot.Designer.cs">
+      <DependentUpon>ucEditLot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucLinkPurchaseOrder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucLinkPurchaseOrder.Designer.cs">
+      <DependentUpon>ucLinkPurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucSalesDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucSalesDashboard.Designer.cs">
+      <DependentUpon>ucSalesDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucSalesMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucSalesMenu.Designer.cs">
+      <DependentUpon>ucSalesMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucSalesTasks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucSalesTasks.Designer.cs">
+      <DependentUpon>ucSalesTasks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Views\Default\ucDefaultDashboard.resx">
+      <DependentUpon>ucDefaultDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Default\ucDefaultMenu.resx">
+      <DependentUpon>ucDefaultMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Engineering\ucEngineeringTasks.resx">
+      <DependentUpon>ucEngineeringTasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Executive\ucExecutiveMenu.resx">
+      <DependentUpon>ucExecutiveMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Production\ucProductionMenu.resx">
+      <DependentUpon>ucProductionMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Purchasing\ucPurchasingMenu.resx">
+      <DependentUpon>ucPurchasingMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainWrapper.resx">
+      <DependentUpon>MainWrapper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Engineering\ucEngineeringDashboard.resx">
+      <DependentUpon>ucEngineeringDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Engineering\ucProcessMenu.resx">
+      <DependentUpon>ucProcessMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Engineering\ucProcessTask.resx">
+      <DependentUpon>ucProcessTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Sales\ucAddLot.resx">
+      <DependentUpon>ucAddLot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Sales\ucAddEditQuote.resx">
+      <DependentUpon>ucAddEditQuote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Sales\ucEditLot.resx">
+      <DependentUpon>ucEditLot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Sales\ucLinkPurchaseOrder.resx">
+      <DependentUpon>ucLinkPurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Sales\ucSalesDashboard.resx">
+      <DependentUpon>ucSalesDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Sales\ucSalesMenu.resx">
+      <DependentUpon>ucSalesMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Sales\ucSalesTasks.resx">
+      <DependentUpon>ucSalesTasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TracerImg.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
