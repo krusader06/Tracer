@@ -38,6 +38,8 @@ namespace Tracer.Forms.Classes
                 tempLots = connection.Query<DatabaseTables.LotStatus>($"SELECT * FROM LotStatus WHERE LotID='{ LotID[0] }'").ToList();
             }
 
+
+
             //Parse the LotStatus
 
             int state = 0;
