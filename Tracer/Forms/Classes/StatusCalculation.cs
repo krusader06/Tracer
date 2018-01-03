@@ -11,7 +11,7 @@ namespace Tracer.Forms.Classes
     {
         public void CalculateStatus(Classes.LotTask currentTask)
         {   //Find out whether or not the task is a Quote Task or Lot Task
-            if (currentTask.Lot == 0)
+            if (currentTask.Lot == 0) //The lot will be 0 if it is still in the quoting stage...
             {
                 CalculateQuoteStatus(currentTask);
             }
@@ -276,10 +276,210 @@ namespace Tracer.Forms.Classes
             }
         }
 
+
+
+
         public void CalculateQuoteStatus(Classes.LotTask currentTask)
         {
 
+            //Holder for the QuoteStatus
+            List<DatabaseTables.QuoteStatus> tempLots = new List<DatabaseTables.QuoteStatus>();
+            //This is responsible for going through a QuoteWOR and updating the "QuoteCurrentStatus" field on QuoteStatus Table.
 
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //Load a new QuoteCurrentStatus where QuoteWOR = currentTask.JobWOR
+                tempLots = connection.Query<DatabaseTables.QuoteStatus>($"SELECT * FROM QuoteStatus WHERE QuoteWOR='{ currentTask.JobWOR }'").ToList();
+            }
+
+            //Parse the QuoteStatus
+
+            int state = 0;
+            int finalState = 15;
+            var newStatus = "";
+
+            //For each step (BOMValidation, PartsReview, PreBid, and FinalReview) it first looks to see if the step is complete.
+            //If it is complete, it moves on to the next step
+            //if not complete, it looks to see if it's been requested
+            //if it is requested, then it looks to see if it's In Progress
+
+
+            while (state < finalState)
+            {
+                switch (state)
+                {
+                    case 0: //Looking at BOM Validation Status
+
+                        if (tempLots[0].BOMValidationComplete == 1)
+                        {//BOM Validation is complete, Go on to check for Parts Review Status
+                            state = 2;
+
+                            newStatus = "BOM Validation is Complete";
+                        }
+                        else
+                        {
+                            //BOM Validation is not complete
+                            state = 1;
+                        }
+
+                        break;
+
+                    case 1:
+
+                        if (tempLots[0].BOMValidationRequest == 1)
+                        {
+                            //BOM Validation has been requested, check to see if it is in progress
+                            if (tempLots[0].BOMValidationInProgress == 1)
+                            {
+                                //BOM Validation is in Progress, Update newStatus and signal end of state machine
+                                newStatus = "BOM Validation In Progress";
+                                state = finalState;
+                            }
+                            else
+                            {
+                                //BOM Validation has been requested
+                                newStatus = "BOM Validation Requested";
+                                state = finalState;
+                            }
+                        }
+                        else
+                        {
+                            //BOM Validation has not been requested, check to see if Parts Review has been Requested
+                            newStatus = "New Quote";
+                        }
+
+                        break;
+
+                    case 2: //Looking at Parts Review
+
+                        if (tempLots[0].PartsReviewComplete == 1)
+                        {//Parts Review is complete, Go on to check for Pre-Bid Status
+                            state = 4;
+                            newStatus = "Parts Review Complete";
+                        }
+                        else
+                        {
+                            //Parts Review is not complete
+                            state = 3;
+                        }
+
+                        break;
+
+                    case 3:
+
+                        if (tempLots[0].PartsReviewRequest == 1)
+                        {
+                            //Parts Review has been requested, check to see if it is in progress
+                            if (tempLots[0].PartsReviewInProgress == 1)
+                            {
+                                //Parts Review is in Progress, Update newStatus and signal end of state machine
+                                newStatus = "Parts Review In Progress";
+                                state = finalState;
+                            }
+                            else
+                            {
+                                //Parts Review has been requested
+                                newStatus = "Parts Review Requested";
+                                state = finalState;
+                            }
+                        }
+                        else
+                        {
+                            //Parts Review has not been requested, Check to see if Pre-Bid has been requested
+                            state = 4; //This is a difference from the above state machine becuase Parts Review might not come before Pre-Bid
+                        }
+
+                        break;
+
+                    case 4: //Looking at Pre-Bid Review
+
+                        if (tempLots[0].PreBidComplete == 1)
+                        {//Pre-Bid Review is complete, Go on to check for Final Review Status
+                            state = 6;
+                            newStatus = "Pre-Bid Review Complete";
+                        }
+                        else
+                        {
+                            //Pre-Bid Review is not complete
+                            state = 5;
+                        }
+
+                        break;
+
+                    case 5:
+
+                        if (tempLots[0].PreBidRequest == 1)
+                        {
+                            //Pre-Bid Review has been requested, check to see if it is in progress
+                            if (tempLots[0].PreBidInProgress == 1)
+                            {
+                                //Pre-Bid Review is in Progress, Update newStatus and signal end of state machine
+                                newStatus = "Pre-Bid Review In Progress";
+                                state = finalState;
+                            }
+                            else
+                            {
+                                //Pre-Bid Review has been requested
+                                newStatus = "Pre-Bid Review Requested";
+                                state = finalState;
+                            }
+                        }
+                        else
+                        {
+                            //Pre-Bid Review has not been requested
+                            state = finalState;
+                        }
+
+                        break;
+
+                    case 6: //Looking at Final Review
+
+                        if (tempLots[0].FinalReviewComplete == 1)
+                        {//Final Review is complete
+                            state = 8;
+                        }
+                        else
+                        {
+                            //Final Review is not complete
+                            state = 7;
+                        }
+
+                        break;
+
+                    case 7:
+
+                        if (tempLots[0].FinalReviewInProgress == 1)
+                        {
+
+                            //Final Review is in Progress, Update newStatus and signal end of state machine
+                            newStatus = "Final Review In Progress";
+                            state = finalState;
+
+                        }
+                        else
+                        {
+                            //Final Review has not been requested
+                            newStatus = "Final Review Complete";
+                            state = finalState;
+                        }
+
+                        break;
+
+                    default:
+
+                        newStatus = "Unknown State";
+                        state = finalState;
+
+                        break;
+                }
+            }
+
+
+            //Write newStatus to QuteStatus.QWuoteCurrentStatus
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                connection.Execute($"UPDATE QuoteStatus SET QuoteCurrentStatus='{ newStatus }' WHERE QuoteWOR='{ currentTask.JobWOR }'");
+            }
 
 
 

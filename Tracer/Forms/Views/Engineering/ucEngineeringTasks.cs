@@ -235,22 +235,22 @@ namespace Tracer.Forms.Views.Engineering
 
             switch (dgTaskView[3, activeRow].Value.ToString())
             {
-                case "BOM Validation Requested":
-                    //Update QuoteStatus
+                case "BOM Validation In Progress":
+                    //Set BOMValidationComplete=True, BOMValidationRequest=False, BOMValidationInProgress=False; Eventually, Time-Tracking will happen here too...
                     db.UpdateBOMValidationComplete(currentTask);
 
                     break;
-                case "Master Creation Requested":
+                case "Master Creation In Progress":
                     //Change the MasterInProgress Flag to True and Time-Stamp LotTimeTracking.MasterEnd
                     db.UpdateMasterComplete(currentTask);
 
                     break;
-                case "Quote Review Requested":
+                case "Quote Review In Progress":
                     //Update QuoteReviewComplete Flag to True and Time-stamp LotTimeTracking.QuoteReviewEnd
                     db.UpdateQuoteReviewComplete(currentTask);
 
                     break;
-                case "Pre-Bid Review Requested":
+                case "Pre-Bid Review In Progress":
                     //Update PreBidComplete Flag to True
                     db.UpdatePreBidComplete(currentTask);
 

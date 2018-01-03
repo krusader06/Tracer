@@ -41,24 +41,12 @@ namespace Tracer.Forms.Classes.DataAccess
 
         public void UpdateBOMValidationInProgress(LotTask currentTask)
         {
+
+            //Set BomValidationInProgress Flag within QuoteStatus
             using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
             {
-
-                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
-                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ currentTask.JobWOR }' AND Lot=' { currentTask.Lot }'").ToList();
-
-                //2. Change MasterInProgress flag to "True" where LotID = returned LotID from previous Call
-                connection.Execute($"UPDATE LotStatus SET MasterReviewInProgress='True' WHERE LotID='{ LotID[0] }'");
-
-                //3. Get LotStatusID from LotStatus where LotID = returned LotID from previous Call
-                var LotStatusID = connection.Query<string>($"SELECT LotStatusID FROM LotStatus WHERE LotID='{ LotID[0] }'").ToList();
-
-                //Get Current DateTime
-                DateTime rightNow = new DateTime();
-                rightNow = DateTime.Now;
-
-                //4. update MasterReviewStart(time-stamp) in LotTimeTracking where LotStatusID = LotStatusID from previous Call
-                connection.Execute($"UPDATE LotTimeTracking SET MasterReviewStart='{ rightNow.ToString() }' WHERE LotStatusID='{ LotStatusID[0] }'");
+                //1. Update BOMValidationInProgress where QuoteWOR = workorder from currentTask
+                connection.Execute($"UPDATE QuoteStatus SET BOMValidationInProgress='True' WHERE QuoteWOR='{ currentTask.JobWOR }'");
             }
         }
 
@@ -66,22 +54,17 @@ namespace Tracer.Forms.Classes.DataAccess
         {
             using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
             {
+                //1. Change BOMValidationRequest, BOMValidationInProgress flags to "False", and BOMValidationComplete flag to "True" where QuoteWOR = currentTask.JobWOR
+                connection.Execute($"UPDATE QuoteStatus SET BOMValidationInProgress='False', BOMValidationRequest='False', BOMValidationComplete='True' WHERE QuoteWOR='{ currentTask.JobWOR }'");
 
-                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
-                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ currentTask.JobWOR }' AND Lot=' { currentTask.Lot }'").ToList();
+                //TIME-TRACKING PLACE-HOLDER FOR NOW
 
-                //2. Change MasterReviewInProgress, MasterReviewInProgress flags to "False", and MasterReviewComplete flag to "True" where LotID = returned LotID from previous Call
-                connection.Execute($"UPDATE LotStatus SET MasterReviewInProgress='False', MasterReviewRequest='False', MasterReviewComplete='True' WHERE LotID='{ LotID[0] }'");
 
-                //3. Get LotStatusID from LotStatus where LotID = returned LotID from previous Call
-                var LotStatusID = connection.Query<string>($"SELECT LotStatusID FROM LotStatus WHERE LotID='{ LotID[0] }'").ToList();
+                //DateTime rightNow = new DateTime();
+                //rightNow = DateTime.Now;
 
-                //Get Current DateTime
-                DateTime rightNow = new DateTime();
-                rightNow = DateTime.Now;
-
-                //4. update MasterReviewEnd(time-stamp) in LotTimeTracking where LotStatusID = LotStatusID from previous Call
-                connection.Execute($"UPDATE LotTimeTracking SET MasterReviewEnd='{ rightNow.ToString() }' WHERE LotStatusID='{ LotStatusID[0] }'");
+                //3. update MasterReviewEnd(time-stamp) in LotTimeTracking where LotStatusID = LotStatusID from previous Call
+                //connection.Execute($"UPDATE LotTimeTracking SET MasterReviewEnd='{ rightNow.ToString() }' WHERE LotStatusID='{ LotStatusID[0] }'");
             }
         }
 
@@ -99,8 +82,6 @@ namespace Tracer.Forms.Classes.DataAccess
         {
             throw new NotImplementedException();
         }
-
-        
 
         internal void UpdateQuoteReviewComplete(LotTask currentTask)
         {
