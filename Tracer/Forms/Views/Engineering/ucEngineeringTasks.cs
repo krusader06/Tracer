@@ -49,7 +49,7 @@ namespace Tracer.Forms.Views.Engineering
 
         //Functions----------------------------------------------------------------------------------
         //Engineering Task List will show 4 items for now: BOM Validation Request, Quote Review Request, Master Creation Request, Pre-Bid Review Request
-        private void updateData(object sender, EventArgs e)
+        public void updateData(object sender, EventArgs e)
         {
             dgTaskView.DataSource = null;
             Classes.DataAccess.EngineeringDataAccess db = new Classes.DataAccess.EngineeringDataAccess();

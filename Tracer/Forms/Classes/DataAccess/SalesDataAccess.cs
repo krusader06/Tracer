@@ -80,7 +80,7 @@ namespace Tracer.Forms.Classes.DataAccess
                 //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
                 var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ currentTask.JobWOR }' AND Lot=' { currentTask.Lot }'").ToList();
 
-                //2. Change MasterInProgress flag to "True" where LotID = returned LotID from previous Call
+                //2. Change MasterReviewInProgress flag to "True" where LotID = returned LotID from previous Call
                 connection.Execute($"UPDATE LotStatus SET MasterReviewInProgress='True' WHERE LotID='{ LotID[0] }'");
 
                 //3. Get LotStatusID from LotStatus where LotID = returned LotID from previous Call

@@ -32,7 +32,7 @@ namespace Tracer.Forms.Views.Process
             UpdateBinding();
         }
 
-        private void populate(object sender, EventArgs e)
+        public void populate(object sender, EventArgs e)
         {
             Classes.DataAccess.EngineeringDataAccess db = new Classes.DataAccess.EngineeringDataAccess();
             quotes = db.LoadProcessDashboard();

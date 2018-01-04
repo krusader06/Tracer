@@ -13,8 +13,8 @@ namespace Tracer.Forms.Classes.DataAccess
         public List<DatabaseTables.ActiveQuotes> LoadProcessDashboard()
         {
             using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
-            {
-                var result = connection.Query<DatabaseTables.ActiveQuotes>($"select * from ActiveQuotes where QuoteConfidence='High'").ToList();
+            {//Grab all active/high-confidence quotes
+                var result = connection.Query<DatabaseTables.ActiveQuotes>($"select * from ActiveQuotes where QuoteConfidence='High' AND POReceived='False' AND QuoteInactive='False'").ToList();
                 return result;
             }
         }
@@ -38,6 +38,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $"WHERE LotStatus.QuoteReviewRequest = 'True' OR LotStatus.MasterRequest = 'True'").ToList();
             }
         }
+
+        //BOM Validation Tasks----------------------------------------------------------------------
 
         public void UpdateBOMValidationInProgress(LotTask currentTask)
         {
@@ -68,34 +70,133 @@ namespace Tracer.Forms.Classes.DataAccess
             }
         }
 
+        //Master Tasks-------------------------------------------------------------------------------
+
         internal void UpdateMasterInProgress(LotTask currentTask)
         {
-            throw new NotImplementedException();
-        }
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Get LotID from LotNumbers where JobWOR = currentTask.JobWOR and Lot = currentTask.Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ currentTask.JobWOR }' AND Lot=' { currentTask.Lot }'").ToList();
 
-        internal void UpdateQuoteReviewInProgress(LotTask currentTask)
-        {
-            throw new NotImplementedException();
-        }
+                //2. Change MasterInProgress flag to "True" where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotStatus SET MasterInProgress='True' WHERE LotID='{ LotID[0] }'");
 
-        internal void UpdatePreBidInProgress(LotTask currentTask)
-        {
-            throw new NotImplementedException();
-        }
+                //3. Get LotStatusID from LotStatus where LotID = returned LotID from previous Call
+                var LotStatusID = connection.Query<string>($"SELECT LotStatusID FROM LotStatus WHERE LotID='{ LotID[0] }'").ToList();
 
-        internal void UpdateQuoteReviewComplete(LotTask currentTask)
-        {
-            throw new NotImplementedException();
-        }
+                //Get Current DateTime
+                DateTime rightNow = new DateTime();
+                rightNow = DateTime.Now;
 
-        internal void UpdatePreBidComplete(LotTask currentTask)
-        {
-            throw new NotImplementedException();
+                //4. update MasterStart(time-stamp) in LotTimeTracking where LotStatusID = LotStatusID from previous Call
+                connection.Execute($"UPDATE LotTimeTracking SET MasterStart='{ rightNow.ToString() }' WHERE LotStatusID='{ LotStatusID[0] }'");
+            }
         }
 
         internal void UpdateMasterComplete(LotTask currentTask)
         {
-            throw new NotImplementedException();
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+
+                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ currentTask.JobWOR }' AND Lot=' { currentTask.Lot }'").ToList();
+
+                //2. Change MasterRequest, MasterInProgress flags to "False", and MasterReviewComplete flag to "True" where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotStatus SET MasterInProgress='False', MasterRequest='False', MasterComplete='True' WHERE LotID='{ LotID[0] }'");
+
+                //3. Get LotStatusID from LotStatus where LotID = returned LotID from previous Call
+                var LotStatusID = connection.Query<string>($"SELECT LotStatusID FROM LotStatus WHERE LotID='{ LotID[0] }'").ToList();
+
+                //Get Current DateTime
+                DateTime rightNow = new DateTime();
+                rightNow = DateTime.Now;
+
+                //4. update MasterEnd(time-stamp) in LotTimeTracking where LotStatusID = LotStatusID from previous Call
+                connection.Execute($"UPDATE LotTimeTracking SET MasterEnd='{ rightNow.ToString() }' WHERE LotStatusID='{ LotStatusID[0] }'");
+            }
         }
+
+
+        //Quote Review Tasks-------------------------------------------------------------------------------
+
+        internal void UpdateQuoteReviewInProgress(LotTask currentTask)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Get LotID from LotNumbers where JobWOR = currentTask.JobWOR and Lot = currentTask.Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ currentTask.JobWOR }' AND Lot=' { currentTask.Lot }'").ToList();
+
+                //2. Change QuoteReviewInProgress flag to "True" where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotStatus SET QuoteReviewInProgress='True' WHERE LotID='{ LotID[0] }'");
+
+                //3. Get LotStatusID from LotStatus where LotID = returned LotID from previous Call
+                var LotStatusID = connection.Query<string>($"SELECT LotStatusID FROM LotStatus WHERE LotID='{ LotID[0] }'").ToList();
+
+                //Get Current DateTime
+                DateTime rightNow = new DateTime();
+                rightNow = DateTime.Now;
+
+                //4. update QuoteReviewStart(time-stamp) in LotTimeTracking where LotStatusID = LotStatusID from previous Call
+                connection.Execute($"UPDATE LotTimeTracking SET QuoteReviewStart='{ rightNow.ToString() }' WHERE LotStatusID='{ LotStatusID[0] }'");
+            }
+        }
+
+        internal void UpdateQuoteReviewComplete(LotTask currentTask)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+
+                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ currentTask.JobWOR }' AND Lot=' { currentTask.Lot }'").ToList();
+
+                //2. Change QuoteReviewRequest, QuoteReviewInProgress flags to "False", and QuoteReviewComplete flag to "True" where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotStatus SET QuoteReviewInProgress='False', QuoteReviewRequest='False', QuoteReviewComplete='True' WHERE LotID='{ LotID[0] }'");
+
+                //3. Get LotStatusID from LotStatus where LotID = returned LotID from previous Call
+                var LotStatusID = connection.Query<string>($"SELECT LotStatusID FROM LotStatus WHERE LotID='{ LotID[0] }'").ToList();
+
+                //Get Current DateTime
+                DateTime rightNow = new DateTime();
+                rightNow = DateTime.Now;
+
+                //4. update QuoteReviewEnd(time-stamp) in LotTimeTracking where LotStatusID = LotStatusID from previous Call
+                connection.Execute($"UPDATE LotTimeTracking SET QuoteReviewEnd='{ rightNow.ToString() }' WHERE LotStatusID='{ LotStatusID[0] }'");
+            }
+        }
+
+        //Pre-Bid Tasks-------------------------------------------------------------------------------
+
+        internal void UpdatePreBidInProgress(LotTask currentTask)
+        {
+            //Set PreBidInProgress Flag within QuoteStatus
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Update PreBidInProgress where QuoteWOR = workorder from currentTask
+                connection.Execute($"UPDATE QuoteStatus SET PreBidInProgress='True' WHERE QuoteWOR='{ currentTask.JobWOR }'");
+            }
+        }
+
+
+
+        internal void UpdatePreBidComplete(LotTask currentTask)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Change PreBidRequest, PreBidInProgress flags to "False", and PreBidComplete flag to "True" where QuoteWOR = currentTask.JobWOR
+                connection.Execute($"UPDATE QuoteStatus SET PreBidInProgress='False', PreBidRequest='False', PreBidComplete='True' WHERE QuoteWOR='{ currentTask.JobWOR }'");
+
+                //TIME-TRACKING PLACE-HOLDER FOR NOW
+
+
+                //DateTime rightNow = new DateTime();
+                //rightNow = DateTime.Now;
+
+                //3. update MasterReviewEnd(time-stamp) in LotTimeTracking where LotStatusID = LotStatusID from previous Call
+                //connection.Execute($"UPDATE LotTimeTracking SET MasterReviewEnd='{ rightNow.ToString() }' WHERE LotStatusID='{ LotStatusID[0] }'");
+            }
+        }
+
+       
     }
 }

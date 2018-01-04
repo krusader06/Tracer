@@ -183,6 +183,7 @@ namespace Tracer
             else
             {
                 Forms.Views.Process.ucProcessDashboard.Instance.BringToFront();
+                Forms.Views.Process.ucProcessDashboard.Instance.populate(null, null);
             }  
         }
 

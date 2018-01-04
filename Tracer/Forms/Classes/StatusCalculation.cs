@@ -123,13 +123,13 @@ namespace Tracer.Forms.Classes
                             if (tempLots[0].MasterInProgress == 1)
                             {
                                 //Master is in Progress, Update newStatus and signal end of state machine
-                                newStatus = "Master In Progress";
+                                newStatus = "Master Creation In Progress";
                                 state = finalState;
                             }
                             else
                             {
                                 //Master has been requested
-                                newStatus = "Master Requested";
+                                newStatus = "Master Creation Requested";
                                 state = finalState;
                             }
                         }
@@ -346,6 +346,7 @@ namespace Tracer.Forms.Classes
                         {
                             //BOM Validation has not been requested, check to see if Parts Review has been Requested
                             newStatus = "New Quote";
+                            state = 2;
                         }
 
                         break;
