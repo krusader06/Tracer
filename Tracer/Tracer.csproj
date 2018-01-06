@@ -10,6 +10,7 @@
     <AssemblyName>Tracer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -22,7 +23,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -44,6 +44,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>tracerimg_ErH_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -149,17 +152,35 @@
     <Compile Include="Forms\Views\Sales\ucAddEditQuote.Designer.cs">
       <DependentUpon>ucAddEditQuote.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Views\Sales\ucDeActivateQuote.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucDeActivateQuote.Designer.cs">
+      <DependentUpon>ucDeActivateQuote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Views\Sales\ucEditLot.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Views\Sales\ucEditLot.Designer.cs">
       <DependentUpon>ucEditLot.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Views\Sales\ucEngineeringRequest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucEngineeringRequest.Designer.cs">
+      <DependentUpon>ucEngineeringRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Views\Sales\ucLinkPurchaseOrder.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Views\Sales\ucLinkPurchaseOrder.Designer.cs">
       <DependentUpon>ucLinkPurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucPurchasingRequest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucPurchasingRequest.Designer.cs">
+      <DependentUpon>ucPurchasingRequest.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Views\Sales\ucSalesDashboard.cs">
       <SubType>UserControl</SubType>
@@ -217,11 +238,20 @@
     <EmbeddedResource Include="Forms\Views\Sales\ucAddEditQuote.resx">
       <DependentUpon>ucAddEditQuote.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Sales\ucDeActivateQuote.resx">
+      <DependentUpon>ucDeActivateQuote.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Sales\ucEditLot.resx">
       <DependentUpon>ucEditLot.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Sales\ucEngineeringRequest.resx">
+      <DependentUpon>ucEngineeringRequest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Sales\ucLinkPurchaseOrder.resx">
       <DependentUpon>ucLinkPurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Sales\ucPurchasingRequest.resx">
+      <DependentUpon>ucPurchasingRequest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Sales\ucSalesDashboard.resx">
       <DependentUpon>ucSalesDashboard.cs</DependentUpon>
@@ -257,6 +287,8 @@
   <ItemGroup>
     <None Include="Resources\TracerImg.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="tracerimg_ErH_icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

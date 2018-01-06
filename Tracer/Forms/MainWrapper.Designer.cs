@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainShell));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,42 +94,42 @@
             // salesToolStripMenuItem
             // 
             this.salesToolStripMenuItem.Name = "salesToolStripMenuItem";
-            this.salesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.salesToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.salesToolStripMenuItem.Text = "Sales";
             this.salesToolStripMenuItem.Click += new System.EventHandler(this.salesToolStripMenuItem_Click);
             // 
             // engineeringToolStripMenuItem
             // 
             this.engineeringToolStripMenuItem.Name = "engineeringToolStripMenuItem";
-            this.engineeringToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.engineeringToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.engineeringToolStripMenuItem.Text = "Engineering";
             this.engineeringToolStripMenuItem.Click += new System.EventHandler(this.engineeringToolStripMenuItem_Click);
             // 
             // purchasingToolStripMenuItem
             // 
             this.purchasingToolStripMenuItem.Name = "purchasingToolStripMenuItem";
-            this.purchasingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.purchasingToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.purchasingToolStripMenuItem.Text = "Purchasing";
             this.purchasingToolStripMenuItem.Click += new System.EventHandler(this.purchasingToolStripMenuItem_Click);
             // 
             // productionToolStripMenuItem
             // 
             this.productionToolStripMenuItem.Name = "productionToolStripMenuItem";
-            this.productionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.productionToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.productionToolStripMenuItem.Text = "Production";
             this.productionToolStripMenuItem.Click += new System.EventHandler(this.productionToolStripMenuItem_Click);
             // 
             // executiveToolStripMenuItem
             // 
             this.executiveToolStripMenuItem.Name = "executiveToolStripMenuItem";
-            this.executiveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.executiveToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.executiveToolStripMenuItem.Text = "Executive";
             this.executiveToolStripMenuItem.Click += new System.EventHandler(this.executiveToolStripMenuItem_Click);
             // 
             // homeToolStripMenuItem
             // 
             this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.homeToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.homeToolStripMenuItem.Text = "Home";
             this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
             // 
@@ -192,6 +193,7 @@
             this.Controls.Add(this.MenuContainer);
             this.Controls.Add(this.menuStrip1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainShell";

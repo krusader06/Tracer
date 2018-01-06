@@ -24,18 +24,108 @@ namespace Tracer.Forms.Classes.DataAccess
         public List<Classes.LotTask> GetEngineeringTaskList()
         {
             using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
-            {   //Responsible for returning all 4 Engineerings Taks types and compiling them under a lotTask list
-                return connection.Query<Classes.LotTask>($"SELECT ActiveQuotes.QuoteWOR AS JobWOR" +
-                    $", Lot='0', ActiveQuotes.PartID, QuoteStatus.QuoteCurrentStatus AS JobStatus " +
+            {   //Responsible for returning all 4 Engineering Task types and compiling them under a lotTask list
+
+                //Crazy SQL Call...
+                return connection.Query<Classes.LotTask>(
+                    //Get BOM Validation Requests
+                    $"SELECT ActiveQuotes.QuoteWOR AS JobWOR " +
+                    $", Lot = '0' " +
+                    $", ActiveQuotes.PartID " +
+                    $", JobStatus = 'BOM Validation Requested' " +
                     $"FROM ActiveQuotes INNER JOIN QuoteStatus " +
                     $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
-                    $"WHERE QuoteStatus.BOMValidationRequest='True' " +
-                    $"OR QuoteStatus.PreBidRequest='True' " +
+                    $"WHERE QuoteStatus.BOMValidationRequest = 'True' " +
+                    $"AND QuoteStatus.BOMValidationInProgress = 'False' " +
+                    $"AND ActiveQuotes.QuoteInactive = 'False' " +
+                    $"AND ActiveQuotes.POReceived = 'False' " +
+
                     $"UNION " +
-                    $"SELECT LotNumbers.JobWOR, LotNumbers.Lot, LotNumbers.PartID, LotStatus.JobStatus " +
+                    //Get BOM Validation In Progress
+                    $"SELECT ActiveQuotes.QuoteWOR AS JobWOR " +
+                    $", Lot = '0' " +
+                    $", ActiveQuotes.PartID " +
+                    $", JobStatus = 'BOM Validation In Progress' " +
+                    $"FROM ActiveQuotes INNER JOIN QuoteStatus " +
+                    $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
+                    $"WHERE QuoteStatus.BOMValidationRequest = 'True' " +
+                    $"AND QuoteStatus.BOMValidationInProgress = 'True' " +
+                    $"AND ActiveQuotes.QuoteInactive = 'False' " +
+                    $"AND ActiveQuotes.POReceived = 'False' " +
+
+                    $"UNION " +
+                    //Get Pre-Bid Review Requests
+                    $"SELECT ActiveQuotes.QuoteWOR AS JobWOR " +
+                    $", Lot = '0' " +
+                    $", ActiveQuotes.PartID " +
+                    $", JobStatus = 'Pre-Bid Review Requested' " +
+                    $"FROM ActiveQuotes INNER JOIN QuoteStatus " +
+                    $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
+                    $"WHERE QuoteStatus.PreBidRequest = 'True' " +
+                    $"AND QuoteStatus.PreBidInProgress = 'False' " +
+                    $"AND ActiveQuotes.QuoteInactive = 'False' " +
+                    $"AND ActiveQuotes.POReceived = 'False' " +
+
+                    $"UNION " +
+                    //Get Pre-Bid Review In Progress
+                    $"SELECT ActiveQuotes.QuoteWOR AS JobWOR " +
+                    $", Lot = '0' " +
+                    $", ActiveQuotes.PartID " +
+                    $", JobStatus = 'Pre-Bid Review In Progress' " +
+                    $"FROM ActiveQuotes INNER JOIN QuoteStatus " +
+                    $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
+                    $"WHERE QuoteStatus.PreBidRequest = 'True' " +
+                    $"AND QuoteStatus.PreBidInProgress = 'True' " +
+                    $"AND ActiveQuotes.QuoteInactive = 'False' " +
+                    $"AND ActiveQuotes.POReceived = 'False' " +
+
+                    $"UNION " +
+                    //Get Quote Review Requested
+                    $"SELECT LotNumbers.JobWOR " +
+                    $", LotNumbers.Lot " +
+                    $", LotNumbers.PartID " +
+                    $", JobStatus = 'Quote Review Requested' " +
                     $"FROM LotNumbers INNER JOIN LotStatus " +
                     $"ON LotNumbers.LotID = LotStatus.LotID " +
-                    $"WHERE LotStatus.QuoteReviewRequest = 'True' OR LotStatus.MasterRequest = 'True'").ToList();
+                    $"WHERE LotStatus.QuoteReviewRequest = 'True' " +
+                    $"AND LotStatus.QuoteReviewInProgress = 'False' " +
+                    $"AND LotStatus.JobComplete = 'False' " +
+
+                    $"UNION " +
+                    //Get Quote Review In Progress
+                    $"SELECT LotNumbers.JobWOR " +
+                    $", LotNumbers.Lot " +
+                    $", LotNumbers.PartID " +
+                    $", JobStatus = 'Quote Review In Progress' " +
+                    $"FROM LotNumbers INNER JOIN LotStatus " +
+                    $"ON LotNumbers.LotID = LotStatus.LotID " +
+                    $"WHERE LotStatus.QuoteReviewRequest = 'True' " +
+                    $"AND LotStatus.QuoteReviewInProgress = 'True' " +
+                    $"AND LotStatus.JobComplete = 'False' " +
+
+                    $"UNION " +
+                    //Get Master Creation Requested
+                    $"SELECT LotNumbers.JobWOR " +
+                    $", LotNumbers.Lot " +
+                    $", LotNumbers.PartID " +
+                    $", JobStatus = 'Master Creation Requested' " +
+                    $"FROM LotNumbers INNER JOIN LotStatus " +
+                    $"ON LotNumbers.LotID = LotStatus.LotID " +
+                    $"WHERE LotStatus.MasterRequest = 'True' " +
+                    $"AND LotStatus.MasterInProgress = 'False' " +
+                    $"AND LotStatus.JobComplete = 'False' " +
+
+                    $"UNION " +
+                    //Get Master Creation In Progress
+                    $"SELECT LotNumbers.JobWOR " +
+                    $", LotNumbers.Lot " +
+                    $", LotNumbers.PartID " +
+                    $", JobStatus = 'Master Creation In Progress' " +
+                    $"FROM LotNumbers INNER JOIN LotStatus " +
+                    $"ON LotNumbers.LotID = LotStatus.LotID " +
+                    $"WHERE LotStatus.MasterRequest = 'True' " +
+                    $"AND LotStatus.MasterInProgress = 'True' " +
+                    $"AND LotStatus.JobComplete = 'False'").ToList();
             }
         }
 

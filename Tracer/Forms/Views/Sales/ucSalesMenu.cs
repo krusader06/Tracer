@@ -17,9 +17,8 @@ namespace Tracer.Forms.Views.Sales
         public event EventHandler TasksButtonClicked;
         public event EventHandler AddEditQuoteButtonClicked;
         public event EventHandler EditLotButtonClicked;
-        public event EventHandler RequestPreBidReviewButtonClicked;
-        public event EventHandler RequestPartsReviewButtonClicked;
-        public event EventHandler ReviewMasterButtonClicked;
+        public event EventHandler EngineeringRequestButtonClicked;
+        public event EventHandler PurchasingRequestButtonClicked;
         public event EventHandler AddPurchaseOrderButtonClicked;
         public event EventHandler DeactivateQuoteButtonClicked;
         public event EventHandler HomeButtonClicked;
@@ -75,27 +74,19 @@ namespace Tracer.Forms.Views.Sales
                 EditLotButtonClicked(this, EventArgs.Empty);
             }
         }
-        private void onRequestPreBidReviewButtonClick()
+        private void onEngineeringRequestButtonClick()
         {
-            if (RequestPreBidReviewButtonClicked != null)
+            if (EngineeringRequestButtonClicked != null)
             {
-                RequestPreBidReviewButtonClicked(this, EventArgs.Empty);
+                EngineeringRequestButtonClicked(this, EventArgs.Empty);
             }
         }
 
-        private void onRequestPartsReviewButtonClick()
+        private void onPurchasingRequestButtonClick()
         {
-            if (RequestPartsReviewButtonClicked != null)
+            if (PurchasingRequestButtonClicked != null)
             {
-                RequestPartsReviewButtonClicked(this, EventArgs.Empty);
-            }
-        }
-
-        private void onReviewMasterButtonClick()
-        {
-            if (ReviewMasterButtonClicked != null)
-            {
-                ReviewMasterButtonClicked(this, EventArgs.Empty);
+                PurchasingRequestButtonClicked(this, EventArgs.Empty);
             }
         }
 
@@ -152,19 +143,14 @@ namespace Tracer.Forms.Views.Sales
             onEditLotButtonClick();
         }
 
-        private void btnRequestPreBidReview_Click(object sender, EventArgs e)
+        private void btnEngineeringRequest_Click(object sender, EventArgs e)
         {
-            onRequestPreBidReviewButtonClick();
+            onEngineeringRequestButtonClick();
         }
 
-        private void btnRequestPartsReview_Click(object sender, EventArgs e)
+        private void btnPurchasingRequest_Click(object sender, EventArgs e)
         {
-            onRequestPartsReviewButtonClick();
-        }
-
-        private void btnReviewMaster_Click(object sender, EventArgs e)
-        {
-            onReviewMasterButtonClick();
+            onPurchasingRequestButtonClick();
         }
 
         private void btnAddPurchaseOrder_Click(object sender, EventArgs e)
@@ -186,5 +172,7 @@ namespace Tracer.Forms.Views.Sales
         {
             onExitButtonClick();
         }
+
+        
     }
 }

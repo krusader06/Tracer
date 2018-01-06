@@ -12,7 +12,6 @@ namespace Tracer.Forms.Classes
         public int Lot { get; set; }
         public string PartID { get; set; }
         public string JobStatus { get; set; }
-        public string TaskDescription { get; set; }
         public string Owner { get; set; }
     }
 }

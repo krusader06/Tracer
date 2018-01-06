@@ -67,7 +67,7 @@ namespace Tracer.Forms.Views.Sales
         {
             dgWORGrid.DataSource = null;
             Classes.DataAccess.SalesDataAccess db = new Classes.DataAccess.SalesDataAccess();
-            WorkOrders = db.GetCompleteWorkOrders();
+            WorkOrders = db.GetActiveWorkOrders();
             dgWORGrid.DataSource = WorkOrders;
 
             dgWORGrid.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

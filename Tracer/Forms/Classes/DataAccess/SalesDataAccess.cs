@@ -45,7 +45,7 @@ namespace Tracer.Forms.Classes.DataAccess
             }
         }
 
-        public List<DatabaseTables.WorkOrders> GetCompleteWorkOrders()
+        public List<DatabaseTables.WorkOrders> GetActiveWorkOrders()
         {
             using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
             {
@@ -67,7 +67,30 @@ namespace Tracer.Forms.Classes.DataAccess
         {
             using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
             {
-                return connection.Query<Classes.LotTask>($"SELECT LotNumbers.JobWOR, LotNumbers.Lot, LotNumbers.PartID, LotStatus.JobStatus FROM LotNumbers INNER JOIN LotStatus ON LotNumbers.LotID=LotStatus.LotID WHERE LotStatus.MasterReviewRequest='True'").ToList();
+                return connection.Query<Classes.LotTask>(
+                    $"SELECT LotNumbers.JobWOR " +
+                    $", LotNumbers.Lot " +
+                    $", LotNumbers.PartID " +
+                    $", JobStatus = 'Master Review Requested' " +
+                    $"FROM LotNumbers " +
+                    $"INNER JOIN LotStatus " +
+                    $"ON LotNumbers.LotID = LotStatus.LotID " +
+                    $"WHERE LotStatus.MasterReviewRequest = 'True' " +
+                    $"AND LotStatus.MasterReviewInProgress = 'False' " +
+                    $"AND LotStatus.JobComplete = 'False' " +
+
+                    $"UNION " +
+
+                    $"SELECT LotNumbers.JobWOR " +
+                    $", LotNumbers.Lot " +
+                    $", LotNumbers.PartID " +
+                    $", JobStatus = 'Master Review In Progress' " +
+                    $"FROM LotNumbers " +
+                    $"INNER JOIN LotStatus " +
+                    $"ON LotNumbers.LotID = LotStatus.LotID " +
+                    $"WHERE LotStatus.MasterReviewRequest = 'True' " +
+                    $"AND LotStatus.MasterReviewInProgress = 'True' " +
+                    $"AND LotStatus.JobComplete = 'False'").ToList();
             }
         }
 
@@ -126,7 +149,7 @@ namespace Tracer.Forms.Classes.DataAccess
             {
                 List<DatabaseTables.ActiveQuotes> activeQuote = new List<DatabaseTables.ActiveQuotes>();
                 activeQuote.Add(updateQuote);
-             
+
                 connection.Execute($"UPDATE ActiveQuotes SET Date=@Date, Time=@Time, PartID=@PartID, Customer=@Customer, PartDescription=@PartDescription, QuoteConfidence=@QuoteConfidence, QuoteComments=@QuoteComments, QuoteDueDate=@QuoteDueDate WHERE QuoteWOR=@QuoteWOR", activeQuote);
 
             }
@@ -138,7 +161,7 @@ namespace Tracer.Forms.Classes.DataAccess
             {
                 List<DatabaseTables.LotNumbers> activeLot = new List<DatabaseTables.LotNumbers>();
                 activeLot.Add(updateLot);
-                
+
                 connection.Execute($"UPDATE LotNumbers SET Lot=@Lot, OrderQuantity=@OrderQuantity, JobDueDate=@JobDueDate, MasterDueDate=@MasterDueDate, TurnTime=@TurnTime, Consigned=@Consigned, JobComments=@JobComments WHERE LotID=@LotID", activeLot);
 
             }
@@ -248,7 +271,43 @@ namespace Tracer.Forms.Classes.DataAccess
             }
         }
 
+        //Insert Data---------------------------------------------------------------------------------------------------------------
 
+        public void requestPreBidReview(string QuoteWOR)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //Set PreBidRequest to True, PreBidInProgress and PreBidComplete to False
+                connection.Execute($"UPDATE QuoteStatus SET PreBidRequest='True', PreBidInProgress='False', PreBidComplete='False' WHERE QuoteWOR='{ QuoteWOR }'");
+            }
+        }
+
+        public void requestBOMValidation(string QuoteWOR)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //Set BOMValidationRequest to True, BOMValidationInProgress and BOMValidationComplete to False
+                connection.Execute($"UPDATE QuoteStatus SET BOMValidationRequest='True', BOMValidationInProgress='False', BOMValidationComplete='False' WHERE QuoteWOR='{ QuoteWOR }'");
+            }
+        }
+
+        public void requestPartsReview(string QuoteWOR)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //Set PartsReviewRequest to True, PartsReviewInProgress and PartsReviewComplete to False
+                connection.Execute($"UPDATE QuoteStatus SET PartsReviewRequest='True', PartsReviewInProgress='False', PartsReviewComplete='False' WHERE QuoteWOR='{ QuoteWOR }'");
+            }
+        }
+
+        public void deActivateQuote(string QuoteWOR)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //Set QuoteInactive to True
+                connection.Execute($"UPDATE ActiveQuotes SET QuoteInactive='True' WHERE QuoteWOR='{ QuoteWOR }'");
+            }
+        }
 
 
 

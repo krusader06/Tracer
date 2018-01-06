@@ -54,17 +54,12 @@ namespace Tracer.Forms.Views.Sales
             dgTaskView.DataSource = null;
             Classes.DataAccess.SalesDataAccess db = new Classes.DataAccess.SalesDataAccess();
             MasterReviewRequests = db.GetMasterReviewRequests();
-            //Fill In the Task Name for each list item
-            for (int i = 0; i < MasterReviewRequests.Count; i++)
-            {
-                MasterReviewRequests[i].TaskDescription = "Perform Master Review";
-            }
 
             dgTaskView.DataSource = MasterReviewRequests;
             dgTaskView.Columns["Owner"].Visible = false;
 
             dgTaskView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgTaskView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgTaskView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void dgTaskView_CellClick(object sender, DataGridViewCellEventArgs e)

@@ -54,33 +54,38 @@ namespace Tracer.Forms.Views.Engineering
             dgTaskView.DataSource = null;
             Classes.DataAccess.EngineeringDataAccess db = new Classes.DataAccess.EngineeringDataAccess();
             MasterReviewRequests = db.GetEngineeringTaskList();
+
+
+
             //Fill In the Task Name for each list item
-            for (int i = 0; i < MasterReviewRequests.Count; i++)
-            {
-                switch (MasterReviewRequests[i].JobStatus)
-                {
-                    case "BOM Validation Requested":
-                        MasterReviewRequests[i].TaskDescription = "Perform BOM Validation";
+            //for (int i = 0; i < MasterReviewRequests.Count; i++)
+            //{
+            //    switch (MasterReviewRequests[i].JobStatus)
+            //    {
+            //        case "BOM Validation Requested":
+            //            MasterReviewRequests[i].TaskDescription = "Perform BOM Validation";
 
-                        break;
-                    case "Master Creation Requested":
-                        MasterReviewRequests[i].TaskDescription = "Perform Master Creation";
+            //            break;
+            //        case "Master Creation Requested":
+            //            MasterReviewRequests[i].TaskDescription = "Perform Master Creation";
 
-                        break;
-                    case "Quote Review Requested":
-                        MasterReviewRequests[i].TaskDescription = "Perform Quote Review";
-                        break;
-                    case "Pre-Bid Review Requested":
-                        MasterReviewRequests[i].TaskDescription = "Perform Pre-Bid Review";
-                        break;
-                }
-            }
+            //            break;
+            //        case "Quote Review Requested":
+            //            MasterReviewRequests[i].TaskDescription = "Perform Quote Review";
+            //            break;
+            //        case "Pre-Bid Review Requested":
+            //            MasterReviewRequests[i].TaskDescription = "Perform Pre-Bid Review";
+            //            break;
+            //    }
+            //}
+
+
 
             dgTaskView.DataSource = MasterReviewRequests;
             dgTaskView.Columns["Owner"].Visible = false;
 
             dgTaskView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgTaskView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgTaskView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void dgTaskView_CellClick(object sender, DataGridViewCellEventArgs e)

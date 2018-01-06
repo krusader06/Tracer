@@ -34,10 +34,9 @@
             this.btnDashboard = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnEditLot = new System.Windows.Forms.Button();
-            this.btnRequestPreBidReview = new System.Windows.Forms.Button();
-            this.btnReviewMaster = new System.Windows.Forms.Button();
+            this.btnEngineeringRequest = new System.Windows.Forms.Button();
             this.btnAddPurchaseOrder = new System.Windows.Forms.Button();
-            this.btnRequestPartsReview = new System.Windows.Forms.Button();
+            this.btnPurchasingRequest = new System.Windows.Forms.Button();
             this.btnDeactivateQuote = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -149,43 +148,24 @@
             this.btnEditLot.UseVisualStyleBackColor = false;
             this.btnEditLot.Click += new System.EventHandler(this.btnEditLot_Click);
             // 
-            // btnRequestPreBidReview
+            // btnEngineeringRequest
             // 
-            this.btnRequestPreBidReview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnEngineeringRequest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRequestPreBidReview.BackColor = System.Drawing.Color.Transparent;
-            this.btnRequestPreBidReview.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnRequestPreBidReview.FlatAppearance.BorderSize = 0;
-            this.btnRequestPreBidReview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRequestPreBidReview.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRequestPreBidReview.ForeColor = System.Drawing.Color.Gray;
-            this.btnRequestPreBidReview.Location = new System.Drawing.Point(0, 348);
-            this.btnRequestPreBidReview.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRequestPreBidReview.Name = "btnRequestPreBidReview";
-            this.btnRequestPreBidReview.Size = new System.Drawing.Size(200, 50);
-            this.btnRequestPreBidReview.TabIndex = 9;
-            this.btnRequestPreBidReview.Text = "Request Pre-Bid Review";
-            this.btnRequestPreBidReview.UseVisualStyleBackColor = false;
-            this.btnRequestPreBidReview.Click += new System.EventHandler(this.btnRequestPreBidReview_Click);
-            // 
-            // btnReviewMaster
-            // 
-            this.btnReviewMaster.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReviewMaster.BackColor = System.Drawing.Color.Transparent;
-            this.btnReviewMaster.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnReviewMaster.FlatAppearance.BorderSize = 0;
-            this.btnReviewMaster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReviewMaster.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReviewMaster.ForeColor = System.Drawing.Color.Gray;
-            this.btnReviewMaster.Location = new System.Drawing.Point(0, 456);
-            this.btnReviewMaster.Margin = new System.Windows.Forms.Padding(2);
-            this.btnReviewMaster.Name = "btnReviewMaster";
-            this.btnReviewMaster.Size = new System.Drawing.Size(200, 50);
-            this.btnReviewMaster.TabIndex = 8;
-            this.btnReviewMaster.Text = "Review Master";
-            this.btnReviewMaster.UseVisualStyleBackColor = false;
-            this.btnReviewMaster.Click += new System.EventHandler(this.btnReviewMaster_Click);
+            this.btnEngineeringRequest.BackColor = System.Drawing.Color.Transparent;
+            this.btnEngineeringRequest.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnEngineeringRequest.FlatAppearance.BorderSize = 0;
+            this.btnEngineeringRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEngineeringRequest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEngineeringRequest.ForeColor = System.Drawing.Color.Gray;
+            this.btnEngineeringRequest.Location = new System.Drawing.Point(0, 348);
+            this.btnEngineeringRequest.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEngineeringRequest.Name = "btnEngineeringRequest";
+            this.btnEngineeringRequest.Size = new System.Drawing.Size(200, 50);
+            this.btnEngineeringRequest.TabIndex = 9;
+            this.btnEngineeringRequest.Text = "Engineering Request";
+            this.btnEngineeringRequest.UseVisualStyleBackColor = false;
+            this.btnEngineeringRequest.Click += new System.EventHandler(this.btnEngineeringRequest_Click);
             // 
             // btnAddPurchaseOrder
             // 
@@ -206,24 +186,24 @@
             this.btnAddPurchaseOrder.UseVisualStyleBackColor = false;
             this.btnAddPurchaseOrder.Click += new System.EventHandler(this.btnAddPurchaseOrder_Click);
             // 
-            // btnRequestPartsReview
+            // btnPurchasingRequest
             // 
-            this.btnRequestPartsReview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnPurchasingRequest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRequestPartsReview.BackColor = System.Drawing.Color.Transparent;
-            this.btnRequestPartsReview.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnRequestPartsReview.FlatAppearance.BorderSize = 0;
-            this.btnRequestPartsReview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRequestPartsReview.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRequestPartsReview.ForeColor = System.Drawing.Color.Gray;
-            this.btnRequestPartsReview.Location = new System.Drawing.Point(0, 402);
-            this.btnRequestPartsReview.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRequestPartsReview.Name = "btnRequestPartsReview";
-            this.btnRequestPartsReview.Size = new System.Drawing.Size(200, 50);
-            this.btnRequestPartsReview.TabIndex = 7;
-            this.btnRequestPartsReview.Text = "Request Parts Review";
-            this.btnRequestPartsReview.UseVisualStyleBackColor = false;
-            this.btnRequestPartsReview.Click += new System.EventHandler(this.btnRequestPartsReview_Click);
+            this.btnPurchasingRequest.BackColor = System.Drawing.Color.Transparent;
+            this.btnPurchasingRequest.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnPurchasingRequest.FlatAppearance.BorderSize = 0;
+            this.btnPurchasingRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPurchasingRequest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPurchasingRequest.ForeColor = System.Drawing.Color.Gray;
+            this.btnPurchasingRequest.Location = new System.Drawing.Point(0, 402);
+            this.btnPurchasingRequest.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPurchasingRequest.Name = "btnPurchasingRequest";
+            this.btnPurchasingRequest.Size = new System.Drawing.Size(200, 50);
+            this.btnPurchasingRequest.TabIndex = 7;
+            this.btnPurchasingRequest.Text = "Purchasing Request";
+            this.btnPurchasingRequest.UseVisualStyleBackColor = false;
+            this.btnPurchasingRequest.Click += new System.EventHandler(this.btnPurchasingRequest_Click);
             // 
             // btnDeactivateQuote
             // 
@@ -235,7 +215,7 @@
             this.btnDeactivateQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeactivateQuote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeactivateQuote.ForeColor = System.Drawing.Color.Gray;
-            this.btnDeactivateQuote.Location = new System.Drawing.Point(0, 510);
+            this.btnDeactivateQuote.Location = new System.Drawing.Point(0, 456);
             this.btnDeactivateQuote.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeactivateQuote.Name = "btnDeactivateQuote";
             this.btnDeactivateQuote.Size = new System.Drawing.Size(200, 50);
@@ -269,15 +249,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.Controls.Add(this.btnExit);
-            this.Controls.Add(this.btnRequestPartsReview);
+            this.Controls.Add(this.btnPurchasingRequest);
             this.Controls.Add(this.btnTasks);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.btnDeactivateQuote);
             this.Controls.Add(this.btnAddPurchaseOrder);
             this.Controls.Add(this.btnEditLot);
-            this.Controls.Add(this.btnReviewMaster);
             this.Controls.Add(this.btnAddEditQuote);
-            this.Controls.Add(this.btnRequestPreBidReview);
+            this.Controls.Add(this.btnEngineeringRequest);
             this.Controls.Add(this.btnDashboard);
             this.Controls.Add(this.pictureBox1);
             this.Name = "ucSalesMenu";
@@ -295,10 +274,9 @@
         private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnEditLot;
-        private System.Windows.Forms.Button btnRequestPreBidReview;
-        private System.Windows.Forms.Button btnReviewMaster;
+        private System.Windows.Forms.Button btnEngineeringRequest;
         private System.Windows.Forms.Button btnAddPurchaseOrder;
-        private System.Windows.Forms.Button btnRequestPartsReview;
+        private System.Windows.Forms.Button btnPurchasingRequest;
         private System.Windows.Forms.Button btnDeactivateQuote;
         private System.Windows.Forms.Button btnHome;
     }

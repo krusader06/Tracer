@@ -204,6 +204,7 @@ namespace Tracer
             else
             {
                 Forms.Views.Engineering.ucEngineeringTasks.Instance.BringToFront();
+                Forms.Views.Engineering.ucEngineeringTasks.Instance.updateData(null, null);
             }
         }
 
@@ -238,11 +239,10 @@ namespace Tracer
                 Forms.Views.Sales.ucSalesMenu.Instance.TasksButtonClicked += new EventHandler(showSalesTasks);
                 Forms.Views.Sales.ucSalesMenu.Instance.AddEditQuoteButtonClicked += new EventHandler(showSalesAddEditQuote);
                 Forms.Views.Sales.ucSalesMenu.Instance.EditLotButtonClicked += new EventHandler(showSalesEditLot);
-                //Forms.Views.Sales.ucSalesMenu.Instance.RequestPreBidReviewButtonClicked += new EventHandler();
-                //Forms.Views.Sales.ucSalesMenu.Instance.RequestPartsReviewButtonClicked += new EventHandler();
-                //Forms.Views.Sales.ucSalesMenu.Instance.ReviewMasterButtonClicked += new EventHandler();
+                Forms.Views.Sales.ucSalesMenu.Instance.EngineeringRequestButtonClicked += new EventHandler(showEngineeringRequest);
+                Forms.Views.Sales.ucSalesMenu.Instance.PurchasingRequestButtonClicked += new EventHandler(showPurchasingRequest);
                 Forms.Views.Sales.ucSalesMenu.Instance.AddPurchaseOrderButtonClicked += new EventHandler(showSalesAddPurchaseOrder);
-                //Forms.Views.Sales.ucSalesMenu.Instance.DeactivateQuoteButtonClicked += new EventHandler();
+                Forms.Views.Sales.ucSalesMenu.Instance.DeactivateQuoteButtonClicked += new EventHandler(showDeActivateQuote);
                 Forms.Views.Sales.ucSalesMenu.Instance.HomeButtonClicked += new EventHandler(prepareHomeView);
                 Forms.Views.Sales.ucSalesMenu.Instance.ExitButtonClicked += new EventHandler(exitApplication);
             }
@@ -331,6 +331,72 @@ namespace Tracer
             else
             {
                 Forms.Views.Sales.ucEditLot.Instance.BringToFront();
+            }
+        }
+
+        private void showEngineeringRequest(object sender, EventArgs e)
+        {
+            // Show the Sales Add New Quote Page
+
+            lblMain.Text = "Sales - Engineering Request";
+
+            if (!mainContainer.Controls.Contains(Forms.Views.Sales.ucEngineeringRequest.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Sales.ucEngineeringRequest.Instance);
+                Forms.Views.Sales.ucEngineeringRequest.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Sales.ucEngineeringRequest.Instance.BringToFront();
+
+                //Add Event Listeners If Necessary...
+
+            }
+            else
+            {
+                Forms.Views.Sales.ucEngineeringRequest.Instance.BringToFront();
+                Forms.Views.Sales.ucEngineeringRequest.Instance.ShowActiveQuotes();
+            }
+        }
+
+        private void showPurchasingRequest(object sender, EventArgs e)
+        {
+            // Show the Sales Add New Quote Page
+
+            lblMain.Text = "Sales - Purchasing Request";
+
+            if (!mainContainer.Controls.Contains(Forms.Views.Sales.ucPurchasingRequest.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Sales.ucPurchasingRequest.Instance);
+                Forms.Views.Sales.ucPurchasingRequest.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Sales.ucPurchasingRequest.Instance.BringToFront();
+
+                //Add Event Listeners If Necessary...
+
+            }
+            else
+            {
+                Forms.Views.Sales.ucPurchasingRequest.Instance.BringToFront();
+                Forms.Views.Sales.ucPurchasingRequest.Instance.ShowActiveQuotes();
+            }
+        }
+
+        private void showDeActivateQuote(object sender, EventArgs e)
+        {
+            // Show the Sales Add New Quote Page
+
+            lblMain.Text = "Sales - De-Activate Quote";
+
+            if (!mainContainer.Controls.Contains(Forms.Views.Sales.ucDeActivateQuote.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Sales.ucDeActivateQuote.Instance);
+                Forms.Views.Sales.ucDeActivateQuote.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Sales.ucDeActivateQuote.Instance.BringToFront();
+
+                //Add Event Listeners If Necessary...
+
+            }
+            else
+            {
+                Forms.Views.Sales.ucDeActivateQuote.Instance.BringToFront();
+                Forms.Views.Sales.ucDeActivateQuote.Instance.ShowActiveQuotes();
             }
         }
 
