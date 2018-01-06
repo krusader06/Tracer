@@ -57,6 +57,9 @@ namespace Tracer.Forms.Views.Sales
             dgActiveQuotes.DataSource = quotes;
             dgActiveQuotes.Columns["QuoteInactive"].Visible = false;
             dgActiveQuotes.Columns["POReceived"].Visible = false;
+
+            dgActiveQuotes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgActiveQuotes.Columns["PartDescription"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void updateData(object sender, EventArgs e)

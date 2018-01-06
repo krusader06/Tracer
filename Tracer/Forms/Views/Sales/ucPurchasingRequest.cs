@@ -48,6 +48,9 @@ namespace Tracer.Forms.Views.Sales
             dgActiveQuotes.Columns["QuoteInactive"].Visible = false;
             dgActiveQuotes.Columns["POReceived"].Visible = false;
 
+            dgActiveQuotes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgActiveQuotes.Columns["QuoteComments"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
         }
 
         //Physical Events-----------------------------------------------------------------------------------------------

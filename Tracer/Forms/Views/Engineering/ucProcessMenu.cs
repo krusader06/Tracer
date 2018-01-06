@@ -16,9 +16,7 @@ namespace Tracer.Forms.Views.Process
         //Event Handlers--------------------------------------------------------------
         public event EventHandler DashboardButtonClicked;
         public event EventHandler TasksButtonClicked;
-        public event EventHandler ReveiwQuoteButtonClicked;
-        public event EventHandler CreateMasterButtonClicked;
-        public event EventHandler RequestMasterReviewButtonClicked;
+        public event EventHandler SalesRequestButtonClicked;
         public event EventHandler ReleaseWORButtonClicked;
         public event EventHandler CompileTravelerButtonClicked;
         public event EventHandler TravelerReturnButtonClicked;
@@ -58,25 +56,12 @@ namespace Tracer.Forms.Views.Process
                 TasksButtonClicked(this, EventArgs.Empty);
             }
         }
-        private void onReveiwQuoteButtonClick()
+
+        private void onSalesRequestButtonClick()
         {
-            if (ReveiwQuoteButtonClicked != null)
+            if (SalesRequestButtonClicked != null)
             {
-                ReveiwQuoteButtonClicked(this, EventArgs.Empty);
-            }
-        }
-        private void onCreateMasterButtonClick()
-        {
-            if (CreateMasterButtonClicked != null)
-            {
-                CreateMasterButtonClicked(this, EventArgs.Empty);
-            }
-        }
-        private void onRequestMasterReviewButtonClick()
-        {
-            if (RequestMasterReviewButtonClicked != null)
-            {
-                RequestMasterReviewButtonClicked(this, EventArgs.Empty);
+                SalesRequestButtonClicked(this, EventArgs.Empty);
             }
         }
         private void onReleaseWORButtonClick()
@@ -128,18 +113,9 @@ namespace Tracer.Forms.Views.Process
             onTasksButtonClick();
         }
 
-        private void btnReveiwQuote_Click(object sender, EventArgs e)
+        private void btnSalesRequest_Click(object sender, EventArgs e)
         {
-            onReveiwQuoteButtonClick();
-        }
-        private void btnCreateMaster_Click(object sender, EventArgs e)
-        {
-            onCreateMasterButtonClick();
-        }
-
-        private void btnRequestMasterReview_Click(object sender, EventArgs e)
-        {
-            onRequestMasterReviewButtonClick();
+            onSalesRequestButtonClick();
         }
 
         private void btnReleaseWOR_Click(object sender, EventArgs e)

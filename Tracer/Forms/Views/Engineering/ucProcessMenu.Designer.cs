@@ -31,14 +31,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnTasks = new System.Windows.Forms.Button();
-            this.btnTravelerReturn = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
-            this.btnReveiwQuote = new System.Windows.Forms.Button();
-            this.btnCreateMaster = new System.Windows.Forms.Button();
-            this.btnRequestMasterReview = new System.Windows.Forms.Button();
+            this.btnSalesRequest = new System.Windows.Forms.Button();
             this.btnReleaseWOR = new System.Windows.Forms.Button();
-            this.btnCompileTraveler = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,25 +87,6 @@
             this.btnTasks.UseVisualStyleBackColor = false;
             this.btnTasks.Click += new System.EventHandler(this.btnTasks_Click);
             // 
-            // btnTravelerReturn
-            // 
-            this.btnTravelerReturn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTravelerReturn.BackColor = System.Drawing.Color.Transparent;
-            this.btnTravelerReturn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnTravelerReturn.FlatAppearance.BorderSize = 0;
-            this.btnTravelerReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTravelerReturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTravelerReturn.ForeColor = System.Drawing.Color.Gray;
-            this.btnTravelerReturn.Location = new System.Drawing.Point(0, 456);
-            this.btnTravelerReturn.Margin = new System.Windows.Forms.Padding(2);
-            this.btnTravelerReturn.Name = "btnTravelerReturn";
-            this.btnTravelerReturn.Size = new System.Drawing.Size(200, 50);
-            this.btnTravelerReturn.TabIndex = 3;
-            this.btnTravelerReturn.Text = "Traveler Return";
-            this.btnTravelerReturn.UseVisualStyleBackColor = false;
-            this.btnTravelerReturn.Click += new System.EventHandler(this.btnTravelerReturn_Click);
-            // 
             // btnDashboard
             // 
             this.btnDashboard.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -148,62 +125,24 @@
             this.btnHome.UseVisualStyleBackColor = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
-            // btnReveiwQuote
+            // btnSalesRequest
             // 
-            this.btnReveiwQuote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnSalesRequest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReveiwQuote.BackColor = System.Drawing.Color.Transparent;
-            this.btnReveiwQuote.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnReveiwQuote.FlatAppearance.BorderSize = 0;
-            this.btnReveiwQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReveiwQuote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReveiwQuote.ForeColor = System.Drawing.Color.Gray;
-            this.btnReveiwQuote.Location = new System.Drawing.Point(0, 186);
-            this.btnReveiwQuote.Margin = new System.Windows.Forms.Padding(2);
-            this.btnReveiwQuote.Name = "btnReveiwQuote";
-            this.btnReveiwQuote.Size = new System.Drawing.Size(200, 50);
-            this.btnReveiwQuote.TabIndex = 4;
-            this.btnReveiwQuote.Text = "Review Quote";
-            this.btnReveiwQuote.UseVisualStyleBackColor = false;
-            this.btnReveiwQuote.Click += new System.EventHandler(this.btnReveiwQuote_Click);
-            // 
-            // btnCreateMaster
-            // 
-            this.btnCreateMaster.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreateMaster.BackColor = System.Drawing.Color.Transparent;
-            this.btnCreateMaster.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCreateMaster.FlatAppearance.BorderSize = 0;
-            this.btnCreateMaster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCreateMaster.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateMaster.ForeColor = System.Drawing.Color.Gray;
-            this.btnCreateMaster.Location = new System.Drawing.Point(0, 240);
-            this.btnCreateMaster.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCreateMaster.Name = "btnCreateMaster";
-            this.btnCreateMaster.Size = new System.Drawing.Size(200, 50);
-            this.btnCreateMaster.TabIndex = 3;
-            this.btnCreateMaster.Text = "Create Master";
-            this.btnCreateMaster.UseVisualStyleBackColor = false;
-            this.btnCreateMaster.Click += new System.EventHandler(this.btnCreateMaster_Click);
-            // 
-            // btnRequestMasterReview
-            // 
-            this.btnRequestMasterReview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRequestMasterReview.BackColor = System.Drawing.Color.Transparent;
-            this.btnRequestMasterReview.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnRequestMasterReview.FlatAppearance.BorderSize = 0;
-            this.btnRequestMasterReview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRequestMasterReview.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRequestMasterReview.ForeColor = System.Drawing.Color.Gray;
-            this.btnRequestMasterReview.Location = new System.Drawing.Point(0, 294);
-            this.btnRequestMasterReview.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRequestMasterReview.Name = "btnRequestMasterReview";
-            this.btnRequestMasterReview.Size = new System.Drawing.Size(200, 50);
-            this.btnRequestMasterReview.TabIndex = 2;
-            this.btnRequestMasterReview.Text = "Request Master Review";
-            this.btnRequestMasterReview.UseVisualStyleBackColor = false;
-            this.btnRequestMasterReview.Click += new System.EventHandler(this.btnRequestMasterReview_Click);
+            this.btnSalesRequest.BackColor = System.Drawing.Color.Transparent;
+            this.btnSalesRequest.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnSalesRequest.FlatAppearance.BorderSize = 0;
+            this.btnSalesRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalesRequest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalesRequest.ForeColor = System.Drawing.Color.Gray;
+            this.btnSalesRequest.Location = new System.Drawing.Point(0, 186);
+            this.btnSalesRequest.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSalesRequest.Name = "btnSalesRequest";
+            this.btnSalesRequest.Size = new System.Drawing.Size(200, 50);
+            this.btnSalesRequest.TabIndex = 2;
+            this.btnSalesRequest.Text = "Sales Request";
+            this.btnSalesRequest.UseVisualStyleBackColor = false;
+            this.btnSalesRequest.Click += new System.EventHandler(this.btnSalesRequest_Click);
             // 
             // btnReleaseWOR
             // 
@@ -215,33 +154,14 @@
             this.btnReleaseWOR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReleaseWOR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReleaseWOR.ForeColor = System.Drawing.Color.Gray;
-            this.btnReleaseWOR.Location = new System.Drawing.Point(0, 348);
+            this.btnReleaseWOR.Location = new System.Drawing.Point(0, 240);
             this.btnReleaseWOR.Margin = new System.Windows.Forms.Padding(2);
             this.btnReleaseWOR.Name = "btnReleaseWOR";
             this.btnReleaseWOR.Size = new System.Drawing.Size(200, 50);
             this.btnReleaseWOR.TabIndex = 3;
-            this.btnReleaseWOR.Text = "Release Work Order";
+            this.btnReleaseWOR.Text = "Complete Engineering Task";
             this.btnReleaseWOR.UseVisualStyleBackColor = false;
             this.btnReleaseWOR.Click += new System.EventHandler(this.btnReleaseWOR_Click);
-            // 
-            // btnCompileTraveler
-            // 
-            this.btnCompileTraveler.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCompileTraveler.BackColor = System.Drawing.Color.Transparent;
-            this.btnCompileTraveler.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCompileTraveler.FlatAppearance.BorderSize = 0;
-            this.btnCompileTraveler.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCompileTraveler.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCompileTraveler.ForeColor = System.Drawing.Color.Gray;
-            this.btnCompileTraveler.Location = new System.Drawing.Point(0, 402);
-            this.btnCompileTraveler.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCompileTraveler.Name = "btnCompileTraveler";
-            this.btnCompileTraveler.Size = new System.Drawing.Size(200, 50);
-            this.btnCompileTraveler.TabIndex = 2;
-            this.btnCompileTraveler.Text = "Compile Traveler";
-            this.btnCompileTraveler.UseVisualStyleBackColor = false;
-            this.btnCompileTraveler.Click += new System.EventHandler(this.btnCompileTraveler_Click);
             // 
             // ucProcessMenu
             // 
@@ -250,13 +170,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnHome);
-            this.Controls.Add(this.btnCompileTraveler);
-            this.Controls.Add(this.btnRequestMasterReview);
+            this.Controls.Add(this.btnSalesRequest);
             this.Controls.Add(this.btnTasks);
             this.Controls.Add(this.btnReleaseWOR);
-            this.Controls.Add(this.btnCreateMaster);
-            this.Controls.Add(this.btnTravelerReturn);
-            this.Controls.Add(this.btnReveiwQuote);
             this.Controls.Add(this.btnDashboard);
             this.Controls.Add(this.pictureBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -272,13 +188,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnTasks;
-        private System.Windows.Forms.Button btnTravelerReturn;
         private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.Button btnHome;
-        private System.Windows.Forms.Button btnReveiwQuote;
-        private System.Windows.Forms.Button btnCreateMaster;
-        private System.Windows.Forms.Button btnRequestMasterReview;
+        private System.Windows.Forms.Button btnSalesRequest;
         private System.Windows.Forms.Button btnReleaseWOR;
-        private System.Windows.Forms.Button btnCompileTraveler;
     }
 }

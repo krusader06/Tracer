@@ -151,9 +151,7 @@ namespace Tracer
 
                 Forms.Views.Process.ucProcessMenu.Instance.DashboardButtonClicked += new EventHandler(showEngineeringDashboard);
                 Forms.Views.Process.ucProcessMenu.Instance.TasksButtonClicked += new EventHandler(showEngineeringTasks);
-                //Forms.Views.Process.ucProcessMenu.Instance.ReveiwQuoteButtonClicked += new EventHandler();
-                //Forms.Views.Process.ucProcessMenu.Instance.CreateMasterButtonClicked += new EventHandler();
-                //Forms.Views.Process.ucProcessMenu.Instance.RequestMasterReviewButtonClicked += new EventHandler();
+                Forms.Views.Process.ucProcessMenu.Instance.SalesRequestButtonClicked += new EventHandler(showSalesRequest);
                 //Forms.Views.Process.ucProcessMenu.Instance.ReleaseWORButtonClicked += new EventHandler();
                 //Forms.Views.Process.ucProcessMenu.Instance.CompileTravelerButtonClicked += new EventHandler();
                 //Forms.Views.Process.ucProcessMenu.Instance.TravelerReturnButtonClicked += new EventHandler();
@@ -205,6 +203,27 @@ namespace Tracer
             {
                 Forms.Views.Engineering.ucEngineeringTasks.Instance.BringToFront();
                 Forms.Views.Engineering.ucEngineeringTasks.Instance.updateData(null, null);
+            }
+        }
+
+        private void showSalesRequest(object sender, EventArgs e)
+        {
+            //Show the Engineering Dashboard
+
+            lblMain.Text = "Engineering - Sales Request";
+
+            if (!mainContainer.Controls.Contains(Forms.Views.Engineering.ucSalesRequest.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Engineering.ucSalesRequest.Instance);
+                Forms.Views.Engineering.ucSalesRequest.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Engineering.ucSalesRequest.Instance.BringToFront();
+                //Listen to Dashboard Buttons Here
+                //None...
+            }
+            else
+            {
+                Forms.Views.Engineering.ucSalesRequest.Instance.BringToFront();
+                Forms.Views.Engineering.ucSalesRequest.Instance.ShowLotNumbers();
             }
         }
 
@@ -418,7 +437,7 @@ namespace Tracer
             else
             {
                 Forms.Views.Sales.ucLinkPurchaseOrder.Instance.BringToFront();
-                Forms.Views.Sales.ucLinkPurchaseOrder.Instance.refreshData(null, null);
+                Forms.Views.Sales.ucLinkPurchaseOrder.Instance.updateData(null, null);
             }
         }
 

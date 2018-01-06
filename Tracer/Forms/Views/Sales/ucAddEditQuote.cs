@@ -64,6 +64,9 @@ namespace Tracer.Forms.Views.Sales
             UpdateBinding();
             dgQuoteGrid.Columns["QuoteInactive"].Visible = true;
             dgQuoteGrid.Columns["POReceived"].Visible = true;
+
+            dgQuoteGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgQuoteGrid.Columns["PartDescription"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void showActiveQuotes()
@@ -74,6 +77,9 @@ namespace Tracer.Forms.Views.Sales
             UpdateBinding();
             dgQuoteGrid.Columns["QuoteInactive"].Visible = false;
             dgQuoteGrid.Columns["POReceived"].Visible = false;
+
+            dgQuoteGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgQuoteGrid.Columns["PartDescription"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         //Physical Button Events--------------------------------------------------------------

@@ -116,10 +116,11 @@ namespace Tracer.Forms.Views.Sales
 
         private void LoadLotStatus()
         {
-            newLotStatus.QuoteReviewRequest = 0;
+            //Load Default values, and request that Engineering does a quote review and makes a master
+            newLotStatus.QuoteReviewRequest = 1;
             newLotStatus.QuoteReviewInProgress = 0;
             newLotStatus.QuoteReviewComplete = 0;
-            newLotStatus.MasterRequest = 0;
+            newLotStatus.MasterRequest = 1;
             newLotStatus.MasterInProgress = 0;
             newLotStatus.MasterComplete = 0;
             newLotStatus.MasterReviewRequest = 0;

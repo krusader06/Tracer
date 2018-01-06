@@ -76,6 +76,7 @@ namespace Tracer.Forms.Views.Sales
             dgWORGrid.Columns["Time"].Visible = false;
             dgWORGrid.Columns["PurchaseOrderNumber"].Visible = false;
             dgWORGrid.Columns["WorkOrderComplete"].Visible = false;
+
         }
 
         private void LoadAllWorkOrders()
@@ -168,6 +169,9 @@ namespace Tracer.Forms.Views.Sales
             dgLotGrid.DataSource = lotNumbers;
             dgLotGrid.Columns["JobWOR"].Visible = false;
             dgLotGrid.Columns["LotID"].Visible = false;
+
+            dgLotGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgLotGrid.Columns["JobComments"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void dgWORGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -262,10 +266,10 @@ namespace Tracer.Forms.Views.Sales
 
         private void LoadLotStatus()
         {
-            newLotStatus.QuoteReviewRequest = 0;
+            newLotStatus.QuoteReviewRequest = 1;
             newLotStatus.QuoteReviewInProgress = 0;
             newLotStatus.QuoteReviewComplete = 0;
-            newLotStatus.MasterRequest = 0;
+            newLotStatus.MasterRequest = 1;
             newLotStatus.MasterInProgress = 0;
             newLotStatus.MasterComplete = 0;
             newLotStatus.MasterReviewRequest = 0;

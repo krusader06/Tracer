@@ -19,6 +19,25 @@ namespace Tracer.Forms.Classes.DataAccess
             }
         }
 
+        public List<DatabaseTables.LotNumbers> GetLotNumbers()
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {//Grab all Unique Lot Numbers that aren't complete and Master Review has not been requested/In Progress
+                return connection.Query<DatabaseTables.LotNumbers>(
+                    $"SELECT DISTINCT LotNumbers.JobWOR " +
+                    $", LotNumbers.Lot " +
+                    $", LotNumbers.Customer " +
+                    $", LotNumbers.PartID " +
+                    $"FROM LotNumbers " +
+                    $"INNER JOIN LotStatus " +
+                    $"ON LotStatus.LotID = LotNumbers.LotID " +
+                    $"WHERE LotStatus.JobComplete = 'False' " +
+                    $"AND LotStatus.MasterReviewInProgress='False' " +
+                    $"AND LotStatus.MasterReviewRequest='False' " +
+                    $"ORDER BY LotNumbers.JobWOR, LotNumbers.Lot").ToList();
+            }
+        }
+
         //Task Queries-----------------------------------------------------------------------------------------------------------------
 
         public List<Classes.LotTask> GetEngineeringTaskList()
@@ -287,6 +306,21 @@ namespace Tracer.Forms.Classes.DataAccess
             }
         }
 
-       
+        //Insert Data---------------------------------------------------------------------------------------------------------------
+
+        public void requestMasterReview(string JobWOR, string Lot)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ JobWOR }' AND Lot=' { Lot }'").ToList();
+
+                //2. Change QuoteReviewRequest, QuoteReviewInProgress flags to "False", and QuoteReviewComplete flag to "True" where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotStatus SET MasterReviewRequest='True', MasterReviewInProgress='False', MasterReviewComplete='False' WHERE LotID='{ LotID[0] }'");
+
+            }
+        }
+
+
     }
 }

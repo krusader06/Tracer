@@ -98,6 +98,12 @@
     <Compile Include="Forms\Views\Engineering\ucEngineeringTasks.Designer.cs">
       <DependentUpon>ucEngineeringTasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Views\Engineering\ucSalesRequest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Engineering\ucSalesRequest.Designer.cs">
+      <DependentUpon>ucSalesRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Views\Executive\ucExecutiveMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -133,12 +139,6 @@
     </Compile>
     <Compile Include="Forms\Views\Engineering\ucProcessMenu.Designer.cs">
       <DependentUpon>ucProcessMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Views\Engineering\ucProcessTask.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Views\Engineering\ucProcessTask.Designer.cs">
-      <DependentUpon>ucProcessTask.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Views\Sales\ucAddLot.cs">
       <SubType>UserControl</SubType>
@@ -211,6 +211,9 @@
     <EmbeddedResource Include="Forms\Views\Engineering\ucEngineeringTasks.resx">
       <DependentUpon>ucEngineeringTasks.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Engineering\ucSalesRequest.resx">
+      <DependentUpon>ucSalesRequest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Executive\ucExecutiveMenu.resx">
       <DependentUpon>ucExecutiveMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -228,9 +231,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Engineering\ucProcessMenu.resx">
       <DependentUpon>ucProcessMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Views\Engineering\ucProcessTask.resx">
-      <DependentUpon>ucProcessTask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Sales\ucAddLot.resx">
       <DependentUpon>ucAddLot.cs</DependentUpon>

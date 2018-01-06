@@ -35,30 +35,22 @@ namespace Tracer.Forms.Views.Sales
         public ucLinkPurchaseOrder()
         {
             InitializeComponent();
-            refreshData(null, null);
-        }
-
-        public void refreshData(object sender, EventArgs e)
-        {
-            //Refresh the dataGridView
-            updateData(sender, EventArgs.Empty);
+            updateData(null, null);
         }
 
         //Functions----------------------------------------------------------------------------------
 
-        private void UpdateBinding()
-        {
-            dgActiveQuotes.DataSource = quotes;
-            dgActiveQuotes.Columns["QuoteInactive"].Visible = false;
-            dgActiveQuotes.Columns["POReceived"].Visible = false;
-        }
-
-        private void updateData(object sender, EventArgs e)
+        public void updateData(object sender, EventArgs e)
         {
             dgActiveQuotes.DataSource = null;
             Classes.DataAccess.SalesDataAccess db = new Classes.DataAccess.SalesDataAccess();
             quotes = db.GetActiveQuotes();
-            UpdateBinding();
+            dgActiveQuotes.DataSource = quotes;
+            dgActiveQuotes.Columns["QuoteInactive"].Visible = false;
+            dgActiveQuotes.Columns["POReceived"].Visible = false;
+
+            dgActiveQuotes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgActiveQuotes.Columns["QuoteComments"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void createWOR()

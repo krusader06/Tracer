@@ -198,7 +198,7 @@ namespace Tracer.Forms.Classes.DataAccess
                 connection.Execute($"UPDATE ActiveQuotes SET POReceived='True' WHERE QuoteWOR=@JobWOR", WorkOrders);
 
                 //Insert New Work Order
-                connection.Execute($"insert into WorkOrders(JobWOR, Date, Time, PurchaseOrderNumber) values(@JobWOR, @Date, @Time, @PurchaseOrderNumber)", WorkOrders);
+                connection.Execute($"insert into WorkOrders(JobWOR, Date, Time, PurchaseOrderNumber, WorkOrderComplete) values(@JobWOR, @Date, @Time, @PurchaseOrderNumber, @WorkOrderComplete)", WorkOrders);
 
             }
         }
@@ -236,7 +236,7 @@ namespace Tracer.Forms.Classes.DataAccess
                 connection.Execute($"insert into LotNumbers(JobWOR, Lot, Customer, PartID, PartDescription, OrderQuantity, JobDueDate, MasterDueDate, TurnTime, Consigned, JobComments) values(@JobWOR, @Lot, @Customer, @PartID, @PartDescription, @OrderQuantity, @JobDueDate, @MasterDueDate, @TurnTime, @Consigned, @JobComments)", lstNewLotNumber);
 
                 //2. Get LotID from JobWOR
-                var tempLotID = connection.Query<DatabaseTables.LotNumbers>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ lstNewLotNumber[0].JobWOR }'").ToList();
+                var tempLotID = connection.Query<DatabaseTables.LotNumbers>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ lstNewLotNumber[0].JobWOR }' AND Lot='{ lstNewLotNumber[0].Lot }'").ToList();
 
                 //Update the LotStatus and LotPurchasingStatus with tempLotID
                 lstNewLotStatus[0].LotID = tempLotID[0].LotID;
