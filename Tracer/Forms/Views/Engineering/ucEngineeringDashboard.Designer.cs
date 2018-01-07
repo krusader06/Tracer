@@ -51,6 +51,7 @@
             this.dgActiveWORs.RowTemplate.Height = 28;
             this.dgActiveWORs.Size = new System.Drawing.Size(812, 395);
             this.dgActiveWORs.TabIndex = 1;
+            this.dgActiveWORs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgActiveWORs_CellClick);
             // 
             // label1
             // 

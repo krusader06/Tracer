@@ -20,11 +20,27 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", Lot = '' " +
                     $", ActiveQuotes.PartID " +
                     $", ActiveQuotes.Customer " +
+
+                    $", QuoteStatus.BOMValidationRequest " +
+                    $", QuoteStatus.BOMValidationInProgress " +
                     $", QuoteStatus.BOMValidationComplete " +
+
+                    $", QuoteStatus.PreBidRequest " +
+                    $", QuoteStatus.PreBidInProgress " +
                     $", QuoteStatus.PreBidComplete " +
+
+                    $", QuoteReviewRequest = '' " +
+                    $", QuoteReviewInProgress = '' " +
                     $", QuoteReviewComplete = '' " +
+
+                    $", MasterRequest = '' " +
+                    $", MasterInProgress = '' " +
                     $", MasterComplete = '' " +
+
+                    $", MasterReviewRequest = '' " +
+                    $", MasterReviewInProgress = '' " +
                     $", MasterReviewComplete = '' " +
+
                     $", WORLotReleased = '' " +
                     $", TravelerReleased = '' " +
                     $", StencilPlotsApproved = '' " +
@@ -33,8 +49,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $"FROM ActiveQuotes " +
                     $"INNER JOIN QuoteStatus " +
                     $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
-                    $"WHERE(BOMValidationComplete = 'True' OR PreBidComplete = 'True') " +
-                    $"AND(ActiveQuotes.POReceived = 'False' AND ActiveQuotes.QuoteInactive = 'False') " +
+                    $"WHERE " +
+                    $"ActiveQuotes.POReceived = 'False' AND ActiveQuotes.QuoteInactive = 'False' " +
 
                     $"UNION " +
 
@@ -43,11 +59,27 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotNumbers.Lot " +
                     $", LotNumbers.PartID " +
                     $", LotNumbers.Customer " +
+
+                    $", QuoteStatus.BOMValidationRequest " +
+                    $", QuoteStatus.BOMValidationInProgress " +
                     $", QuoteStatus.BOMValidationComplete " +
+
+                    $", QuoteStatus.PreBidRequest " +
+                    $", QuoteStatus.PreBidInProgress " +
                     $", QuoteStatus.PreBidComplete " +
+
+                    $", LotStatus.QuoteReviewRequest " +
+                    $", LotStatus.QuoteReviewInProgress " +
                     $", LotStatus.QuoteReviewComplete " +
+
+                    $", LotStatus.MasterRequest " +
+                    $", LotStatus.MasterInProgress " +
                     $", LotStatus.MasterComplete " +
+
+                    $", LotStatus.MasterReviewRequest " +
+                    $", LotStatus.MasterReviewInProgress " +
                     $", LotStatus.MasterReviewComplete " +
+
                     $", LotStatus.WORLotReleased " +
                     $", LotStatus.TravelerReleased " +
                     $", LotPurchasingStatus.StencilPlotsApproved " +

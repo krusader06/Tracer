@@ -21,7 +21,6 @@ namespace Tracer.Forms.Classes
             }
         }
 
-
         public void CalculateLotStatus(Classes.LotTask currentTask)
         {
             //Holder for the LotStatus
@@ -482,11 +481,433 @@ namespace Tracer.Forms.Classes
                 connection.Execute($"UPDATE QuoteStatus SET QuoteCurrentStatus='{ newStatus }' WHERE QuoteWOR='{ currentTask.JobWOR }'");
             }
 
+        }
+
+        //Dashboard Status Calculations----------------------------------------------------------------------------------------------
+        public List<DatabaseTables.EngineeringDashboard> CalculateEngineeringDashboard(List<DatabaseTables.EngineeringDashboard> engineeringDashboard)
+        {
+            int state = 0;
+            int finalState = 10;
+            string newStatus = "";
+
+            for (int i = 0; i < engineeringDashboard.Count(); i++)
+            {   
+
+                // Get BomValidationStatus
+                state = 0;
+                newStatus = "";
+
+                while (state < finalState)
+                {
+                    switch (state)
+                    {
+                        case 0:
+                            //Check BOMValidationRequested
+                            if (engineeringDashboard[i].BOMValidationRequest == "True")
+                            {
+                                //Bom Validation Requested, Check to see if BOMValidationInProgress
+                                state = 1;
+                            }
+                            else
+                            {
+                                //Bom Validation Not Requested, Check to see if BOMValidationComplete
+                                state = 2;
+                            }
+
+                            break;
+
+                        case 1:
+                            //Check to see if BOMValidationInProgress
+                            if (engineeringDashboard[i].BOMValidationInProgress == "True")
+                            {
+                                //BOM Validation has been requested and is in progress - Check to see if Validation is Complete
+                                state = 3;
+                            }
+                            else
+                            {
+                                //BOM Validation has been requested, but is not In Progress
+                                state = finalState;
+                                newStatus = "Requested";
+                            }
+
+                            break;
+
+                        case 2:
+                            //Check to see if BOMValidationComplete
+                            if (engineeringDashboard[i].BOMValidationComplete == "True")
+                            {
+                                //BOM Validation is Complete
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Nothing has happened
+                                state = finalState;
+                                newStatus = "Not Started";
+                            }
+
+                            break;
+
+                        case 3:
+                            if (engineeringDashboard[i].BOMValidationComplete == "True")
+                            {
+                                //All 3 semaphores are true
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Only Requested and InProgress
+                                state = finalState;
+                                newStatus = "In Progress";
+                            }
+
+                            break;
+                    }
+                }
+
+                engineeringDashboard[i].BOMValidationStatus = newStatus;
 
 
+                //Get PreBid Status
+                state = 0;
+                newStatus = "";
 
+                while (state < finalState)
+                {
+                    switch (state)
+                    {
+                        case 0:
+                            //Check PreBidRequested
+                            if (engineeringDashboard[i].PreBidRequest == "True")
+                            {
+                                //PreBid Requested, Check to see if PreBidInProgress
+                                state = 1;
+                            }
+                            else
+                            {
+                                //PreBid Not Requested, Check to see if PreBidComplete
+                                state = 2;
+                            }
+
+                            break;
+
+                        case 1:
+                            //Check to see if PreBidInProgress
+                            if (engineeringDashboard[i].PreBidInProgress == "True")
+                            {
+                                //PreBid has been requested and is in progress - Check to see if PreBid is Complete
+                                state = 3;
+                            }
+                            else
+                            {
+                                //PreBid has been requested, but is not In Progress
+                                state = finalState;
+                                newStatus = "Requested";
+                            }
+
+                            break;
+
+                        case 2:
+                            //Check to see if PreBidComplete
+                            if (engineeringDashboard[i].PreBidComplete == "True")
+                            {
+                                //PreBid is Complete
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Nothing has happened
+                                state = finalState;
+                                newStatus = "Not Started";
+                            }
+
+                            break;
+
+                        case 3:
+                            if (engineeringDashboard[i].PreBidComplete == "True")
+                            {
+                                //All 3 semaphores are true
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Only Requested and InProgress
+                                state = finalState;
+                                newStatus = "In Progress";
+                            }
+
+                            break;
+                    }
+                }
+
+                engineeringDashboard[i].PreBidStatus = newStatus;
+
+                //Get Quote Review Status
+                state = 0;
+                newStatus = "";
+
+                while (state < finalState)
+                {
+                    switch (state)
+                    {
+                        case 0:
+                            //Check QuoteReviewRequested
+                            if (engineeringDashboard[i].QuoteReviewRequest == "True")
+                            {
+                                //QuoteReview Requested, Check to see if QuoteReviewInProgress
+                                state = 1;
+                            }
+                            else
+                            {
+                                //QuoteReview Not Requested, Check to see if QuoteReviewComplete
+                                state = 2;
+                            }
+
+                            break;
+
+                        case 1:
+                            //Check to see if QuoteReviewInProgress
+                            if (engineeringDashboard[i].QuoteReviewInProgress == "True")
+                            {
+                                //QuoteReview has been requested and is in progress - Check to see if QuoteReview is Complete
+                                state = 3;
+                            }
+                            else
+                            {
+                                //QuoteReview has been requested, but is not In Progress
+                                state = finalState;
+                                newStatus = "Requested";
+                            }
+
+                            break;
+
+                        case 2:
+                            //Check to see if QuoteReviewComplete
+                            if (engineeringDashboard[i].QuoteReviewComplete == "True")
+                            {
+                                //PreBid is Complete
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Nothing has happened
+                                state = finalState;
+                                newStatus = "Not Started";
+                            }
+
+                            break;
+
+                        case 3:
+                            if (engineeringDashboard[i].QuoteReviewComplete == "True")
+                            {
+                                //All 3 semaphores are true
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Only Requested and InProgress
+                                state = finalState;
+                                newStatus = "In Progress";
+                            }
+
+                            break;
+                    }
+                }
+
+                engineeringDashboard[i].QuoteReviewStatus = newStatus;
+
+                //Get Master Status
+                state = 0;
+                newStatus = "";
+
+                while (state < finalState)
+                {
+                    switch (state)
+                    {
+                        case 0:
+                            //Check MasterRequested
+                            if (engineeringDashboard[i].MasterRequest == "True")
+                            {
+                                //Master Requested, Check to see if MasterInProgress
+                                state = 1;
+                            }
+                            else
+                            {
+                                //Master Not Requested, Check to see if MasterComplete
+                                state = 2;
+                            }
+
+                            break;
+
+                        case 1:
+                            //Check to see if MasterInProgress
+                            if (engineeringDashboard[i].MasterInProgress == "True")
+                            {
+                                //Master has been requested and is in progress - Check to see if Master is Complete
+                                state = 3;
+                            }
+                            else
+                            {
+                                //Master has been requested, but is not In Progress
+                                state = finalState;
+                                newStatus = "Requested";
+                            }
+
+                            break;
+
+                        case 2:
+                            //Check to see if MasterComplete
+                            if (engineeringDashboard[i].MasterComplete == "True")
+                            {
+                                //PreBid is Complete
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Nothing has happened
+                                state = finalState;
+                                newStatus = "Not Started";
+                            }
+
+                            break;
+
+                        case 3:
+                            if (engineeringDashboard[i].MasterComplete == "True")
+                            {
+                                //All 3 semaphores are true
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Only Requested and InProgress
+                                state = finalState;
+                                newStatus = "In Progress";
+                            }
+
+                            break;
+                    }
+                }
+
+                engineeringDashboard[i].MasterStatus = newStatus;
+
+                //Get MasterReview Status
+                state = 0;
+                newStatus = "";
+
+                while (state < finalState)
+                {
+                    switch (state)
+                    {
+                        case 0:
+                            //Check MasterReviewRequested
+                            if (engineeringDashboard[i].MasterReviewRequest == "True")
+                            {
+                                //MasterReview Requested, Check to see if MasterReviewInProgress
+                                state = 1;
+                            }
+                            else
+                            {
+                                //MasterReview Not Requested, Check to see if MasterReviewComplete
+                                state = 2;
+                            }
+
+                            break;
+
+                        case 1:
+                            //Check to see if MasterReviewInProgress
+                            if (engineeringDashboard[i].MasterReviewInProgress == "True")
+                            {
+                                //MasterReview has been requested and is in progress - Check to see if MasterReview is Complete
+                                state = 3;
+                            }
+                            else
+                            {
+                                //MasterReview has been requested, but is not In Progress
+                                state = finalState;
+                                newStatus = "Requested";
+                            }
+
+                            break;
+
+                        case 2:
+                            //Check to see if MasterReviewComplete
+                            if (engineeringDashboard[i].MasterReviewComplete == "True")
+                            {
+                                //PreBid is Complete
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Nothing has happened
+                                state = finalState;
+                                newStatus = "Not Started";
+                            }
+
+                            break;
+
+                        case 3:
+                            if (engineeringDashboard[i].MasterReviewComplete == "True")
+                            {
+                                //All 3 semaphores are true
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Only Requested and InProgress
+                                state = finalState;
+                                newStatus = "In Progress";
+                            }
+
+                            break;
+                    }
+                }
+
+                engineeringDashboard[i].MasterReviewStatus = newStatus;
+
+                //Determine whether or not this is a Quote or WOR and fill in cells as necessary
+                if (engineeringDashboard[i].QuoteOrWOR == "Quote")
+                {
+                    //Fill in "Not Used" for all non-used cells
+                    engineeringDashboard[i].QuoteReviewRequest = "Not Used";
+                    engineeringDashboard[i].QuoteReviewInProgress = "Not Used";
+                    engineeringDashboard[i].QuoteReviewComplete = "Not Used";
+                    engineeringDashboard[i].QuoteReviewStatus = "Not Used";
+
+                    engineeringDashboard[i].MasterRequest = "Not Used";
+                    engineeringDashboard[i].MasterInProgress = "Not Used";
+                    engineeringDashboard[i].MasterComplete = "Not Used";
+                    engineeringDashboard[i].MasterStatus = "Not Used";
+
+                    engineeringDashboard[i].MasterReviewRequest = "Not Used";
+                    engineeringDashboard[i].MasterReviewInProgress = "Not Used";
+                    engineeringDashboard[i].MasterReviewComplete = "Not Used";
+                    engineeringDashboard[i].MasterReviewStatus = "Not Used";
+
+                    engineeringDashboard[i].WORLotReleased = "Not Used";
+                    engineeringDashboard[i].TravelerReleased = "Not Used";
+                    engineeringDashboard[i].StencilPlotsApproved = "Not Used";
+                    engineeringDashboard[i].PCBArraysApproved = "Not Used";
+                    engineeringDashboard[i].KitReleased = "Not Used";
+                }
+            }
+
+
+            //Send back the updated engineeringDashboard
+            return engineeringDashboard;
 
         }
+
+
 
 
     }
