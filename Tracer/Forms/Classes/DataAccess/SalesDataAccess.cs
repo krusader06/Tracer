@@ -241,9 +241,9 @@ namespace Tracer.Forms.Classes.DataAccess
                 //Update the LotStatus and LotPurchasingStatus with tempLotID
                 lstNewLotStatus[0].LotID = tempLotID[0].LotID;
                 lstNewLotPurchasingStatus[0].LotID = tempLotID[0].LotID;
-
+            
                 //3. Enter LotStatus
-                connection.Execute($"insert into LotStatus(LotID, QuoteReviewRequest, QuoteReviewInProgress, QuoteReviewComplete, MasterRequest, MasterInProgress, MasterComplete, MasterReviewRequest, MasterReviewInProgress, MasterReviewComplete, WORLotReleaseInProgress, WORLotReleaseComplete, TravelerInProgress, TravelerComplete, JobInProgress, JobComplete, SuperHot, JobStatus) values(@LotID, @QuoteReviewRequest, @QuoteReviewInProgress, @QuoteReviewComplete, @MasterRequest, @MasterInProgress, @MasterComplete, @MasterReviewRequest, @MasterReviewInProgress, @MasterReviewComplete, @WORLotReleaseInProgress, @WORLotReleaseComplete, @TravelerInProgress, @TravelerComplete, @JobInProgress, @JobComplete, @SuperHot, @JobStatus)", lstNewLotStatus);
+                connection.Execute($"insert into LotStatus(LotID, QuoteReviewRequest, QuoteReviewInProgress, QuoteReviewComplete, MasterRequest, MasterInProgress, MasterComplete, MasterReviewRequest, MasterReviewInProgress, MasterReviewComplete, WORLotReleased, TravelerReleased, TravelerReturned, JobInProgress, JobComplete, SuperHot, JobStatus) values(@LotID, @QuoteReviewRequest, @QuoteReviewInProgress, @QuoteReviewComplete, @MasterRequest, @MasterInProgress, @MasterComplete, @MasterReviewRequest, @MasterReviewInProgress, @MasterReviewComplete, @WORLotReleased, @TravelerReleased, @TravelerReturned, @JobInProgress, @JobComplete, @SuperHot, @JobStatus)", lstNewLotStatus);
 
                 //4. Get LotStatusID from LotID
                 var tempLotStatusID = connection.Query<DatabaseTables.LotStatus>($"SELECT LotStatusID FROM LotStatus WHERE LotID='{ lstNewLotStatus[0].LotID }'").ToList();
@@ -255,7 +255,7 @@ namespace Tracer.Forms.Classes.DataAccess
                 connection.Execute($"insert into LotTimeTracking(LotStatusID, QuoteReviewStart, QuoteReviewEnd, MasterStart, MasterEnd, MasterReviewStart, MasterReviewEnd, WORReleaseStart, WORReleaseEnd, TravelerStart, TravelerEnd, JobStart, JobEnd) values(@LotStatusID, @QuoteReviewStart, @QuoteReviewEnd, @MasterStart, @MasterEnd, @MasterReviewStart, @MasterReviewEnd, @WORReleaseStart, @WORReleaseEnd, @TravelerStart, @TravelerEnd, @JobStart, @JobEnd)", lstNewLotTimeTracking);
 
                 //6. Enter LotPurchasingStatus
-                connection.Execute($"insert into LotPurchasingStatus(LotID, NumStencilsRequired, NumStencilsOrdered, NumStencilsReceived, NumPCBRequired, NumPCBOrdered, NumPCBReceived, PartsOrdered, PartsReceived, KitReleased) values(@LotID, @NumStencilsRequired, @NumStencilsOrdered, @NumStencilsReceived, @NumPCBRequired, @NumPCBOrdered, @NumPCBReceived, @PartsOrdered, @PartsReceived, @KitReleased)", lstNewLotPurchasingStatus);
+                connection.Execute($"insert into LotPurchasingStatus(LotID, NumStencilsRequired, NumStencilsOrdered, NumStencilsReceived, StencilPlotsApproved, NumPCBRequired, NumPCBOrdered, NumPCBReceived, PCBArraysApproved, PartsOrdered, PartsReceived, KitReleased) values(@LotID, @NumStencilsRequired, @NumStencilsOrdered, @NumStencilsReceived, @StencilPlotsApproved, @NumPCBRequired, @NumPCBOrdered, @NumPCBReceived, @PCBArraysApproved, @PartsOrdered, @PartsReceived, @KitReleased)", lstNewLotPurchasingStatus);
 
                 //7. Get LotPurchasingStatusID from LotID
                 var tempLotPurchasingStatusID = connection.Query<DatabaseTables.LotPurchasingStatus>($"SELECT PurchasingStatusID FROM LotPurchasingStatus WHERE LotID='{ lstNewLotPurchasingStatus[0].LotID }'").ToList();

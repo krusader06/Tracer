@@ -47,6 +47,8 @@
             // 
             // dgActiveQuotes
             // 
+            this.dgActiveQuotes.AllowUserToAddRows = false;
+            this.dgActiveQuotes.AllowUserToDeleteRows = false;
             this.dgActiveQuotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -54,18 +56,19 @@
             this.dgActiveQuotes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgActiveQuotes.Location = new System.Drawing.Point(16, 52);
             this.dgActiveQuotes.Name = "dgActiveQuotes";
+            this.dgActiveQuotes.ReadOnly = true;
             this.dgActiveQuotes.Size = new System.Drawing.Size(768, 508);
             this.dgActiveQuotes.TabIndex = 19;
             this.dgActiveQuotes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgActiveQuotes_CellClick);
             // 
-            // ucSalesTask
+            // ucSalesRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.Controls.Add(this.btnRequestMasterReview);
             this.Controls.Add(this.dgActiveQuotes);
-            this.Name = "ucSalesTask";
+            this.Name = "ucSalesRequest";
             this.Size = new System.Drawing.Size(800, 577);
             ((System.ComponentModel.ISupportInitialize)(this.dgActiveQuotes)).EndInit();
             this.ResumeLayout(false);

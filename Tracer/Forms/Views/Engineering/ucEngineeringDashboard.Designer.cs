@@ -47,6 +47,7 @@
             this.dgActiveWORs.Location = new System.Drawing.Point(17, 67);
             this.dgActiveWORs.Margin = new System.Windows.Forms.Padding(1);
             this.dgActiveWORs.Name = "dgActiveWORs";
+            this.dgActiveWORs.ReadOnly = true;
             this.dgActiveWORs.RowTemplate.Height = 28;
             this.dgActiveWORs.Size = new System.Drawing.Size(812, 395);
             this.dgActiveWORs.TabIndex = 1;
