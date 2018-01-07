@@ -290,9 +290,11 @@ namespace Tracer.Forms.Views.Sales
             newLotPurchasingStatus.NumStencilsRequired = 0;
             newLotPurchasingStatus.NumStencilsOrdered = 0;
             newLotPurchasingStatus.NumStencilsReceived = 0;
+            newLotPurchasingStatus.StencilPlotsApproved = 0;
             newLotPurchasingStatus.NumPCBRequired = 0;
             newLotPurchasingStatus.NumPCBOrdered = 0;
             newLotPurchasingStatus.NumPCBReceived = 0;
+            newLotPurchasingStatus.PCBArraysApproved = 0;
             newLotPurchasingStatus.PartsOrdered = 0;
             newLotPurchasingStatus.PartsReceived = 0;
             newLotPurchasingStatus.KitReleased = 0;
@@ -301,8 +303,10 @@ namespace Tracer.Forms.Views.Sales
         private void LoadPurchasingTimeTracking()
         {
             newPurchasingTimeTracking.StencilOrderDate = "";
+            newPurchasingTimeTracking.StencilPlotsApprovedDate = "";
             newPurchasingTimeTracking.StencilReceivedDate = "";
             newPurchasingTimeTracking.PCBOrderDate = "";
+            newPurchasingTimeTracking.PCBArraysApprovedDate = "";
             newPurchasingTimeTracking.PCBReceivedDate = "";
             newPurchasingTimeTracking.PartsOrderDate = "";
             newPurchasingTimeTracking.PartsReceivedDate = "";

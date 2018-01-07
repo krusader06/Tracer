@@ -13,9 +13,11 @@ namespace Tracer.Forms.Classes.DatabaseTables
         public int NumStencilsRequired { get; set; }
         public int NumStencilsOrdered { get; set; }
         public int NumStencilsReceived { get; set; }
+        public int StencilPlotsApproved { get; set; }
         public int NumPCBRequired { get; set; }
         public int NumPCBOrdered { get; set; }
         public int NumPCBReceived { get; set; }
+        public int PCBArraysApproved { get; set; }
         public int PartsOrdered { get; set; }
         public int PartsReceived { get; set; }
         public int KitReleased { get; set; }

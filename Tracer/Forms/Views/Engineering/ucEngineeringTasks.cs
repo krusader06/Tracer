@@ -55,32 +55,6 @@ namespace Tracer.Forms.Views.Engineering
             Classes.DataAccess.EngineeringDataAccess db = new Classes.DataAccess.EngineeringDataAccess();
             MasterReviewRequests = db.GetEngineeringTaskList();
 
-
-
-            //Fill In the Task Name for each list item
-            //for (int i = 0; i < MasterReviewRequests.Count; i++)
-            //{
-            //    switch (MasterReviewRequests[i].JobStatus)
-            //    {
-            //        case "BOM Validation Requested":
-            //            MasterReviewRequests[i].TaskDescription = "Perform BOM Validation";
-
-            //            break;
-            //        case "Master Creation Requested":
-            //            MasterReviewRequests[i].TaskDescription = "Perform Master Creation";
-
-            //            break;
-            //        case "Quote Review Requested":
-            //            MasterReviewRequests[i].TaskDescription = "Perform Quote Review";
-            //            break;
-            //        case "Pre-Bid Review Requested":
-            //            MasterReviewRequests[i].TaskDescription = "Perform Pre-Bid Review";
-            //            break;
-            //    }
-            //}
-
-
-
             dgTaskView.DataSource = MasterReviewRequests;
             dgTaskView.Columns["Owner"].Visible = false;
 

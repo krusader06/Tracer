@@ -43,8 +43,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgActiveWORs.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgActiveWORs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgActiveWORs.Enabled = false;
             this.dgActiveWORs.Location = new System.Drawing.Point(17, 67);
-            this.dgActiveWORs.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.dgActiveWORs.Margin = new System.Windows.Forms.Padding(1);
             this.dgActiveWORs.Name = "dgActiveWORs";
             this.dgActiveWORs.RowTemplate.Height = 28;
             this.dgActiveWORs.Size = new System.Drawing.Size(812, 395);
@@ -68,7 +69,7 @@
             this.BackColor = System.Drawing.Color.Silver;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgActiveWORs);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ucProcessDashboard";
             this.Size = new System.Drawing.Size(845, 479);
             ((System.ComponentModel.ISupportInitialize)(this.dgActiveWORs)).EndInit();

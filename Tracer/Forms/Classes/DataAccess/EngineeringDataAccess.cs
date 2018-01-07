@@ -10,12 +10,57 @@ namespace Tracer.Forms.Classes.DataAccess
     public class EngineeringDataAccess
     {
         //Generic Queries--------------------------------------------------------------------------------------------------------------
-        public List<DatabaseTables.ActiveQuotes> LoadProcessDashboard()
+        public List<DatabaseTables.EngineeringDashboard> LoadProcessDashboard()
         {
             using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
             {//Grab all active/high-confidence quotes
-                var result = connection.Query<DatabaseTables.ActiveQuotes>($"select * from ActiveQuotes where QuoteConfidence='High' AND POReceived='False' AND QuoteInactive='False'").ToList();
-                return result;
+                return connection.Query<DatabaseTables.EngineeringDashboard>(
+                    $"SELECT 'QuoteOrWOR' = 'Quote' " +
+                    $", ActiveQuotes.QuoteWOR AS WOR " +
+                    $", Lot = '' " +
+                    $", ActiveQuotes.PartID " +
+                    $", ActiveQuotes.Customer " +
+                    $", QuoteStatus.BOMValidationComplete " +
+                    $", QuoteStatus.PreBidComplete " +
+                    $", QuoteReviewComplete = '' " +
+                    $", MasterComplete = '' " +
+                    $", MasterReviewComplete = '' " +
+                    $", WORLotReleaseComplete = '' " +
+                    $", TravelerComplete = '' " +
+                    $", StencilPlotsApproved = '' " +
+                    $", PCBArraysApproved = '' " +
+                    $", KitReleased = '' " +
+                    $"FROM ActiveQuotes " +
+                    $"INNER JOIN QuoteStatus " +
+                    $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
+                    $"WHERE(BOMValidationComplete = 'True' OR PreBidComplete = 'True') " +
+                    $"AND(ActiveQuotes.POReceived = 'False' AND ActiveQuotes.QuoteInactive = 'False') " +
+
+                    $"UNION " +
+
+                    $"SELECT 'QuoteOrWOR' = 'WOR' " +
+                    $", LotNumbers.JobWOR AS WOR " +
+                    $", LotNumbers.Lot " +
+                    $", LotNumbers.PartID " +
+                    $", LotNumbers.Customer " +
+                    $", QuoteStatus.BOMValidationComplete " +
+                    $", QuoteStatus.PreBidComplete " +
+                    $", LotStatus.QuoteReviewComplete " +
+                    $", LotStatus.MasterComplete " +
+                    $", LotStatus.MasterReviewComplete " +
+                    $", LotStatus.WORLotReleaseComplete " +
+                    $", LotStatus.TravelerComplete " +
+                    $", LotPurchasingStatus.StencilPlotsApproved " +
+                    $", LotPurchasingStatus.PCBArraysApproved " +
+                    $", LotPurchasingStatus.KitReleased " +
+                    $"FROM LotNumbers " +
+                    $"INNER JOIN LotStatus " +
+                    $"ON LotNumbers.LotID = LotStatus.LotID " +
+                    $"INNER JOIN QuoteStatus " +
+                    $"ON LotNumbers.JobWOR = QuoteStatus.QuoteWOR " +
+                    $"INNER JOIN LotPurchasingStatus " +
+                    $"ON LotStatus.LotID = LotPurchasingStatus.LotID " +
+                    $"WHERE LotStatus.JobComplete = 'False'").ToList();
             }
         }
 

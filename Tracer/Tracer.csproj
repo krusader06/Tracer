@@ -70,6 +70,7 @@
     <Compile Include="Forms\Classes\DataAccess\EngineeringDataAccess.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\ActiveQuotes.cs" />
     <Compile Include="Forms\Classes\DataAccess\SalesDataAccess.cs" />
+    <Compile Include="Forms\Classes\DatabaseTables\EngineeringDashboard.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\LotNumbers.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\LotPurchasingStatus.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\LotStatus.cs" />

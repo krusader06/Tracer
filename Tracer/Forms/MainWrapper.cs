@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Tracer
             //On Initial Application Run, load the default menu and view selection dashboard
             InitializeComponent();
             //Load the default view
-            prepareHomeView(null, null);
+            prepareView(null, null);
         }
 
         //-------------------------Menu Toolstrip Controllers----------------------------------------
@@ -56,7 +57,7 @@ namespace Tracer
         private void homeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Hime View Button Clicked...Switch To Home View
-            prepareHomeView(sender, e);
+            prepareView(sender, e);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -65,10 +66,49 @@ namespace Tracer
         }
 
         //-------------------------Home View Controller------------------------------------------
+        private void prepareView(object sender, EventArgs e)
+        {
+            //Get the default view appSetting...
+            string defaultView = ConfigurationManager.AppSettings["DefaultView"];
+
+            if (defaultView == "")
+            {
+                defaultView = "Home";
+            }
+
+            switch (defaultView)
+            {
+                case "Home":
+                    prepareHomeView(sender, e);
+                    break;
+
+                case "Sales":
+                    prepareSalesView(sender, e);
+                    break;
+
+                case "Engineering":
+                    prepareEngineeringView(sender, e);
+                    break;
+
+                case "Purchasing":
+                    preparePurchasingView(sender, e);
+                    break;
+
+                case "Production":
+                    prepareProductionView(sender, e);
+                    break;
+
+                case "Executive":
+                    prepareExecutiveView(sender, e);
+                    break;
+            }
+        }
+
         private void prepareHomeView(object sender, EventArgs e)
         {
             showHomeMenu(sender, e);
             showHomeDashboard(sender, e);
+            homeToolStripMenuItem.Checked = true;
 
             //Set up checks for menu strip
             engineeringToolStripMenuItem.Checked = false;
@@ -76,10 +116,10 @@ namespace Tracer
             purchasingToolStripMenuItem.Checked = false;
             productionToolStripMenuItem.Checked = false;
             executiveToolStripMenuItem.Checked = false;
-            homeToolStripMenuItem.Checked = true;
+            homeToolStripMenuItem.Checked = false;
         }
 
-        private void showHomeMenu(object sender, EventArgs e)
+            private void showHomeMenu(object sender, EventArgs e)
         {
             //Load Home Menu
             if (!MenuContainer.Controls.Contains(Forms.Views.Default.ucDefaultMenu.Instance))
