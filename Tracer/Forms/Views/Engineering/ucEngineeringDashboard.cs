@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Tracer.Forms.Views.Process
+namespace Tracer.Forms.Views.Engineering
 {
     public partial class ucProcessDashboard : UserControl
     {

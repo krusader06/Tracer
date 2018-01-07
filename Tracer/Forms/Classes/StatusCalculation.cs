@@ -183,11 +183,11 @@ namespace Tracer.Forms.Classes
 
                         break;
 
-                    case 6: //Looking at WORLot Release
+                    case 6: //Looking at WORLot Release...........NOT NEEDED-DO SOMETHING WITH THIS AT SOME POINT!!!!!!
 
-                        if (tempLots[0].WORLotReleaseComplete == 1)
+                        if (tempLots[0].WORLotReleased == 1)
                         {//WORLot Release is complete
-                            state = 8;
+                            state = 7;
                         }
                         else
                         {
@@ -199,7 +199,7 @@ namespace Tracer.Forms.Classes
 
                     case 7:
 
-                        if (tempLots[0].WORLotReleaseInProgress == 1)
+                        if (tempLots[0].WORLotReleased == 1)
                         {
 
                             //WORLot Release is in Progress, Update newStatus and signal end of state machine
@@ -218,7 +218,7 @@ namespace Tracer.Forms.Classes
 
                     case 8: //Looking at Traveler Status
 
-                        if (tempLots[0].TravelerComplete == 1)
+                        if (tempLots[0].TravelerReturned == 1)
                         {//Traveler is complete
                             state = 10;
                         }
@@ -232,7 +232,7 @@ namespace Tracer.Forms.Classes
 
                     case 9:
 
-                        if (tempLots[0].TravelerInProgress == 1)
+                        if (tempLots[0].TravelerReleased == 1)
                         {
 
                             //Traveler is in Progress, Update newStatus and signal end of state machine

@@ -99,6 +99,12 @@
     <Compile Include="Forms\Views\Engineering\ucEngineeringTasks.Designer.cs">
       <DependentUpon>ucEngineeringTasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Views\Engineering\ucPerformEngineeringTask.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Engineering\ucPerformEngineeringTask.Designer.cs">
+      <DependentUpon>ucPerformEngineeringTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Views\Engineering\ucSalesRequest.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -135,11 +141,11 @@
     <Compile Include="Forms\Views\Engineering\ucEngineeringDashboard.Designer.cs">
       <DependentUpon>ucEngineeringDashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Views\Engineering\ucProcessMenu.cs">
+    <Compile Include="Forms\Views\Engineering\ucEngineeringMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Views\Engineering\ucProcessMenu.Designer.cs">
-      <DependentUpon>ucProcessMenu.cs</DependentUpon>
+    <Compile Include="Forms\Views\Engineering\ucEngineeringMenu.Designer.cs">
+      <DependentUpon>ucEngineeringMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Views\Sales\ucAddLot.cs">
       <SubType>UserControl</SubType>
@@ -212,6 +218,9 @@
     <EmbeddedResource Include="Forms\Views\Engineering\ucEngineeringTasks.resx">
       <DependentUpon>ucEngineeringTasks.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Engineering\ucPerformEngineeringTask.resx">
+      <DependentUpon>ucPerformEngineeringTask.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Engineering\ucSalesRequest.resx">
       <DependentUpon>ucSalesRequest.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,8 +239,8 @@
     <EmbeddedResource Include="Forms\Views\Engineering\ucEngineeringDashboard.resx">
       <DependentUpon>ucEngineeringDashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Views\Engineering\ucProcessMenu.resx">
-      <DependentUpon>ucProcessMenu.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Views\Engineering\ucEngineeringMenu.resx">
+      <DependentUpon>ucEngineeringMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Sales\ucAddLot.resx">
       <DependentUpon>ucAddLot.cs</DependentUpon>

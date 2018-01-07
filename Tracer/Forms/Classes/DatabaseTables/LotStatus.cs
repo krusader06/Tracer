@@ -19,10 +19,9 @@ namespace Tracer.Forms.Classes.DatabaseTables
         public int MasterReviewRequest { get; set; }
         public int MasterReviewInProgress { get; set; }
         public int MasterReviewComplete { get; set; }
-        public int WORLotReleaseInProgress { get; set; }
-        public int WORLotReleaseComplete { get; set; }
-        public int TravelerInProgress { get; set; }
-        public int TravelerComplete { get; set; }
+        public int WORLotReleased { get; set; }
+        public int TravelerReleased { get; set; }
+        public int TravelerReturned { get; set; }
         public int JobInProgress { get; set; }
         public int JobComplete { get; set; }
         public int SuperHot { get; set; }

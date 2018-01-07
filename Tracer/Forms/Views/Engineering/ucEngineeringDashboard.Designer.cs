@@ -1,4 +1,4 @@
-﻿namespace Tracer.Forms.Views.Process
+﻿namespace Tracer.Forms.Views.Engineering
 {
     partial class ucProcessDashboard
     {

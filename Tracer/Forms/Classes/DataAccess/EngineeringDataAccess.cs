@@ -25,8 +25,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", QuoteReviewComplete = '' " +
                     $", MasterComplete = '' " +
                     $", MasterReviewComplete = '' " +
-                    $", WORLotReleaseComplete = '' " +
-                    $", TravelerComplete = '' " +
+                    $", WORLotReleased = '' " +
+                    $", TravelerReleased = '' " +
                     $", StencilPlotsApproved = '' " +
                     $", PCBArraysApproved = '' " +
                     $", KitReleased = '' " +
@@ -48,8 +48,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotStatus.QuoteReviewComplete " +
                     $", LotStatus.MasterComplete " +
                     $", LotStatus.MasterReviewComplete " +
-                    $", LotStatus.WORLotReleaseComplete " +
-                    $", LotStatus.TravelerComplete " +
+                    $", LotStatus.WORLotReleased " +
+                    $", LotStatus.TravelerReleased " +
                     $", LotPurchasingStatus.StencilPlotsApproved " +
                     $", LotPurchasingStatus.PCBArraysApproved " +
                     $", LotPurchasingStatus.KitReleased " +
@@ -353,6 +353,8 @@ namespace Tracer.Forms.Classes.DataAccess
 
         //Insert Data---------------------------------------------------------------------------------------------------------------
 
+
+        //AT SOME POINT, TIME-TRACKING MUST BE IMPLEMENTED HERE!!!!!!!
         public void requestMasterReview(string JobWOR, string Lot)
         {
             using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
@@ -362,6 +364,71 @@ namespace Tracer.Forms.Classes.DataAccess
 
                 //2. Change QuoteReviewRequest, QuoteReviewInProgress flags to "False", and QuoteReviewComplete flag to "True" where LotID = returned LotID from previous Call
                 connection.Execute($"UPDATE LotStatus SET MasterReviewRequest='True', MasterReviewInProgress='False', MasterReviewComplete='False' WHERE LotID='{ LotID[0] }'");
+
+            }
+        }
+
+        public void releaseTraveler(string JobWOR, string Lot)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ JobWOR }' AND Lot=' { Lot }'").ToList();
+
+                //2. Change TravelerReleased = True, TravelerReturned = False where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotStatus SET TravelerReleased = 'True', TravelerReturned = 'False' WHERE LotID='{ LotID[0] }'");
+
+            }
+        }
+
+        public void returnTraveler(string JobWOR, string Lot)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ JobWOR }' AND Lot=' { Lot }'").ToList();
+
+                //2. Change TravelerReleased = False, TravelerReturned = True where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotStatus SET TravelerReturned = 'True' WHERE LotID='{ LotID[0] }'");
+
+            }
+        }
+
+        public void releaseWorkOrder(string JobWOR, string Lot)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ JobWOR }' AND Lot=' { Lot }'").ToList();
+
+                //2. Change WORLotReleased = True where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotStatus SET WORLotReleased = 'True' WHERE LotID='{ LotID[0] }'");
+
+            }
+        }
+
+        public void approveStencilPlots(string JobWOR, string Lot)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ JobWOR }' AND Lot=' { Lot }'").ToList();
+
+                //2. Change LotPurchasingStatus.StencilPlotsApproved = True where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotPurchasingStatus SET StencilPlotsApproved = 'True' WHERE LotID='{ LotID[0] }'");
+
+            }
+        }
+
+        public void approvePCBArrays(string JobWOR, string Lot)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ JobWOR }' AND Lot=' { Lot }'").ToList();
+
+                //2. Change LotPurchasingStatus.PCBArraysApproved = True where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotPurchasingStatus SET PCBArraysApproved = 'True' WHERE LotID='{ LotID[0] }'");
 
             }
         }

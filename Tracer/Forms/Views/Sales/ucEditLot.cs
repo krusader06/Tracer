@@ -275,10 +275,9 @@ namespace Tracer.Forms.Views.Sales
             newLotStatus.MasterReviewRequest = 0;
             newLotStatus.MasterReviewInProgress = 0;
             newLotStatus.MasterReviewComplete = 0;
-            newLotStatus.WORLotReleaseInProgress = 0;
-            newLotStatus.WORLotReleaseComplete = 0;
-            newLotStatus.TravelerInProgress = 0;
-            newLotStatus.TravelerComplete = 0;
+            newLotStatus.WORLotReleased = 0;
+            newLotStatus.TravelerReleased = 0;
+            newLotStatus.TravelerReturned = 0;
             newLotStatus.JobInProgress = 0;
             newLotStatus.JobComplete = 0;
             newLotStatus.SuperHot = 0;

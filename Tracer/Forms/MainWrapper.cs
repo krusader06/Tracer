@@ -181,26 +181,24 @@ namespace Tracer
 
         private void showEngineeringMenu(object sender, EventArgs e)
         {
-            if (!MenuContainer.Controls.Contains(Forms.Views.Process.ucProcessMenu.Instance))
+            if (!MenuContainer.Controls.Contains(Forms.Views.Engineering.ucEngineeringMenu.Instance))
             {
-                MenuContainer.Controls.Add(Forms.Views.Process.ucProcessMenu.Instance);
-                Forms.Views.Process.ucProcessMenu.Instance.Dock = DockStyle.Fill;
-                Forms.Views.Process.ucProcessMenu.Instance.BringToFront();
+                MenuContainer.Controls.Add(Forms.Views.Engineering.ucEngineeringMenu.Instance);
+                Forms.Views.Engineering.ucEngineeringMenu.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Engineering.ucEngineeringMenu.Instance.BringToFront();
 
                 //Listen To Menu Buttons
 
-                Forms.Views.Process.ucProcessMenu.Instance.DashboardButtonClicked += new EventHandler(showEngineeringDashboard);
-                Forms.Views.Process.ucProcessMenu.Instance.TasksButtonClicked += new EventHandler(showEngineeringTasks);
-                Forms.Views.Process.ucProcessMenu.Instance.SalesRequestButtonClicked += new EventHandler(showSalesRequest);
-                //Forms.Views.Process.ucProcessMenu.Instance.ReleaseWORButtonClicked += new EventHandler();
-                //Forms.Views.Process.ucProcessMenu.Instance.CompileTravelerButtonClicked += new EventHandler();
-                //Forms.Views.Process.ucProcessMenu.Instance.TravelerReturnButtonClicked += new EventHandler();
-                Forms.Views.Process.ucProcessMenu.Instance.HomeButtonClicked += new EventHandler(prepareHomeView);
-                Forms.Views.Process.ucProcessMenu.Instance.ExitButtonClicked += new EventHandler(exitApplication);
+                Forms.Views.Engineering.ucEngineeringMenu.Instance.DashboardButtonClicked += new EventHandler(showEngineeringDashboard);
+                Forms.Views.Engineering.ucEngineeringMenu.Instance.TasksButtonClicked += new EventHandler(showEngineeringTasks);
+                Forms.Views.Engineering.ucEngineeringMenu.Instance.SalesRequestButtonClicked += new EventHandler(showSalesRequest);
+                Forms.Views.Engineering.ucEngineeringMenu.Instance.PerformEngineeringTaskButtonClicked += new EventHandler(showPerformEngineeringTask);
+                Forms.Views.Engineering.ucEngineeringMenu.Instance.HomeButtonClicked += new EventHandler(prepareHomeView);
+                Forms.Views.Engineering.ucEngineeringMenu.Instance.ExitButtonClicked += new EventHandler(exitApplication);
             }
             else
             {
-                Forms.Views.Process.ucProcessMenu.Instance.BringToFront();
+                Forms.Views.Engineering.ucEngineeringMenu.Instance.BringToFront();
             }
         }
 
@@ -208,20 +206,20 @@ namespace Tracer
         {
             //Show the Engineering Dashboard
 
-            lblMain.Text = "Engineering Dashboard";
+            lblMain.Text = "Engineering - Dashboard";
 
-            if (!mainContainer.Controls.Contains(Forms.Views.Process.ucProcessDashboard.Instance))
+            if (!mainContainer.Controls.Contains(Forms.Views.Engineering.ucProcessDashboard.Instance))
             {
-                mainContainer.Controls.Add(Forms.Views.Process.ucProcessDashboard.Instance);
-                Forms.Views.Process.ucProcessDashboard.Instance.Dock = DockStyle.Fill;
-                Forms.Views.Process.ucProcessDashboard.Instance.BringToFront();
+                mainContainer.Controls.Add(Forms.Views.Engineering.ucProcessDashboard.Instance);
+                Forms.Views.Engineering.ucProcessDashboard.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Engineering.ucProcessDashboard.Instance.BringToFront();
                 //Listen to Dashboard Buttons Here
                     //None...
             }
             else
             {
-                Forms.Views.Process.ucProcessDashboard.Instance.BringToFront();
-                Forms.Views.Process.ucProcessDashboard.Instance.populate(null, null);
+                Forms.Views.Engineering.ucProcessDashboard.Instance.BringToFront();
+                Forms.Views.Engineering.ucProcessDashboard.Instance.populate(null, null);
             }  
         }
 
@@ -264,6 +262,27 @@ namespace Tracer
             {
                 Forms.Views.Engineering.ucSalesRequest.Instance.BringToFront();
                 Forms.Views.Engineering.ucSalesRequest.Instance.ShowLotNumbers();
+            }
+        }
+
+        private void showPerformEngineeringTask(object sender, EventArgs e)
+        {
+            //Show the Engineering Dashboard
+
+            lblMain.Text = "Engineering - Perform Engineering Tasks";
+
+            if (!mainContainer.Controls.Contains(Forms.Views.Engineering.ucPerformEngineeringTask.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Engineering.ucPerformEngineeringTask.Instance);
+                Forms.Views.Engineering.ucPerformEngineeringTask.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Engineering.ucPerformEngineeringTask.Instance.BringToFront();
+                //Listen to Dashboard Buttons Here
+                //None...
+            }
+            else
+            {
+                Forms.Views.Engineering.ucPerformEngineeringTask.Instance.BringToFront();
+                Forms.Views.Engineering.ucPerformEngineeringTask.Instance.ShowLotNumbers();
             }
         }
 
@@ -315,7 +334,7 @@ namespace Tracer
         {
             // Show the Sales View Dashboard
 
-            lblMain.Text = "Sales Dashboard";
+            lblMain.Text = "Sales - Dashboard";
 
             if (!mainContainer.Controls.Contains(Forms.Views.Sales.ucSalesDashboard.Instance))
             {
@@ -547,7 +566,7 @@ namespace Tracer
         private void showPurchasingDashboard(object sender, EventArgs e)
         {
             // Show the Purchasing Main View Dashboard
-            lblMain.Text = "Purchasing Dashboard";
+            lblMain.Text = "Purchasing - Dashboard";
         }
 
 
@@ -591,7 +610,7 @@ namespace Tracer
         private void showProductionDashboard(object sender, EventArgs e)
         {
             // Show the Production Main View Dashboard
-            lblMain.Text = "Production Dashboard";
+            lblMain.Text = "Production - Dashboard";
 
         }
 
@@ -636,7 +655,7 @@ namespace Tracer
         private void showExecutiveDashboard(object sender, EventArgs e)
         {
             // Show the Executive Main View Dashboard
-            lblMain.Text = "Executive Dashboard";
+            lblMain.Text = "Executive - Dashboard";
 
         }
 

@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Tracer.Forms.Views.Process
+namespace Tracer.Forms.Views.Engineering
 {
 
-    public partial class ucProcessMenu : UserControl
+    public partial class ucEngineeringMenu : UserControl
     {
         //Event Handlers--------------------------------------------------------------
         public event EventHandler DashboardButtonClicked;
@@ -19,22 +19,22 @@ namespace Tracer.Forms.Views.Process
         public event EventHandler SalesRequestButtonClicked;
         public event EventHandler ReleaseWORButtonClicked;
         public event EventHandler CompileTravelerButtonClicked;
-        public event EventHandler TravelerReturnButtonClicked;
+        public event EventHandler PerformEngineeringTaskButtonClicked;
         public event EventHandler HomeButtonClicked;
         public event EventHandler ExitButtonClicked;
 
         //On Load Stuff--------------------------------------------------------------
-        private static ucProcessMenu _instance;
-        public static ucProcessMenu Instance
+        private static ucEngineeringMenu _instance;
+        public static ucEngineeringMenu Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new ucProcessMenu();
+                    _instance = new ucEngineeringMenu();
                 return _instance;
             }
         }
-        public ucProcessMenu()
+        public ucEngineeringMenu()
         {
             InitializeComponent();
         }
@@ -78,11 +78,11 @@ namespace Tracer.Forms.Views.Process
                 CompileTravelerButtonClicked(this, EventArgs.Empty);
             }
         }
-        private void onTravelerReturnButtonClick()
+        private void onPerformEngineeringTaskButtonClick()
         {
-            if (TravelerReturnButtonClicked != null)
+            if (PerformEngineeringTaskButtonClicked != null)
             {
-                TravelerReturnButtonClicked(this, EventArgs.Empty);
+                PerformEngineeringTaskButtonClicked(this, EventArgs.Empty);
             }
         }
         private void onHomeButtonClick()
@@ -128,9 +128,9 @@ namespace Tracer.Forms.Views.Process
             onCompileTravelerButtonClick();
         }
 
-        private void btnTravelerReturn_Click(object sender, EventArgs e)
+        private void btnPerformEngineeringTask_Click(object sender, EventArgs e)
         {
-            onTravelerReturnButtonClick();
+            onPerformEngineeringTaskButtonClick();
         }
 
         private void btnHome_Click(object sender, EventArgs e)
