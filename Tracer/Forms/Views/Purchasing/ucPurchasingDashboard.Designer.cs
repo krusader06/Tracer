@@ -1,6 +1,6 @@
-﻿namespace Tracer.Forms.Views.Engineering
+﻿namespace Tracer.Forms.Views.Purchasing
 {
-    partial class ucProcessDashboard
+    partial class ucPurchasingDashboard
     {
         /// <summary> 
         /// Required designer variable.
@@ -48,18 +48,17 @@
             this.dgActiveWORs.Name = "dgActiveWORs";
             this.dgActiveWORs.ReadOnly = true;
             this.dgActiveWORs.RowTemplate.Height = 28;
-            this.dgActiveWORs.Size = new System.Drawing.Size(813, 447);
-            this.dgActiveWORs.TabIndex = 1;
+            this.dgActiveWORs.Size = new System.Drawing.Size(812, 445);
+            this.dgActiveWORs.TabIndex = 3;
             this.dgActiveWORs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgActiveWORs_CellClick);
             // 
-            // ucProcessDashboard
+            // ucPurchasingDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.Controls.Add(this.dgActiveWORs);
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "ucProcessDashboard";
+            this.Name = "ucPurchasingDashboard";
             this.Size = new System.Drawing.Size(845, 479);
             ((System.ComponentModel.ISupportInitialize)(this.dgActiveWORs)).EndInit();
             this.ResumeLayout(false);

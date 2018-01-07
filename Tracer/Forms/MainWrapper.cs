@@ -547,7 +547,7 @@ namespace Tracer
 
                 //Listen To Menu Buttons
 
-                //Forms.Views.Purchasing.ucPurchasingMenu.Instance.DashboardButtonClicked += new EventHandler();
+                Forms.Views.Purchasing.ucPurchasingMenu.Instance.DashboardButtonClicked += new EventHandler(showPurchasingDashboard);
                 //Forms.Views.Purchasing.ucPurchasingMenu.Instance.TasksButtonClicked += new EventHandler();
                 //Forms.Views.Purchasing.ucPurchasingMenu.Instance.ReviewPartsForQuoteButtonClicked += new EventHandler();
                 //Forms.Views.Purchasing.ucPurchasingMenu.Instance.OrderItemsButtonClicked += new EventHandler();
@@ -567,6 +567,21 @@ namespace Tracer
         {
             // Show the Purchasing Main View Dashboard
             lblMain.Text = "Purchasing - Dashboard";
+
+            if (!mainContainer.Controls.Contains(Forms.Views.Purchasing.ucPurchasingDashboard.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Purchasing.ucPurchasingDashboard.Instance);
+                Forms.Views.Purchasing.ucPurchasingDashboard.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Purchasing.ucPurchasingDashboard.Instance.BringToFront();
+
+                //Add Event Listeners If Necessary...
+
+            }
+            else
+            {
+                Forms.Views.Purchasing.ucPurchasingDashboard.Instance.BringToFront();
+                Forms.Views.Purchasing.ucPurchasingDashboard.Instance.populate(sender, e);
+            }
         }
 
 

@@ -907,7 +907,344 @@ namespace Tracer.Forms.Classes
 
         }
 
+        //Purchasing Dashboard Status Calculations----------------------------------------------------------------------------------------------
+        public List<DatabaseTables.PurchasingDashboard> CalculatePurchasingDashboard(List<DatabaseTables.PurchasingDashboard> purchasingDashboard)
+        {
+            int state = 0;
+            int finalState = 10;
+            string newStatus = "";
 
+            for (int i = 0; i < purchasingDashboard.Count(); i++)
+            {
+
+                // Get PartsReviewStatus
+                state = 0;
+                newStatus = "";
+
+                while (state < finalState)
+                {
+                    switch (state)
+                    {
+                        case 0:
+                            //Check PartsReviewRequest
+                            if (purchasingDashboard[i].PartsReviewRequest == "True")
+                            {
+                                //PartsReview Requested, Check to see if PartsReviewInProgress
+                                state = 1;
+                            }
+                            else
+                            {
+                                //PartsReview Not Requested, Check to see if PartsReviewComplete
+                                state = 2;
+                            }
+
+                            break;
+
+                        case 1:
+                            //Check to see if PartsReviewInProgress
+                            if (purchasingDashboard[i].PartsReviewInProgress == "True")
+                            {
+                                //PartsReview has been requested and is in progress - Check to see if Review is Complete
+                                state = 3;
+                            }
+                            else
+                            {
+                                //PartsReview has been requested, but is not In Progress
+                                state = finalState;
+                                newStatus = "Requested";
+                            }
+
+                            break;
+
+                        case 2:
+                            //Check to see if PartsReviewComplete
+                            if (purchasingDashboard[i].PartsReviewComplete == "True")
+                            {
+                                //BOM Validation is Complete
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Nothing has happened
+                                state = finalState;
+                                newStatus = "Not Started";
+                            }
+
+                            break;
+
+                        case 3:
+                            if (purchasingDashboard[i].PartsReviewComplete == "True")
+                            {
+                                //All 3 semaphores are true
+                                state = finalState;
+                                newStatus = "Complete";
+                            }
+                            else
+                            {
+                                //Only Requested and InProgress
+                                state = finalState;
+                                newStatus = "In Progress";
+                            }
+
+                            break;
+                    }
+                }
+
+                purchasingDashboard[i].PartsReviewStatus = newStatus;
+
+                // Get StencilStatus
+                state = 0;
+                newStatus = "";
+
+                while (state < finalState)
+                {
+                    switch (state)
+                    {
+                        case 0:
+                            //Check to see if Stencils are Required
+                            if (purchasingDashboard[i].StencilsRequired == "True")
+                            {
+                                //Stencils are required - Check to see if they have been ordered
+                                state = 1;
+                            }
+                            else
+                            {
+                                //Stencil order not required - Check to see if we already have some
+                                state = 3;
+                                
+                            }
+
+                            break;
+
+                        case 1:
+                            if (purchasingDashboard[i].StencilsOrdered == "True")
+                            {
+                                //Stencils have been ordered - Check to see if they have been received
+                                state = 2;
+
+                            }
+                            else
+                            {
+                                //Not Ordered Yet
+                                state = finalState;
+                                newStatus = "Stencils Needed";
+                            }
+
+                            break;
+
+                        case 2:
+                            if (purchasingDashboard[i].StencilsReceived == "True")
+                            {
+                                //Stencils have been received
+                                state = finalState;
+                                newStatus = "Stencils Received";
+                            }
+                            else
+                            {
+                                //Stencils have not been received
+                                state = finalState;
+                                newStatus = "Stencils on Order";
+                            }
+
+                            break;
+
+                        case 3:
+                            if (purchasingDashboard[i].StencilsReceived == "True")
+                            {
+                                state = finalState;
+                                newStatus = "Stencils Received";
+                            }
+                            else
+                            {
+                                state = finalState;
+                                newStatus = "Not Used";
+                            }
+                                break;
+                    }
+                }
+
+                purchasingDashboard[i].StencilStatus = newStatus;
+
+                // Get PCBStatus
+                state = 0;
+                newStatus = "";
+
+                while (state < finalState)
+                {
+                    switch (state)
+                    {
+                        case 0:
+                            //Check to see if PCBs are Required
+                            if (purchasingDashboard[i].PCBRequired == "True")
+                            {
+                                //PCBs are required - Check to see if they have been ordered
+                                state = 1;
+                            }
+                            else
+                            {
+                                //PCB order not required - Check to see if we already have some
+                                state = 3;
+
+                            }
+
+                            break;
+
+                        case 1:
+                            if (purchasingDashboard[i].PCBOrdered == "True")
+                            {
+                                //PCBs have been ordered - Check to see if they have been received
+                                state = 2;
+
+                            }
+                            else
+                            {
+                                //Not Ordered Yet
+                                state = finalState;
+                                newStatus = "PCBs Needed";
+                            }
+
+                            break;
+
+                        case 2:
+                            if (purchasingDashboard[i].PCBReceived == "True")
+                            {
+                                //PCBs have been received
+                                state = finalState;
+                                newStatus = "PCBs Received";
+                            }
+                            else
+                            {
+                                //PCBs have not been received
+                                state = finalState;
+                                newStatus = "PCBs on Order";
+                            }
+
+                            break;
+
+                        case 3:
+                            if (purchasingDashboard[i].PCBReceived == "True")
+                            {
+                                state = finalState;
+                                newStatus = "PCBs Received";
+                            }
+                            else
+                            {
+                                state = finalState;
+                                newStatus = "Not Used";
+                            }
+                            break;
+                    }
+                }
+
+                purchasingDashboard[i].PCBStatus = newStatus;
+
+                // Get Parts Status
+                state = 0;
+                newStatus = "";
+
+                while (state < finalState)
+                {
+                    switch (state)
+                    {
+                        case 0:
+                            //Check to see if Parts are Required
+                            if (purchasingDashboard[i].PartsRequired == "True")
+                            {
+                                //Parts are required - Check to see if they have been ordered
+                                state = 1;
+                            }
+                            else
+                            {
+                                //Parts order not required - Check to see if we already have some
+                                state = 3;
+
+                            }
+
+                            break;
+
+                        case 1:
+                            if (purchasingDashboard[i].PartsOrdered == "True")
+                            {
+                                //Parts have been ordered - Check to see if they have been received
+                                state = 2;
+
+                            }
+                            else
+                            {
+                                //Not Ordered Yet
+                                state = finalState;
+                                newStatus = "Parts Needed";
+                            }
+
+                            break;
+
+                        case 2:
+                            if (purchasingDashboard[i].PartsReceived == "True")
+                            {
+                                //Parts have been received
+                                state = finalState;
+                                newStatus = "Parts Received";
+                            }
+                            else
+                            {
+                                //Parts have not been received
+                                state = finalState;
+                                newStatus = "Parts on Order";
+                            }
+
+                            break;
+
+                        case 3:
+                            if (purchasingDashboard[i].PartsReceived == "True")
+                            {
+                                state = finalState;
+                                newStatus = "Parts Received";
+                            }
+                            else
+                            {
+                                state = finalState;
+                                newStatus = "Not Used";
+                            }
+                            break;
+                    }
+                }
+
+                purchasingDashboard[i].PartsStatus = newStatus;
+
+
+                //Determine whether or not this is a Quote or WOR and fill in cells as necessary
+                if (purchasingDashboard[i].QuoteOrWOR == "Quote")
+                {
+                    //Fill in "Not Used" for all non-used cells if it is a quote
+
+                    purchasingDashboard[i].StencilsRequired = "Not Used";
+                    purchasingDashboard[i].StencilsOrdered = "Not Used";
+                    purchasingDashboard[i].StencilsReceived = "Not Used";
+                    purchasingDashboard[i].StencilStatus = "Not Used";
+
+                    purchasingDashboard[i].PCBRequired = "Not Used";
+                    purchasingDashboard[i].PCBOrdered = "Not Used";
+                    purchasingDashboard[i].PCBReceived = "Not Used";
+                    purchasingDashboard[i].PCBStatus = "Not Used";
+
+                    purchasingDashboard[i].PartsOrdered = "Not Used";
+                    purchasingDashboard[i].PartsReceived = "Not Used";
+                    purchasingDashboard[i].PartsStatus = "Not Used";
+                    purchasingDashboard[i].KitReleased = "Not Used";
+                }
+                else
+                {   //WOR
+                    purchasingDashboard[i].PartsReviewRequest = "Not Used";
+                    purchasingDashboard[i].PartsReviewInProgress = "Not Used";
+                    purchasingDashboard[i].PartsReviewComplete = "Not Used";
+                    purchasingDashboard[i].PartsReviewStatus = "Not Used";
+                }
+            }
+
+            //Send it back!
+            return purchasingDashboard;
+        }
 
 
     }

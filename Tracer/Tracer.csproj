@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\Classes\DataAccess\EngineeringDataAccess.cs" />
+    <Compile Include="Forms\Classes\DataAccess\PurchasingDataAccess.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\ActiveQuotes.cs" />
     <Compile Include="Forms\Classes\DataAccess\SalesDataAccess.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\EngineeringDashboard.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Forms\Classes\DatabaseTables\LotPurchasingStatus.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\LotStatus.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\LotTimeTracking.cs" />
+    <Compile Include="Forms\Classes\DatabaseTables\PurchasingDashboard.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\PurchasingTimeTracking.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\QuoteStatus.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\WorkOrders.cs" />
@@ -122,6 +124,12 @@
     </Compile>
     <Compile Include="Forms\Views\Production\ucProductionMenu.Designer.cs">
       <DependentUpon>ucProductionMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Purchasing\ucPurchasingDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Purchasing\ucPurchasingDashboard.Designer.cs">
+      <DependentUpon>ucPurchasingDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Views\Purchasing\ucPurchasingMenu.cs">
       <SubType>UserControl</SubType>
@@ -229,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Production\ucProductionMenu.resx">
       <DependentUpon>ucProductionMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Purchasing\ucPurchasingDashboard.resx">
+      <DependentUpon>ucPurchasingDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Purchasing\ucPurchasingMenu.resx">
       <DependentUpon>ucPurchasingMenu.cs</DependentUpon>

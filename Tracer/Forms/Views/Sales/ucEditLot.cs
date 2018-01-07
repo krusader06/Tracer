@@ -286,14 +286,15 @@ namespace Tracer.Forms.Views.Sales
 
         private void LoadLotPurchasingStatus()
         {
-            newLotPurchasingStatus.NumStencilsRequired = 0;
-            newLotPurchasingStatus.NumStencilsOrdered = 0;
-            newLotPurchasingStatus.NumStencilsReceived = 0;
+            newLotPurchasingStatus.StencilsRequired = 0;
+            newLotPurchasingStatus.StencilsOrdered = 0;
+            newLotPurchasingStatus.StencilsReceived = 0;
             newLotPurchasingStatus.StencilPlotsApproved = 0;
-            newLotPurchasingStatus.NumPCBRequired = 0;
-            newLotPurchasingStatus.NumPCBOrdered = 0;
-            newLotPurchasingStatus.NumPCBReceived = 0;
+            newLotPurchasingStatus.PCBRequired = 0;
+            newLotPurchasingStatus.PCBOrdered = 0;
+            newLotPurchasingStatus.PCBReceived = 0;
             newLotPurchasingStatus.PCBArraysApproved = 0;
+            newLotPurchasingStatus.PartsRequired = 0;
             newLotPurchasingStatus.PartsOrdered = 0;
             newLotPurchasingStatus.PartsReceived = 0;
             newLotPurchasingStatus.KitReleased = 0;
