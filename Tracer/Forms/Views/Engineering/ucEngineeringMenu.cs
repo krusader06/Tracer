@@ -15,7 +15,6 @@ namespace Tracer.Forms.Views.Engineering
     {
         //Event Handlers--------------------------------------------------------------
         public event EventHandler DashboardButtonClicked;
-        public event EventHandler TasksButtonClicked;
         public event EventHandler SalesRequestButtonClicked;
         public event EventHandler ReleaseWORButtonClicked;
         public event EventHandler CompileTravelerButtonClicked;
@@ -46,14 +45,6 @@ namespace Tracer.Forms.Views.Engineering
             if (DashboardButtonClicked != null)
             {
                 DashboardButtonClicked(this, EventArgs.Empty);
-            }
-        }
-
-        private void onTasksButtonClick()
-        {
-            if (TasksButtonClicked != null)
-            {
-                TasksButtonClicked(this, EventArgs.Empty);
             }
         }
 
@@ -106,11 +97,6 @@ namespace Tracer.Forms.Views.Engineering
         private void btnDashboard_Click(object sender, EventArgs e)
         {
             onDashboardButtonClick();
-        }
-
-        private void btnTasks_Click(object sender, EventArgs e)
-        {
-            onTasksButtonClick();
         }
 
         private void btnSalesRequest_Click(object sender, EventArgs e)

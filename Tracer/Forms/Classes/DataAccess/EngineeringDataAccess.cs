@@ -355,6 +355,45 @@ namespace Tracer.Forms.Classes.DataAccess
             }
         }
 
+        public void setPartsRequired(string JobWOR, string Lot)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ JobWOR }' AND Lot=' { Lot }'").ToList();
+
+                //2. Change WORLotReleased = True where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotPurchasingStatus SET PartsRequired = 'True' WHERE LotID='{ LotID[0] }'");
+
+            }
+        }
+
+        public void setPCBRequired(string JobWOR, string Lot)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ JobWOR }' AND Lot=' { Lot }'").ToList();
+
+                //2. Change WORLotReleased = True where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotPurchasingStatus SET PCBRequired = 'True' WHERE LotID='{ LotID[0] }'");
+
+            }
+        }
+
+        public void setStencilsRequired(string JobWOR, string Lot)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
+                var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ JobWOR }' AND Lot=' { Lot }'").ToList();
+
+                //2. Change WORLotReleased = True where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotPurchasingStatus SET StencilsRequired = 'True' WHERE LotID='{ LotID[0] }'");
+
+            }
+        }
+
         public void approveStencilPlots(string JobWOR, string Lot)
         {
             using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))

@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.dgActiveWORs = new System.Windows.Forms.DataGridView();
-            this.dgActiveWORStatus = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnEnd = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.dgTaskView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgActiveWORs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgActiveWORStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgTaskView)).BeginInit();
             this.SuspendLayout();
             // 
             // dgActiveWORs
@@ -44,99 +43,101 @@
             this.dgActiveWORs.AllowUserToAddRows = false;
             this.dgActiveWORs.AllowUserToDeleteRows = false;
             this.dgActiveWORs.AllowUserToResizeRows = false;
+            this.dgActiveWORs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgActiveWORs.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgActiveWORs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgActiveWORs.Enabled = false;
-            this.dgActiveWORs.Location = new System.Drawing.Point(16, 16);
+            this.dgActiveWORs.Location = new System.Drawing.Point(16, 35);
             this.dgActiveWORs.Margin = new System.Windows.Forms.Padding(1);
             this.dgActiveWORs.Name = "dgActiveWORs";
             this.dgActiveWORs.ReadOnly = true;
             this.dgActiveWORs.RowTemplate.Height = 28;
-            this.dgActiveWORs.Size = new System.Drawing.Size(631, 269);
+            this.dgActiveWORs.Size = new System.Drawing.Size(1525, 261);
             this.dgActiveWORs.TabIndex = 1;
             this.dgActiveWORs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgActiveWORs_CellClick);
             // 
-            // dgActiveWORStatus
-            // 
-            this.dgActiveWORStatus.AllowUserToAddRows = false;
-            this.dgActiveWORStatus.AllowUserToDeleteRows = false;
-            this.dgActiveWORStatus.AllowUserToResizeRows = false;
-            this.dgActiveWORStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgActiveWORStatus.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dgActiveWORStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgActiveWORStatus.Enabled = false;
-            this.dgActiveWORStatus.Location = new System.Drawing.Point(601, 16);
-            this.dgActiveWORStatus.Margin = new System.Windows.Forms.Padding(1);
-            this.dgActiveWORStatus.Name = "dgActiveWORStatus";
-            this.dgActiveWORStatus.ReadOnly = true;
-            this.dgActiveWORStatus.RowTemplate.Height = 28;
-            this.dgActiveWORStatus.Size = new System.Drawing.Size(940, 269);
-            this.dgActiveWORStatus.TabIndex = 2;
-            // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 2);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(624, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 13);
+            this.label1.Size = new System.Drawing.Size(314, 31);
             this.label1.TabIndex = 3;
             this.label1.Text = "Work Orders and Quotes";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(646, 2);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Status";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Enabled = false;
-            this.dataGridView1.Location = new System.Drawing.Point(16, 306);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(1);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(1525, 423);
-            this.dataGridView1.TabIndex = 5;
-            // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 289);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(734, 297);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 13);
+            this.label3.Size = new System.Drawing.Size(88, 31);
             this.label3.TabIndex = 6;
             this.label3.Text = "Tasks";
+            // 
+            // btnEnd
+            // 
+            this.btnEnd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEnd.Enabled = false;
+            this.btnEnd.Location = new System.Drawing.Point(16, 331);
+            this.btnEnd.Name = "btnEnd";
+            this.btnEnd.Size = new System.Drawing.Size(1525, 31);
+            this.btnEnd.TabIndex = 8;
+            this.btnEnd.Text = "End Task";
+            this.btnEnd.UseVisualStyleBackColor = true;
+            this.btnEnd.Visible = false;
+            this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStart.Enabled = false;
+            this.btnStart.Location = new System.Drawing.Point(16, 331);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(1525, 31);
+            this.btnStart.TabIndex = 7;
+            this.btnStart.Text = "Start Task";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // dgTaskView
+            // 
+            this.dgTaskView.AllowUserToAddRows = false;
+            this.dgTaskView.AllowUserToDeleteRows = false;
+            this.dgTaskView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgTaskView.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.dgTaskView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgTaskView.Location = new System.Drawing.Point(16, 368);
+            this.dgTaskView.Name = "dgTaskView";
+            this.dgTaskView.ReadOnly = true;
+            this.dgTaskView.Size = new System.Drawing.Size(1525, 374);
+            this.dgTaskView.TabIndex = 9;
+            this.dgTaskView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTaskView_CellClick);
             // 
             // ucProcessDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.Controls.Add(this.dgTaskView);
+            this.Controls.Add(this.btnEnd);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.dgActiveWORs);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dgActiveWORStatus);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ucProcessDashboard";
-            this.Size = new System.Drawing.Size(1557, 748);
+            this.Size = new System.Drawing.Size(1557, 761);
             ((System.ComponentModel.ISupportInitialize)(this.dgActiveWORs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgActiveWORStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgTaskView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,10 +145,10 @@
 
         #endregion
         private System.Windows.Forms.DataGridView dgActiveWORs;
-        private System.Windows.Forms.DataGridView dgActiveWORStatus;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnEnd;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.DataGridView dgTaskView;
     }
 }

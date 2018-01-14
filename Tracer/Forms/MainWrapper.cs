@@ -190,7 +190,6 @@ namespace Tracer
                 //Listen To Menu Buttons
 
                 Forms.Views.Engineering.ucEngineeringMenu.Instance.DashboardButtonClicked += new EventHandler(showEngineeringDashboard);
-                Forms.Views.Engineering.ucEngineeringMenu.Instance.TasksButtonClicked += new EventHandler(showEngineeringTasks);
                 Forms.Views.Engineering.ucEngineeringMenu.Instance.SalesRequestButtonClicked += new EventHandler(showSalesRequest);
                 Forms.Views.Engineering.ucEngineeringMenu.Instance.PerformEngineeringTaskButtonClicked += new EventHandler(showPerformEngineeringTask);
                 Forms.Views.Engineering.ucEngineeringMenu.Instance.HomeButtonClicked += new EventHandler(prepareHomeView);
@@ -221,27 +220,6 @@ namespace Tracer
                 Forms.Views.Engineering.ucProcessDashboard.Instance.BringToFront();
                 Forms.Views.Engineering.ucProcessDashboard.Instance.populate(null, null);
             }  
-        }
-
-        private void showEngineeringTasks(object sender, EventArgs e)
-        {
-            //Show the Engineering Dashboard
-
-            lblMain.Text = "Engineering - Tasks";
-
-            if (!mainContainer.Controls.Contains(Forms.Views.Engineering.ucEngineeringTasks.Instance))
-            {
-                mainContainer.Controls.Add(Forms.Views.Engineering.ucEngineeringTasks.Instance);
-                Forms.Views.Engineering.ucEngineeringTasks.Instance.Dock = DockStyle.Fill;
-                Forms.Views.Engineering.ucEngineeringTasks.Instance.BringToFront();
-                //Listen to Dashboard Buttons Here
-                //None...
-            }
-            else
-            {
-                Forms.Views.Engineering.ucEngineeringTasks.Instance.BringToFront();
-                Forms.Views.Engineering.ucEngineeringTasks.Instance.updateData(null, null);
-            }
         }
 
         private void showSalesRequest(object sender, EventArgs e)
@@ -314,7 +292,6 @@ namespace Tracer
                 //Listen To Menu Buttons
 
                 Forms.Views.Sales.ucSalesMenu.Instance.DashboardButtonClicked += new EventHandler(showSalesDashboard);
-                Forms.Views.Sales.ucSalesMenu.Instance.TasksButtonClicked += new EventHandler(showSalesTasks);
                 Forms.Views.Sales.ucSalesMenu.Instance.AddEditQuoteButtonClicked += new EventHandler(showSalesAddEditQuote);
                 Forms.Views.Sales.ucSalesMenu.Instance.EditLotButtonClicked += new EventHandler(showSalesEditLot);
                 Forms.Views.Sales.ucSalesMenu.Instance.EngineeringRequestButtonClicked += new EventHandler(showEngineeringRequest);
@@ -345,28 +322,7 @@ namespace Tracer
             else
             {
                 Forms.Views.Sales.ucSalesDashboard.Instance.BringToFront();
-                Forms.Views.Sales.ucSalesDashboard.Instance.refreshData(null, null);
-            }
-        }
-
-        private void showSalesTasks(object sender, EventArgs e)
-        {
-            // Show the Sales Add New Quote Page
-
-            lblMain.Text = "Sales - Tasks";
-
-            if (!mainContainer.Controls.Contains(Forms.Views.Sales.ucSalesTasks.Instance))
-            {
-                mainContainer.Controls.Add(Forms.Views.Sales.ucSalesTasks.Instance);
-                Forms.Views.Sales.ucSalesTasks.Instance.Dock = DockStyle.Fill;
-                Forms.Views.Sales.ucSalesTasks.Instance.BringToFront();
-
-                //Add Event Listeners If Necessary...
-
-            }
-            else
-            {
-                Forms.Views.Sales.ucSalesTasks.Instance.BringToFront();
+                Forms.Views.Sales.ucSalesDashboard.Instance.populate(null, null);
             }
         }
 
@@ -548,11 +504,7 @@ namespace Tracer
                 //Listen To Menu Buttons
 
                 Forms.Views.Purchasing.ucPurchasingMenu.Instance.DashboardButtonClicked += new EventHandler(showPurchasingDashboard);
-                //Forms.Views.Purchasing.ucPurchasingMenu.Instance.TasksButtonClicked += new EventHandler();
-                //Forms.Views.Purchasing.ucPurchasingMenu.Instance.ReviewPartsForQuoteButtonClicked += new EventHandler();
-                //Forms.Views.Purchasing.ucPurchasingMenu.Instance.OrderItemsButtonClicked += new EventHandler();
-                //Forms.Views.Purchasing.ucPurchasingMenu.Instance.ItemsReceivedButtonClicked += new EventHandler();
-                //Forms.Views.Purchasing.ucPurchasingMenu.Instance.ReleaseKitButtonClicked += new EventHandler();
+                Forms.Views.Purchasing.ucPurchasingMenu.Instance.PerformPurchasingTaskButtonClicked += new EventHandler(showPerformPurchasingTask);
                 Forms.Views.Purchasing.ucPurchasingMenu.Instance.HomeButtonClicked += new EventHandler(prepareHomeView);
                 Forms.Views.Purchasing.ucPurchasingMenu.Instance.ExitButtonClicked += new EventHandler(exitApplication);
 
@@ -581,6 +533,27 @@ namespace Tracer
             {
                 Forms.Views.Purchasing.ucPurchasingDashboard.Instance.BringToFront();
                 Forms.Views.Purchasing.ucPurchasingDashboard.Instance.populate(sender, e);
+            }
+        }
+
+        private void showPerformPurchasingTask(object sender, EventArgs e)
+        {
+            // Show the Purchasing Main View Dashboard
+            lblMain.Text = "Purchasing - Perform Purchasing Task";
+
+            if (!mainContainer.Controls.Contains(Forms.Views.Purchasing.ucPerformPurchasingTask.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Purchasing.ucPerformPurchasingTask.Instance);
+                Forms.Views.Purchasing.ucPerformPurchasingTask.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Purchasing.ucPerformPurchasingTask.Instance.BringToFront();
+
+                //Add Event Listeners If Necessary...
+
+            }
+            else
+            {
+                Forms.Views.Purchasing.ucPerformPurchasingTask.Instance.BringToFront();
+                Forms.Views.Purchasing.ucPerformPurchasingTask.Instance.ShowLotNumbers();
             }
         }
 

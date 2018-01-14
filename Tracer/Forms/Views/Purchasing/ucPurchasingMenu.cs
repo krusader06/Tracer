@@ -14,11 +14,7 @@ namespace Tracer.Forms.Views.Purchasing
     {
         //Event Handlers--------------------------------------------------------------
         public event EventHandler DashboardButtonClicked;
-        public event EventHandler TasksButtonClicked;
-        public event EventHandler ReviewPartsForQuoteButtonClicked;
-        public event EventHandler OrderItemsButtonClicked;
-        public event EventHandler ItemsReceivedButtonClicked;
-        public event EventHandler ReleaseKitButtonClicked;
+        public event EventHandler PerformPurchasingTaskButtonClicked;
         public event EventHandler HomeButtonClicked;
         public event EventHandler ExitButtonClicked;
 
@@ -47,41 +43,15 @@ namespace Tracer.Forms.Views.Purchasing
                 DashboardButtonClicked(this, EventArgs.Empty);
             }
         }
-        private void onTasksButtonClick()
+
+        private void onPerformPurchasingTaskButtonClick()
         {
-            if (TasksButtonClicked != null)
+            if (PerformPurchasingTaskButtonClicked != null)
             {
-                TasksButtonClicked(this, EventArgs.Empty);
+                PerformPurchasingTaskButtonClicked(this, EventArgs.Empty);
             }
         }
-        private void onReviewPartsForQuoteButtonClick()
-        {
-            if (ReviewPartsForQuoteButtonClicked != null)
-            {
-                ReviewPartsForQuoteButtonClicked(this, EventArgs.Empty);
-            }
-        }
-        private void onOrderItemsButtonClick()
-        {
-            if (OrderItemsButtonClicked != null)
-            {
-                OrderItemsButtonClicked(this, EventArgs.Empty);
-            }
-        }
-        private void onItemsReceivedButtonClick()
-        {
-            if (ItemsReceivedButtonClicked != null)
-            {
-                ItemsReceivedButtonClicked(this, EventArgs.Empty);
-            }
-        }
-        private void onReleaseKitButtonClick()
-        {
-            if (ReleaseKitButtonClicked != null)
-            {
-                ReleaseKitButtonClicked(this, EventArgs.Empty);
-            }
-        }
+
         private void onHomeButtonClick()
         {
             if (HomeButtonClicked != null)
@@ -105,29 +75,9 @@ namespace Tracer.Forms.Views.Purchasing
             onDashboardButtonClick();
         }
 
-        private void btnTasks_Click(object sender, EventArgs e)
+        private void btnPerformPurchasingTask_Click(object sender, EventArgs e)
         {
-            onTasksButtonClick();
-        }
-
-        private void btnReviewPartsForQuote_Click(object sender, EventArgs e)
-        {
-            onReviewPartsForQuoteButtonClick();
-        }
-
-        private void btnOrderItems_Click(object sender, EventArgs e)
-        {
-            onOrderItemsButtonClick();
-        }
-
-        private void btnItemsReceived_Click(object sender, EventArgs e)
-        {
-            onItemsReceivedButtonClick();
-        }
-
-        private void btnReleaseKit_Click(object sender, EventArgs e)
-        {
-            onReleaseKitButtonClick();
+            onPerformPurchasingTaskButtonClick();
         }
 
         private void btnHome_Click(object sender, EventArgs e)
@@ -139,5 +89,7 @@ namespace Tracer.Forms.Views.Purchasing
         {
             onExitButtonClick();
         }
+
+
     }
 }

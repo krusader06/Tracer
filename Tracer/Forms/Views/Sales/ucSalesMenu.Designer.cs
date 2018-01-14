@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btnExit = new System.Windows.Forms.Button();
-            this.btnTasks = new System.Windows.Forms.Button();
             this.btnAddEditQuote = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -60,25 +59,6 @@
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // btnTasks
-            // 
-            this.btnTasks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTasks.BackColor = System.Drawing.Color.Transparent;
-            this.btnTasks.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnTasks.FlatAppearance.BorderSize = 0;
-            this.btnTasks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTasks.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTasks.ForeColor = System.Drawing.Color.Gray;
-            this.btnTasks.Location = new System.Drawing.Point(0, 132);
-            this.btnTasks.Margin = new System.Windows.Forms.Padding(2);
-            this.btnTasks.Name = "btnTasks";
-            this.btnTasks.Size = new System.Drawing.Size(200, 50);
-            this.btnTasks.TabIndex = 7;
-            this.btnTasks.Text = "Tasks";
-            this.btnTasks.UseVisualStyleBackColor = false;
-            this.btnTasks.Click += new System.EventHandler(this.btnTasks_Click);
-            // 
             // btnAddEditQuote
             // 
             this.btnAddEditQuote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -89,7 +69,7 @@
             this.btnAddEditQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddEditQuote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddEditQuote.ForeColor = System.Drawing.Color.Gray;
-            this.btnAddEditQuote.Location = new System.Drawing.Point(0, 186);
+            this.btnAddEditQuote.Location = new System.Drawing.Point(0, 132);
             this.btnAddEditQuote.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddEditQuote.Name = "btnAddEditQuote";
             this.btnAddEditQuote.Size = new System.Drawing.Size(200, 50);
@@ -139,7 +119,7 @@
             this.btnEditLot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditLot.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditLot.ForeColor = System.Drawing.Color.Gray;
-            this.btnEditLot.Location = new System.Drawing.Point(0, 240);
+            this.btnEditLot.Location = new System.Drawing.Point(0, 186);
             this.btnEditLot.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditLot.Name = "btnEditLot";
             this.btnEditLot.Size = new System.Drawing.Size(200, 50);
@@ -158,7 +138,7 @@
             this.btnEngineeringRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEngineeringRequest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEngineeringRequest.ForeColor = System.Drawing.Color.Gray;
-            this.btnEngineeringRequest.Location = new System.Drawing.Point(0, 348);
+            this.btnEngineeringRequest.Location = new System.Drawing.Point(0, 294);
             this.btnEngineeringRequest.Margin = new System.Windows.Forms.Padding(2);
             this.btnEngineeringRequest.Name = "btnEngineeringRequest";
             this.btnEngineeringRequest.Size = new System.Drawing.Size(200, 50);
@@ -177,7 +157,7 @@
             this.btnAddPurchaseOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddPurchaseOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddPurchaseOrder.ForeColor = System.Drawing.Color.Gray;
-            this.btnAddPurchaseOrder.Location = new System.Drawing.Point(0, 294);
+            this.btnAddPurchaseOrder.Location = new System.Drawing.Point(0, 240);
             this.btnAddPurchaseOrder.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddPurchaseOrder.Name = "btnAddPurchaseOrder";
             this.btnAddPurchaseOrder.Size = new System.Drawing.Size(200, 50);
@@ -196,7 +176,7 @@
             this.btnPurchasingRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPurchasingRequest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPurchasingRequest.ForeColor = System.Drawing.Color.Gray;
-            this.btnPurchasingRequest.Location = new System.Drawing.Point(0, 402);
+            this.btnPurchasingRequest.Location = new System.Drawing.Point(0, 348);
             this.btnPurchasingRequest.Margin = new System.Windows.Forms.Padding(2);
             this.btnPurchasingRequest.Name = "btnPurchasingRequest";
             this.btnPurchasingRequest.Size = new System.Drawing.Size(200, 50);
@@ -215,7 +195,7 @@
             this.btnDeactivateQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeactivateQuote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeactivateQuote.ForeColor = System.Drawing.Color.Gray;
-            this.btnDeactivateQuote.Location = new System.Drawing.Point(0, 456);
+            this.btnDeactivateQuote.Location = new System.Drawing.Point(0, 402);
             this.btnDeactivateQuote.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeactivateQuote.Name = "btnDeactivateQuote";
             this.btnDeactivateQuote.Size = new System.Drawing.Size(200, 50);
@@ -250,7 +230,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPurchasingRequest);
-            this.Controls.Add(this.btnTasks);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.btnDeactivateQuote);
             this.Controls.Add(this.btnAddPurchaseOrder);
@@ -269,7 +248,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.Button btnTasks;
         private System.Windows.Forms.Button btnAddEditQuote;
         private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.PictureBox pictureBox1;

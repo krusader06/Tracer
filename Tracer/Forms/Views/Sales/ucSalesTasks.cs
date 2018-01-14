@@ -155,5 +155,6 @@ namespace Tracer.Forms.Views.Sales
             btnEnd.Visible = false;
             btnEnd.Text = "End";
         }
+
     }
 }

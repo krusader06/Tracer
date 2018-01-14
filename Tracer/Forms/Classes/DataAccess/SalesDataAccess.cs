@@ -233,7 +233,7 @@ namespace Tracer.Forms.Classes.DataAccess
                 lstNewPurchasingTimeTracking.Add(newPurchasingTimeTracking);
 
                 //1. Enter LotNumber
-                connection.Execute($"insert into LotNumbers(JobWOR, Lot, Customer, PartID, PartDescription, OrderQuantity, JobDueDate, MasterDueDate, KitDueDate, TurnTime, Consigned, JobComments) values(@JobWOR, @Lot, @Customer, @PartID, @PartDescription, @OrderQuantity, @JobDueDate, @MasterDueDate, @KitDueDate, @TurnTime, @Consigned, @JobComments)", lstNewLotNumber);
+                connection.Execute($"insert into LotNumbers(JobWOR, Lot, Customer, PartID, PartDescription, OrderQuantity, JobDueDate, MasterDueDate, KitDueDate, TurnTime, Consigned, Turnkey, JobComments) values(@JobWOR, @Lot, @Customer, @PartID, @PartDescription, @OrderQuantity, @JobDueDate, @MasterDueDate, @KitDueDate, @TurnTime, @Consigned, @Turnkey, @JobComments)", lstNewLotNumber);
 
                 //2. Get LotID from JobWOR
                 var tempLotID = connection.Query<DatabaseTables.LotNumbers>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ lstNewLotNumber[0].JobWOR }' AND Lot='{ lstNewLotNumber[0].Lot }'").ToList();
