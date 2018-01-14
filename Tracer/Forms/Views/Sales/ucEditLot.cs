@@ -61,6 +61,8 @@ namespace Tracer.Forms.Views.Sales
             dtJobDueDate.CustomFormat = "MM-dd-yyyy";
             dtMasterDueDate.Format = DateTimePickerFormat.Custom;
             dtMasterDueDate.CustomFormat = "MM-dd-yyyy";
+            dtKitDueDate.Format = DateTimePickerFormat.Custom;
+            dtKitDueDate.CustomFormat = "MM-dd-yyyy";
         }
 
         private void LoadActiveWorkOrders()
@@ -118,25 +120,25 @@ namespace Tracer.Forms.Views.Sales
             updateLot.OrderQuantity = Int32.Parse(txtOrderQuantity.Text);
             updateLot.JobDueDate = dtJobDueDate.Text;
             updateLot.MasterDueDate = dtMasterDueDate.Text;
+            updateLot.KitDueDate = dtKitDueDate.Text;
             updateLot.TurnTime = Int32.Parse(txtTurnTime.Text);
 
-            if (ckTurnkey.Checked == true)
+            if (ckConsigned.Checked == true)
             {
-                if (ckConsigned.Checked == true)
-                {
-                    //Both Checked
-                    updateLot.Consigned = "Turnkey/Consigned";
-                }
-                else
-                {
-                    //Only Turnkey Checked
-                    updateLot.Consigned = "Turnkey";
-                }
+                updateLot.Consigned = 1;
             }
             else
             {
-                //Only Consigned Checked
-                updateLot.Consigned = "Consigned";
+                updateLot.Consigned = 0;
+            }
+
+            if (ckTurnkey.Checked == true)
+            {
+                updateLot.Turnkey = 1;
+            }
+            else
+            {
+                updateLot.Turnkey = 0;
             }
 
             updateLot.JobComments = txtJobComments.Text;
@@ -200,20 +202,21 @@ namespace Tracer.Forms.Views.Sales
                 dtJobDueDate.Value = Convert.ToDateTime(selectedLotRow.Cells["JobDueDate"].Value.ToString());
                 dtMasterDueDate.Value = Convert.ToDateTime(selectedLotRow.Cells["MasterDueDate"].Value.ToString());
 
-                switch (selectedLotRow.Cells["Consigned"].Value.ToString())
+                if (selectedLotRow.Cells["Consigned"].Value.ToString() == "1")
                 {
-                    case "Turnkey/Consigned":
-                        ckConsigned.Checked = true;
-                        ckTurnkey.Checked = true;
-                        break;
-                    case "Turnkey":
-                        ckConsigned.Checked = false;
-                        ckTurnkey.Checked = true;
-                        break;
-                    case "Consigned":
-                        ckConsigned.Checked = true;
-                        ckTurnkey.Checked = false;
-                        break;
+                    ckConsigned.Checked = true;
+                } else
+                {
+                    ckConsigned.Checked = false;
+                }
+
+                if (selectedLotRow.Cells["Turnkey"].Value.ToString() == "1")
+                {
+                    ckTurnkey.Checked = true;
+                }
+                else
+                {
+                    ckTurnkey.Checked = false;
                 }
 
                 btnAdd.Enabled = false;
@@ -221,10 +224,6 @@ namespace Tracer.Forms.Views.Sales
 
             }
         }
-
-
-
-
 
         private void LoadLotNumber()
         {
@@ -240,25 +239,25 @@ namespace Tracer.Forms.Views.Sales
             newLotNumber.OrderQuantity = Int32.Parse(txtOrderQuantity.Text);
             newLotNumber.JobDueDate = dtJobDueDate.Text;
             newLotNumber.MasterDueDate = dtMasterDueDate.Text;
+            newLotNumber.KitDueDate = dtKitDueDate.Text;
             newLotNumber.TurnTime = Int32.Parse(txtTurnTime.Text);
 
-            if (ckTurnkey.Checked == true)
+            if (ckConsigned.Checked == true)
             {
-                if (ckConsigned.Checked == true)
-                {
-                    //Both Checked
-                    newLotNumber.Consigned = "Turnkey/Consigned";
-                }
-                else
-                {
-                    //Only Turnkey Checked
-                    newLotNumber.Consigned = "Turnkey";
-                }
+                newLotNumber.Consigned = 1;
             }
             else
             {
-                //Only Consigned Checked
-                newLotNumber.Consigned = "Consigned";
+                newLotNumber.Consigned = 0;
+            }
+
+            if (ckTurnkey.Checked == true)
+            {
+                newLotNumber.Turnkey = 1;
+            }
+            else
+            {
+                newLotNumber.Turnkey = 0;
             }
 
             newLotNumber.JobComments = txtJobComments.Text;

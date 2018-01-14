@@ -15,6 +15,8 @@ namespace Tracer.Forms.Classes.DatabaseTables
         public string Customer { get; set; }
         public string PartDescription { get; set; }
         public string QuoteConfidence { get; set; }
+        public int Consigned { get; set; }
+        public int Turnkey { get; set; }
         public string QuoteComments { get; set; }
         public string QuoteDueDate { get; set; }
         public int QuoteInactive { get; set; }

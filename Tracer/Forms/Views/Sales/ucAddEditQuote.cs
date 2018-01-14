@@ -123,6 +123,23 @@ namespace Tracer.Forms.Views.Sales
 
             newActiveQuote.QuoteDueDate = dtDueDate.Text;
 
+            if (ckConsigned.Checked == true)
+            {
+                newActiveQuote.Consigned = 1;
+            } else
+            {
+                newActiveQuote.Consigned = 0;
+            }
+
+            if (ckTurnkey.Checked == true)
+            {
+                newActiveQuote.Turnkey = 1;
+            }
+            else
+            {
+                newActiveQuote.Turnkey = 0;
+            }
+
             //Set Initial Status
             newActiveQuote.QuoteInactive = 0;
             newActiveQuote.POReceived = 0;
@@ -141,6 +158,7 @@ namespace Tracer.Forms.Views.Sales
             newQuoteStatus.FinalReviewRequest = 0;
             newQuoteStatus.FinalReviewInProgress = 0;
             newQuoteStatus.FinalReviewComplete = 0;
+            newQuoteStatus.QuoteSent = 0;
             newQuoteStatus.QuoteCurrentStatus = "";
 
             db.InsertNewQuote(newActiveQuote, newQuoteStatus);
@@ -201,6 +219,24 @@ namespace Tracer.Forms.Views.Sales
 
             updateQuote.QuoteDueDate = dtDueDate.Text;
 
+            if (ckConsigned.Checked == true)
+            {
+                updateQuote.Consigned = 1;
+            }
+            else
+            {
+                updateQuote.Consigned = 0;
+            }
+
+            if (ckTurnkey.Checked == true)
+            {
+                updateQuote.Turnkey = 1;
+            }
+            else
+            {
+                updateQuote.Turnkey = 0;
+            }
+
             db.UpdateQuote(updateQuote);
             btnClear_Click(null, null);
         }
@@ -233,8 +269,25 @@ namespace Tracer.Forms.Views.Sales
                         break;
                 }
 
+                if (selectedRow.Cells["Consigned"].Value.ToString() == "1")
+                {
+                    ckConsigned.Checked = true;
+                } else
+                {
+                    ckConsigned.Checked = false;
+                }
+
+                if (selectedRow.Cells["Turnkey"].Value.ToString() == "1")
+                {
+                    ckTurnkey.Checked = true;
+                }
+                else
+                {
+                    ckTurnkey.Checked = false;
+                }
+
                 txtComment.Text = selectedRow.Cells[7].Value.ToString();
-                dtDueDate.Value = Convert.ToDateTime(selectedRow.Cells[8].Value.ToString());
+                dtDueDate.Value = Convert.ToDateTime(selectedRow.Cells["QuoteDueDate"].Value.ToString());
 
                 btnAdd.Enabled = false;
                 btnUpdate.Enabled = true;

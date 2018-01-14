@@ -150,7 +150,7 @@ namespace Tracer.Forms.Classes.DataAccess
                 List<DatabaseTables.ActiveQuotes> activeQuote = new List<DatabaseTables.ActiveQuotes>();
                 activeQuote.Add(updateQuote);
 
-                connection.Execute($"UPDATE ActiveQuotes SET Date=@Date, Time=@Time, PartID=@PartID, Customer=@Customer, PartDescription=@PartDescription, QuoteConfidence=@QuoteConfidence, QuoteComments=@QuoteComments, QuoteDueDate=@QuoteDueDate WHERE QuoteWOR=@QuoteWOR", activeQuote);
+                connection.Execute($"UPDATE ActiveQuotes SET Date=@Date, Time=@Time, PartID=@PartID, Customer=@Customer, PartDescription=@PartDescription, QuoteConfidence=@QuoteConfidence, Consigned=@Consigned, Turnkey=@Turnkey, QuoteComments=@QuoteComments, QuoteDueDate=@QuoteDueDate WHERE QuoteWOR=@QuoteWOR", activeQuote);
 
             }
         }
@@ -162,7 +162,7 @@ namespace Tracer.Forms.Classes.DataAccess
                 List<DatabaseTables.LotNumbers> activeLot = new List<DatabaseTables.LotNumbers>();
                 activeLot.Add(updateLot);
 
-                connection.Execute($"UPDATE LotNumbers SET Lot=@Lot, OrderQuantity=@OrderQuantity, JobDueDate=@JobDueDate, MasterDueDate=@MasterDueDate, TurnTime=@TurnTime, Consigned=@Consigned, JobComments=@JobComments WHERE LotID=@LotID", activeLot);
+                connection.Execute($"UPDATE LotNumbers SET Lot=@Lot, OrderQuantity=@OrderQuantity, JobDueDate=@JobDueDate, MasterDueDate=@MasterDueDate, KitDueDate=@KitDueDate, TurnTime=@TurnTime, Consigned=@Consigned, Turnkey=@Turnkey, JobComments=@JobComments WHERE LotID=@LotID", activeLot);
 
             }
         }
@@ -181,8 +181,8 @@ namespace Tracer.Forms.Classes.DataAccess
                 activeQuote.Add(newActiveQuote);
                 quoteStatus.Add(newQuoteStatus);
 
-                connection.Execute($"insert into ActiveQuotes(QuoteWOR, Date, Time, PartID, Customer, PartDescription, QuoteConfidence, QuoteComments, QuoteDueDate, QuoteInactive, POReceived) values(@QuoteWOR, @Date, @Time, @PartID, @Customer, @PartDescription, @QuoteConfidence, @QuoteComments, @QuoteDueDate, @QuoteInactive, @POReceived)", activeQuote);
-                connection.Execute($"insert into QuoteStatus(QuoteWOR, BOMValidationRequest, BOMValidationInProgress, BOMValidationComplete, PartsReviewRequest, PartsReviewInProgress, PartsReviewComplete, PreBidRequest, PreBidInProgress, PreBidComplete, FinalReviewRequest, FinalReviewInProgress, FinalReviewComplete, QuoteCurrentStatus) values(@QuoteWOR, @BOMValidationRequest, @BOMValidationInProgress, @BOMValidationComplete, @PartsReviewRequest, @PartsReviewInProgress, @PartsReviewComplete, @PreBidRequest, @PreBidInProgress, @PreBidComplete, @FinalReviewRequest, @FinalReviewInProgress, @FinalReviewComplete, @QuoteCurrentStatus)", quoteStatus);
+                connection.Execute($"insert into ActiveQuotes(QuoteWOR, Date, Time, PartID, Customer, PartDescription, QuoteConfidence, Consigned, Turnkey, QuoteComments, QuoteDueDate, QuoteInactive, POReceived) values(@QuoteWOR, @Date, @Time, @PartID, @Customer, @PartDescription, @QuoteConfidence, @Consigned, @Turnkey, @QuoteComments, @QuoteDueDate, @QuoteInactive, @POReceived)", activeQuote);
+                connection.Execute($"insert into QuoteStatus(QuoteWOR, BOMValidationRequest, BOMValidationInProgress, BOMValidationComplete, PartsReviewRequest, PartsReviewInProgress, PartsReviewComplete, PreBidRequest, PreBidInProgress, PreBidComplete, FinalReviewRequest, FinalReviewInProgress, FinalReviewComplete, QuoteSent, QuoteCurrentStatus) values(@QuoteWOR, @BOMValidationRequest, @BOMValidationInProgress, @BOMValidationComplete, @PartsReviewRequest, @PartsReviewInProgress, @PartsReviewComplete, @PreBidRequest, @PreBidInProgress, @PreBidComplete, @FinalReviewRequest, @FinalReviewInProgress, @FinalReviewComplete, @QuoteSent, @QuoteCurrentStatus)", quoteStatus);
 
             }
         }
@@ -233,7 +233,7 @@ namespace Tracer.Forms.Classes.DataAccess
                 lstNewPurchasingTimeTracking.Add(newPurchasingTimeTracking);
 
                 //1. Enter LotNumber
-                connection.Execute($"insert into LotNumbers(JobWOR, Lot, Customer, PartID, PartDescription, OrderQuantity, JobDueDate, MasterDueDate, TurnTime, Consigned, JobComments) values(@JobWOR, @Lot, @Customer, @PartID, @PartDescription, @OrderQuantity, @JobDueDate, @MasterDueDate, @TurnTime, @Consigned, @JobComments)", lstNewLotNumber);
+                connection.Execute($"insert into LotNumbers(JobWOR, Lot, Customer, PartID, PartDescription, OrderQuantity, JobDueDate, MasterDueDate, KitDueDate, TurnTime, Consigned, JobComments) values(@JobWOR, @Lot, @Customer, @PartID, @PartDescription, @OrderQuantity, @JobDueDate, @MasterDueDate, @KitDueDate, @TurnTime, @Consigned, @JobComments)", lstNewLotNumber);
 
                 //2. Get LotID from JobWOR
                 var tempLotID = connection.Query<DatabaseTables.LotNumbers>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ lstNewLotNumber[0].JobWOR }' AND Lot='{ lstNewLotNumber[0].Lot }'").ToList();

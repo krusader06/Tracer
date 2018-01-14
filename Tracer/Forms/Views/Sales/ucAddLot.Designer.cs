@@ -47,6 +47,8 @@
             this.txtLotNumber = new System.Windows.Forms.TextBox();
             this.dgNewLots = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
+            this.dtKitDueDate = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgNewLots)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +80,7 @@
             // ckConsigned
             // 
             this.ckConsigned.AutoSize = true;
-            this.ckConsigned.Location = new System.Drawing.Point(515, 122);
+            this.ckConsigned.Location = new System.Drawing.Point(515, 143);
             this.ckConsigned.Name = "ckConsigned";
             this.ckConsigned.Size = new System.Drawing.Size(76, 17);
             this.ckConsigned.TabIndex = 29;
@@ -88,7 +90,7 @@
             // ckTurnkey
             // 
             this.ckTurnkey.AutoSize = true;
-            this.ckTurnkey.Location = new System.Drawing.Point(444, 122);
+            this.ckTurnkey.Location = new System.Drawing.Point(444, 143);
             this.ckTurnkey.Name = "ckTurnkey";
             this.ckTurnkey.Size = new System.Drawing.Size(65, 17);
             this.ckTurnkey.TabIndex = 28;
@@ -97,7 +99,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(228, 120);
+            this.btnClear.Location = new System.Drawing.Point(228, 124);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(123, 29);
             this.btnClear.TabIndex = 27;
@@ -106,7 +108,7 @@
             // 
             // btnAddLot
             // 
-            this.btnAddLot.Location = new System.Drawing.Point(98, 120);
+            this.btnAddLot.Location = new System.Drawing.Point(98, 124);
             this.btnAddLot.Name = "btnAddLot";
             this.btnAddLot.Size = new System.Drawing.Size(124, 29);
             this.btnAddLot.TabIndex = 26;
@@ -117,7 +119,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(361, 97);
+            this.label6.Location = new System.Drawing.Point(363, 118);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(76, 13);
             this.label6.TabIndex = 24;
@@ -126,7 +128,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(364, 55);
+            this.label5.Location = new System.Drawing.Point(367, 55);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 25;
@@ -170,7 +172,7 @@
             // 
             // txtJobComments
             // 
-            this.txtJobComments.Location = new System.Drawing.Point(443, 94);
+            this.txtJobComments.Location = new System.Drawing.Point(443, 115);
             this.txtJobComments.Name = "txtJobComments";
             this.txtJobComments.Size = new System.Drawing.Size(253, 20);
             this.txtJobComments.TabIndex = 19;
@@ -203,9 +205,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgNewLots.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgNewLots.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgNewLots.Location = new System.Drawing.Point(16, 155);
+            this.dgNewLots.Location = new System.Drawing.Point(16, 166);
             this.dgNewLots.Name = "dgNewLots";
-            this.dgNewLots.Size = new System.Drawing.Size(768, 405);
+            this.dgNewLots.Size = new System.Drawing.Size(768, 394);
             this.dgNewLots.TabIndex = 15;
             // 
             // label2
@@ -219,11 +221,29 @@
             this.label2.TabIndex = 14;
             this.label2.Text = "Work Order:";
             // 
+            // dtKitDueDate
+            // 
+            this.dtKitDueDate.Location = new System.Drawing.Point(443, 94);
+            this.dtKitDueDate.Name = "dtKitDueDate";
+            this.dtKitDueDate.Size = new System.Drawing.Size(253, 20);
+            this.dtKitDueDate.TabIndex = 34;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(372, 97);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Kit Due Date";
+            // 
             // ucAddLot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.Controls.Add(this.dtKitDueDate);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblWorkOrder);
             this.Controls.Add(this.dtMasterDueDate);
             this.Controls.Add(this.dtJobDueDate);
@@ -272,5 +292,7 @@
         private System.Windows.Forms.TextBox txtLotNumber;
         private System.Windows.Forms.DataGridView dgNewLots;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dtKitDueDate;
+        private System.Windows.Forms.Label label1;
     }
 }

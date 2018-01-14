@@ -17,8 +17,10 @@ namespace Tracer.Forms.Classes.DatabaseTables
         public int OrderQuantity { get; set; }
         public string JobDueDate { get; set; }
         public string MasterDueDate { get; set; }
+        public string KitDueDate { get; set; }
         public int TurnTime { get; set; }
-        public string Consigned { get; set; }
+        public int Consigned { get; set; }
+        public int Turnkey { get; set; }
         public string JobComments { get; set; }
 
     }

@@ -14,7 +14,7 @@ namespace Tracer.Forms.Views.Purchasing
     {
 
         private static ucPurchasingDashboard _instance;
-        List<Classes.DatabaseTables.PurchasingDashboard> purchasingDashboard = new List<Classes.DatabaseTables.PurchasingDashboard>();
+        List<Classes.DatabaseTables.Dashboard> purchasingDashboard = new List<Classes.DatabaseTables.Dashboard>();
 
         //Holder for selection location
         int currentSelectionRow = 0;
@@ -49,13 +49,13 @@ namespace Tracer.Forms.Views.Purchasing
         {
 
             dgActiveWORs.Enabled = false;
-            Classes.DataAccess.PurchasingDataAccess db = new Classes.DataAccess.PurchasingDataAccess();
-            purchasingDashboard = db.LoadPurchasingDashboard();
+            Classes.DataAccess.DashboardDataAccess db = new Classes.DataAccess.DashboardDataAccess();
+            purchasingDashboard = db.LoadDashboard();
             dgActiveWORs.DataSource = purchasingDashboard;
 
             Classes.StatusCalculation calculatedStatus = new Classes.StatusCalculation();
 
-            calculatedStatus.CalculatePurchasingDashboard(purchasingDashboard);
+            calculatedStatus.CalculateDashboard(purchasingDashboard);
 
             colorCells();
             formatDataGrid();
@@ -68,85 +68,88 @@ namespace Tracer.Forms.Views.Purchasing
 
         private void colorCells()
         {
-            for (int x = 5; x < dgActiveWORs.Rows[0].Cells.Count; x++)
+            for (int x = 0; x < dgActiveWORs.Rows[0].Cells.Count; x++)
             {
                 for (int y = 0; y < purchasingDashboard.Count(); y++)
                 {
-                    switch (dgActiveWORs.Rows[y].Cells[x].Value.ToString())
+                    if (dgActiveWORs.Rows[y].Cells[x].Value != null)
                     {
-                        case "True":
-                            dgActiveWORs.Rows[y].Cells[x].Value = "";
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                            break;
+                        switch (dgActiveWORs.Rows[y].Cells[x].Value.ToString())
+                        {
+                            case "True":
+                                dgActiveWORs.Rows[y].Cells[x].Value = "";
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
+                                break;
 
-                        case "False":
-                            dgActiveWORs.Rows[y].Cells[x].Value = "";
-                            break;
+                            case "False":
+                                dgActiveWORs.Rows[y].Cells[x].Value = "";
+                                break;
 
-                        case "Not Used":
-                            dgActiveWORs.Rows[y].Cells[x].Value = "";
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Gray;
-                            break;
+                            case "!Not Used!":
+                                dgActiveWORs.Rows[y].Cells[x].Value = "";
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Gray;
+                                break;
 
 
-                        case "Not Started":
-                            dgActiveWORs.Rows[y].Cells[x].Value = "";
-                            break;
+                            case "Not Started":
+                                dgActiveWORs.Rows[y].Cells[x].Value = "";
+                                break;
 
-                        case "Requested":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
-                            break;
+                            case "Requested":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
+                                break;
 
-                        case "In Progress":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
-                            break;
+                            case "In Progress":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
+                                break;
 
-                        case "Complete":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                            break;
+                            case "Complete":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
+                                break;
 
-                        //Stencils
+                            //Stencils
 
-                        case "Stencils Needed":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
-                            break;
+                            case "Stencils Needed":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
+                                break;
 
-                        case "Stencils Received":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                            break;
+                            case "Stencils Received":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
+                                break;
 
-                        case "Stencils on Order":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
-                            break;
+                            case "Stencils on Order":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
+                                break;
 
-                        //PCBs
+                            //PCBs
 
-                        case "PCBs Needed":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
-                            break;
+                            case "PCBs Needed":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
+                                break;
 
-                        case "PCBs Received":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                            break;
+                            case "PCBs Received":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
+                                break;
 
-                        case "PCBs on Order":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
-                            break;
+                            case "PCBs on Order":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
+                                break;
 
-                        //Parts
+                            //Parts
 
-                        case "Parts Needed":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
-                            break;
+                            case "Parts Needed":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
+                                break;
 
-                        case "Parts Received":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                            break;
+                            case "Parts Received":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
+                                break;
 
-                        case "Parts on Order":
-                            dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
-                            break;
+                            case "Parts on Order":
+                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
+                                break;
 
+                        }
                     }
                 }
             }

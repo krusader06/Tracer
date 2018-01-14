@@ -22,6 +22,7 @@ namespace Tracer.Forms.Classes.DatabaseTables
         public int FinalReviewRequest { get; set; }
         public int FinalReviewInProgress { get; set; }
         public int FinalReviewComplete { get; set; }
+        public int QuoteSent { get; set; }
         public string QuoteCurrentStatus { get; set; }
 
     }

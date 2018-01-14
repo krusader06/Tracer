@@ -50,6 +50,8 @@
             this.txtTurnTime = new System.Windows.Forms.TextBox();
             this.txtOrderQuantity = new System.Windows.Forms.TextBox();
             this.txtLotNumber = new System.Windows.Forms.TextBox();
+            this.dtKitDueDate = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgLotGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgWORGrid)).BeginInit();
             this.SuspendLayout();
@@ -172,7 +174,7 @@
             // ckConsigned
             // 
             this.ckConsigned.AutoSize = true;
-            this.ckConsigned.Location = new System.Drawing.Point(513, 87);
+            this.ckConsigned.Location = new System.Drawing.Point(513, 108);
             this.ckConsigned.Name = "ckConsigned";
             this.ckConsigned.Size = new System.Drawing.Size(76, 17);
             this.ckConsigned.TabIndex = 64;
@@ -182,7 +184,7 @@
             // ckTurnkey
             // 
             this.ckTurnkey.AutoSize = true;
-            this.ckTurnkey.Location = new System.Drawing.Point(442, 87);
+            this.ckTurnkey.Location = new System.Drawing.Point(442, 108);
             this.ckTurnkey.Name = "ckTurnkey";
             this.ckTurnkey.Size = new System.Drawing.Size(65, 17);
             this.ckTurnkey.TabIndex = 63;
@@ -192,7 +194,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(359, 62);
+            this.label10.Location = new System.Drawing.Point(362, 83);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(76, 13);
             this.label10.TabIndex = 59;
@@ -201,7 +203,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(362, 20);
+            this.label11.Location = new System.Drawing.Point(365, 21);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(73, 13);
             this.label11.TabIndex = 60;
@@ -245,7 +247,7 @@
             // 
             // txtJobComments
             // 
-            this.txtJobComments.Location = new System.Drawing.Point(441, 59);
+            this.txtJobComments.Location = new System.Drawing.Point(441, 80);
             this.txtJobComments.Name = "txtJobComments";
             this.txtJobComments.Size = new System.Drawing.Size(253, 20);
             this.txtJobComments.TabIndex = 54;
@@ -271,11 +273,29 @@
             this.txtLotNumber.Size = new System.Drawing.Size(263, 20);
             this.txtLotNumber.TabIndex = 51;
             // 
+            // dtKitDueDate
+            // 
+            this.dtKitDueDate.Location = new System.Drawing.Point(441, 59);
+            this.dtKitDueDate.Name = "dtKitDueDate";
+            this.dtKitDueDate.Size = new System.Drawing.Size(253, 20);
+            this.dtKitDueDate.TabIndex = 68;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(370, 62);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.TabIndex = 67;
+            this.label1.Text = "Kit Due Date";
+            // 
             // ucEditLot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.Controls.Add(this.dtKitDueDate);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dtMasterDueDate);
             this.Controls.Add(this.dtJobDueDate);
             this.Controls.Add(this.ckConsigned);
@@ -331,5 +351,7 @@
         private System.Windows.Forms.TextBox txtTurnTime;
         private System.Windows.Forms.TextBox txtOrderQuantity;
         private System.Windows.Forms.TextBox txtLotNumber;
+        private System.Windows.Forms.DateTimePicker dtKitDueDate;
+        private System.Windows.Forms.Label label1;
     }
 }

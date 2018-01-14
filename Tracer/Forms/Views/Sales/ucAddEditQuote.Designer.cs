@@ -49,13 +49,15 @@
             this.dtDueDate = new System.Windows.Forms.DateTimePicker();
             this.ckShowAll = new System.Windows.Forms.CheckBox();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.ckConsigned = new System.Windows.Forms.CheckBox();
+            this.ckTurnkey = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgQuoteGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // radioHighConf
             // 
             this.radioHighConf.AutoSize = true;
-            this.radioHighConf.Location = new System.Drawing.Point(652, 77);
+            this.radioHighConf.Location = new System.Drawing.Point(652, 71);
             this.radioHighConf.Margin = new System.Windows.Forms.Padding(2);
             this.radioHighConf.Name = "radioHighConf";
             this.radioHighConf.Size = new System.Drawing.Size(47, 17);
@@ -67,7 +69,7 @@
             // radioMedConf
             // 
             this.radioMedConf.AutoSize = true;
-            this.radioMedConf.Location = new System.Drawing.Point(588, 77);
+            this.radioMedConf.Location = new System.Drawing.Point(588, 71);
             this.radioMedConf.Margin = new System.Windows.Forms.Padding(2);
             this.radioMedConf.Name = "radioMedConf";
             this.radioMedConf.Size = new System.Drawing.Size(62, 17);
@@ -79,7 +81,7 @@
             // radioLowConf
             // 
             this.radioLowConf.AutoSize = true;
-            this.radioLowConf.Location = new System.Drawing.Point(523, 77);
+            this.radioLowConf.Location = new System.Drawing.Point(523, 71);
             this.radioLowConf.Margin = new System.Windows.Forms.Padding(2);
             this.radioLowConf.Name = "radioLowConf";
             this.radioLowConf.Size = new System.Drawing.Size(45, 17);
@@ -133,7 +135,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(382, 77);
+            this.label8.Location = new System.Drawing.Point(382, 71);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(90, 13);
@@ -277,11 +279,33 @@
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
+            // ckConsigned
+            // 
+            this.ckConsigned.AutoSize = true;
+            this.ckConsigned.Location = new System.Drawing.Point(653, 93);
+            this.ckConsigned.Name = "ckConsigned";
+            this.ckConsigned.Size = new System.Drawing.Size(76, 17);
+            this.ckConsigned.TabIndex = 31;
+            this.ckConsigned.Text = "Consigned";
+            this.ckConsigned.UseVisualStyleBackColor = true;
+            // 
+            // ckTurnkey
+            // 
+            this.ckTurnkey.AutoSize = true;
+            this.ckTurnkey.Location = new System.Drawing.Point(523, 93);
+            this.ckTurnkey.Name = "ckTurnkey";
+            this.ckTurnkey.Size = new System.Drawing.Size(65, 17);
+            this.ckTurnkey.TabIndex = 30;
+            this.ckTurnkey.Text = "Turnkey";
+            this.ckTurnkey.UseVisualStyleBackColor = true;
+            // 
             // ucAddEditQuote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.Controls.Add(this.ckConsigned);
+            this.Controls.Add(this.ckTurnkey);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.ckShowAll);
             this.Controls.Add(this.dtDueDate);
@@ -334,5 +358,7 @@
         private System.Windows.Forms.DateTimePicker dtDueDate;
         private System.Windows.Forms.CheckBox ckShowAll;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.CheckBox ckConsigned;
+        private System.Windows.Forms.CheckBox ckTurnkey;
     }
 }
