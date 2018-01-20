@@ -34,6 +34,8 @@
             this.btnEnd = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.dgTaskView = new System.Windows.Forms.DataGridView();
+            this.ckWORs = new System.Windows.Forms.CheckBox();
+            this.ckQuotes = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgActiveWORs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTaskView)).BeginInit();
             this.SuspendLayout();
@@ -42,6 +44,7 @@
             // 
             this.dgActiveWORs.AllowUserToAddRows = false;
             this.dgActiveWORs.AllowUserToDeleteRows = false;
+            this.dgActiveWORs.AllowUserToResizeColumns = false;
             this.dgActiveWORs.AllowUserToResizeRows = false;
             this.dgActiveWORs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -51,11 +54,11 @@
             this.dgActiveWORs.Location = new System.Drawing.Point(16, 35);
             this.dgActiveWORs.Margin = new System.Windows.Forms.Padding(1);
             this.dgActiveWORs.Name = "dgActiveWORs";
-            this.dgActiveWORs.ReadOnly = true;
-            this.dgActiveWORs.RowTemplate.Height = 28;
             this.dgActiveWORs.Size = new System.Drawing.Size(1525, 261);
             this.dgActiveWORs.TabIndex = 1;
-            this.dgActiveWORs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgActiveWORs_CellClick);
+            this.dgActiveWORs.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgActiveWORs_CellBeginEdit);
+            this.dgActiveWORs.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgActiveWORs_CellEndEdit);
+            this.dgActiveWORs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgActiveWORs_CellFormatting);
             // 
             // label1
             // 
@@ -122,11 +125,37 @@
             this.dgTaskView.TabIndex = 9;
             this.dgTaskView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTaskView_CellClick);
             // 
+            // ckWORs
+            // 
+            this.ckWORs.AutoSize = true;
+            this.ckWORs.Checked = true;
+            this.ckWORs.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckWORs.Location = new System.Drawing.Point(18, 9);
+            this.ckWORs.Name = "ckWORs";
+            this.ckWORs.Size = new System.Drawing.Size(86, 17);
+            this.ckWORs.TabIndex = 11;
+            this.ckWORs.Text = "Work Orders";
+            this.ckWORs.UseVisualStyleBackColor = true;
+            // 
+            // ckQuotes
+            // 
+            this.ckQuotes.AutoSize = true;
+            this.ckQuotes.Checked = true;
+            this.ckQuotes.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckQuotes.Location = new System.Drawing.Point(110, 9);
+            this.ckQuotes.Name = "ckQuotes";
+            this.ckQuotes.Size = new System.Drawing.Size(60, 17);
+            this.ckQuotes.TabIndex = 12;
+            this.ckQuotes.Text = "Quotes";
+            this.ckQuotes.UseVisualStyleBackColor = true;
+            // 
             // ucProcessDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.Controls.Add(this.ckQuotes);
+            this.Controls.Add(this.ckWORs);
             this.Controls.Add(this.dgTaskView);
             this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.btnStart);
@@ -150,5 +179,7 @@
         private System.Windows.Forms.Button btnEnd;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.DataGridView dgTaskView;
+        private System.Windows.Forms.CheckBox ckWORs;
+        private System.Windows.Forms.CheckBox ckQuotes;
     }
 }

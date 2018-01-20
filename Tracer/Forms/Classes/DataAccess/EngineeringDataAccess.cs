@@ -31,6 +31,29 @@ namespace Tracer.Forms.Classes.DataAccess
             }
         }
 
+        //Update Comments
+        public void UpdateComments(string newComment, string type, string WOR, string Lot)
+        {
+            //Determines wheter or not this is a Quote or Work Order, then updates the proper table
+
+            if (type == "Quote")
+            {
+                //Update ActiveQuotes.QuoteComments
+                using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+                {
+                    connection.Execute($"UPDATE ActiveQuotes SET QuoteComments='{ newComment }' WHERE QuoteWOR='{ WOR }'");
+                }
+            }
+            else
+            {
+                //Update LotNumbers.JobComments
+                using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+                {
+                    connection.Execute($"UPDATE LotNumbers SET JobComments='{ newComment }' WHERE JobWOR='{ WOR }' AND Lot='{ Lot }'");
+                }
+            }
+        }
+
         //Task Queries-----------------------------------------------------------------------------------------------------------------
 
         public List<Classes.LotTask> GetEngineeringTaskList()

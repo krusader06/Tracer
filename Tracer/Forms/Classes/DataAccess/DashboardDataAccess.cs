@@ -71,6 +71,7 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", PartsRequired = '' " +
                     $", PartsOrdered = '' " +
                     $", PartsReceived = '' " +
+                    $", ActiveQuotes.QuoteComments AS Comments " +
 
                     $"FROM ActiveQuotes " +
                     $"INNER JOIN QuoteStatus " +
@@ -137,6 +138,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotPurchasingStatus.PartsRequired " +
                     $", LotPurchasingStatus.PartsOrdered " +
                     $", LotPurchasingStatus.PartsReceived " +
+
+                    $", LotNumbers.JobComments AS Comments " +
 
                     $"FROM LotNumbers " +
                     $"INNER JOIN ActiveQuotes " +

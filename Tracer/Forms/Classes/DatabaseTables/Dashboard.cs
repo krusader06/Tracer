@@ -105,5 +105,8 @@ namespace Tracer.Forms.Classes.DatabaseTables
         public string PartsOrdered { get; set; }
         public string PartsReceived { get; set; }
         public string PartsStatus { get; set; }
+
+        //Comment
+        public string Comments { get; set; }
     }
 }

@@ -19,12 +19,12 @@ namespace Tracer.Forms.Views.Sales
 
         List<Classes.LotTask> MasterReviewRequests = new List<Classes.LotTask>();
 
+        //Used to store current cell for active WOR datagrid
+        int WORactiveRow;
+        int WORactiveColumn;
+
         //Used to store datagridview selected row
         int activeRow;
-
-        //Holder for selection location
-        int currentSelectionRow = 0;
-        int currentSelectionColumn = 0;
 
         //Load Stuff------------------------------------------------------------------------------
         private static ucSalesDashboard _instance;
@@ -57,65 +57,106 @@ namespace Tracer.Forms.Views.Sales
 
 
         //-------------------------------------------------------------------------------------------
-        private void colorCells()
+
+        private void dgActiveWORs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            for (int x = 0; x < dgActiveWORs.Rows[0].Cells.Count; x++)
+            if (e.Value != null)
             {
-                for (int y = 0; y < engineeringDashboard.Count(); y++)
+                switch (e.Value.ToString())
                 {
-                    if (dgActiveWORs.Rows[y].Cells[x].Value != null)
-                    {
-                        switch (dgActiveWORs.Rows[y].Cells[x].Value.ToString())
-                        {
-                            case "True":
-                                dgActiveWORs.Rows[y].Cells[x].Value = "";
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                                break;
+                    case "True":
+                        e.Value = "";
+                        e.CellStyle.BackColor = Color.LightGreen;
+                        break;
 
-                            case "False":
-                                dgActiveWORs.Rows[y].Cells[x].Value = "";
-                                break;
+                    case "False":
+                        e.Value = "";
+                        break;
 
-                            case "!Not Used!":
-                                dgActiveWORs.Rows[y].Cells[x].Value = "";
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Gray;
-                                break;
+                    case "!Not Used!":
+                        e.Value = "";
+                        e.CellStyle.BackColor = Color.Gray;
+                        break;
 
-                            case "Not Started":
-                                dgActiveWORs.Rows[y].Cells[x].Value = "";
-                                break;
+                    case "Not Started":
+                        e.Value = "";
+                        break;
 
-                            case "Requested":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
-                                break;
+                    case "Requested":
+                        e.CellStyle.BackColor = Color.LightSteelBlue;
+                        break;
 
-                            case "In Progress":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
-                                break;
+                    case "In Progress":
+                        e.CellStyle.BackColor = Color.Yellow;
+                        break;
 
-                            case "Complete":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                                break;
-
-                        }
-                    }
+                    case "Complete":
+                        e.CellStyle.BackColor = Color.LightGreen;
+                        break;
 
                 }
             }
-            dgActiveWORs.Refresh();
-
         }
 
         private void formatDataGrids()
         {
 
-            //Hides any cells that we don't care about. Eventually this will be in a configuration file...
-
-            //WOR Grid...
-
-            dgActiveWORs.Columns[0].HeaderText = "Quote/WOR";
+            //Format Grid-View-------------------------------------------------------------------------------
 
             dgActiveWORs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgActiveWORs.Columns["Comments"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            //Set all minimum column widths
+            for (int i = 0; i < 65; i++)
+            {
+                dgActiveWORs.Columns[i].MinimumWidth = 75;
+            }
+
+            dgActiveWORs.ColumnHeadersDefaultCellStyle.BackColor = Color.LightBlue;
+            dgActiveWORs.EnableHeadersVisualStyles = false;
+
+            //Re-Name Columns--------------------------------------------------------------------------------
+
+            dgActiveWORs.Columns["QuoteOrWOR"].HeaderText = "Quote/WOR";
+            dgActiveWORs.Columns["PartID"].HeaderText = "Part ID";
+            dgActiveWORs.Columns["PartDescription"].HeaderText = "Description";
+            dgActiveWORs.Columns["QuoteConfidence"].HeaderText = "Confidence";
+            dgActiveWORs.Columns["OrderQuantity"].HeaderText = "Quantity";
+            dgActiveWORs.Columns["TurnTime"].HeaderText = "Turn Time";
+            dgActiveWORs.Columns["Consigned"].HeaderText = "C";
+            dgActiveWORs.Columns["Turnkey"].HeaderText = "T";
+
+            dgActiveWORs.Columns["BOMValidationStatus"].HeaderText = "BOM Validation";
+            dgActiveWORs.Columns["PartsReviewStatus"].HeaderText = "Parts Review";
+            dgActiveWORs.Columns["PreBidStatus"].HeaderText = "Pre-Bid";
+            dgActiveWORs.Columns["FinalReviewStatus"].HeaderText = "Final Review";
+
+            dgActiveWORs.Columns["QuoteDueDate"].HeaderText = "Quote Due";
+            dgActiveWORs.Columns["QuoteSent"].HeaderText = "Quote Sent";
+            dgActiveWORs.Columns["QuoteReviewStatus"].HeaderText = "Quote Review";
+
+            dgActiveWORs.Columns["MasterStatus"].HeaderText = "Master";
+            dgActiveWORs.Columns["MasterDueDate"].HeaderText = "Master Due";
+            dgActiveWORs.Columns["MasterReviewStatus"].HeaderText = "Master Review";
+
+            dgActiveWORs.Columns["WORLotReleased"].HeaderText = "WOR Released";
+
+            dgActiveWORs.Columns["TravelerStatus"].HeaderText = "Traveler";
+
+            dgActiveWORs.Columns["KitReleased"].HeaderText = "Kit";
+            dgActiveWORs.Columns["KitDueDate"].HeaderText = "Kit Due";
+
+            dgActiveWORs.Columns["JobDueDate"].HeaderText = "Job Due";
+
+            dgActiveWORs.Columns["PCBStatus"].HeaderText = "PCBs";
+            dgActiveWORs.Columns["PCBArraysApproved"].HeaderText = "PCBs Approved";
+
+            dgActiveWORs.Columns["StencilStatus"].HeaderText = "Stencils";
+            dgActiveWORs.Columns["StencilPlotsApproved"].HeaderText = "Stencils Approved";
+
+            dgActiveWORs.Columns["PartsStatus"].HeaderText = "Parts";
+
+            //Show/Hide Columns---------------------------------------------------------
 
             //dgActiveWORs.Columns["QuoteOrWOR"].Visible = false;
             //dgActiveWORs.Columns["WOR"].Visible = false;
@@ -147,7 +188,7 @@ namespace Tracer.Forms.Views.Sales
             dgActiveWORs.Columns["FinalReviewRequest"].Visible = false;
             dgActiveWORs.Columns["FinalReviewInProgress"].Visible = false;
             dgActiveWORs.Columns["FinalReviewComplete"].Visible = false;
-            //dgActiveWORs.Columns["FinalReviewStatus"].Visible = false;
+            dgActiveWORs.Columns["FinalReviewStatus"].Visible = false;
 
             //dgActiveWORs.Columns["QuoteDueDate"].Visible = false;
             //dgActiveWORs.Columns["QuoteSent"].Visible = false;
@@ -205,6 +246,17 @@ namespace Tracer.Forms.Views.Sales
 
             dgActiveWORs.Enabled = false;
 
+            //Get Current Selection Location
+            if (dgActiveWORs.CurrentCell != null)
+            {
+                if (dgActiveWORs.CurrentCell.ColumnIndex > 0)
+                {
+                    WORactiveRow = dgActiveWORs.CurrentCell.RowIndex;
+                    WORactiveColumn = dgActiveWORs.CurrentCell.ColumnIndex;
+                }
+            }
+
+            //Load DataGridView
             Classes.DataAccess.DashboardDataAccess db = new Classes.DataAccess.DashboardDataAccess();
             engineeringDashboard = db.LoadDashboard();
             dgActiveWORs.DataSource = engineeringDashboard;
@@ -213,13 +265,13 @@ namespace Tracer.Forms.Views.Sales
 
             calculatedStatus.CalculateDashboard(engineeringDashboard);
 
-            colorCells();
+            //Format DataGridView
             formatDataGrids();
 
-            dgActiveWORs.Enabled = true;
+            //Re-set Current Cell
+            dgActiveWORs.CurrentCell = dgActiveWORs.Rows[WORactiveRow].Cells[WORactiveColumn];
 
-            //Re-select current cell
-            dgActiveWORs.CurrentCell = dgActiveWORs.Rows[currentSelectionRow].Cells[currentSelectionColumn];
+            dgActiveWORs.Enabled = true;
 
             //Task View Handler
             dgTaskView.DataSource = null;
@@ -232,16 +284,6 @@ namespace Tracer.Forms.Views.Sales
             dgTaskView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgTaskView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-        }
-
-        private void dgActiveWORs_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //Update Selected cell so that it doesn't get reset during refresh
-            if (e.RowIndex > 0)
-            {
-                currentSelectionRow = e.RowIndex;
-                currentSelectionColumn = e.ColumnIndex;
-            }
         }
 
 
@@ -339,6 +381,7 @@ namespace Tracer.Forms.Views.Sales
             btnEnd.Visible = false;
             btnEnd.Text = "End";
         }
+
 
     }
 }

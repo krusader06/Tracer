@@ -52,10 +52,9 @@
             this.dgActiveWORs.Margin = new System.Windows.Forms.Padding(1);
             this.dgActiveWORs.Name = "dgActiveWORs";
             this.dgActiveWORs.ReadOnly = true;
-            this.dgActiveWORs.RowTemplate.Height = 28;
             this.dgActiveWORs.Size = new System.Drawing.Size(1525, 261);
             this.dgActiveWORs.TabIndex = 3;
-            this.dgActiveWORs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgActiveWORs_CellClick);
+            this.dgActiveWORs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgActiveWORs_CellFormatting);
             // 
             // label1
             // 

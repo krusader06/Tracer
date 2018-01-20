@@ -17,9 +17,10 @@ namespace Tracer.Forms.Views.Purchasing
         List<Classes.DatabaseTables.Dashboard> purchasingDashboard = new List<Classes.DatabaseTables.Dashboard>();
         List<Classes.LotTask> TaskRequests = new List<Classes.LotTask>();
 
-        //Holder for selection location
-        int currentSelectionRow = 0;
-        int currentSelectionColumn = 0;
+        //Used to store current cell for active WOR datagrid
+        int WORactiveRow;
+        int WORactiveColumn;
+
         //Used for Task View
         int activeRow;
 
@@ -52,6 +53,18 @@ namespace Tracer.Forms.Views.Purchasing
         {
 
             dgActiveWORs.Enabled = false;
+
+            //Get Current Selection Location
+            if (dgActiveWORs.CurrentCell != null)
+            {
+                if (dgActiveWORs.CurrentCell.ColumnIndex > 0)
+                {
+                    WORactiveRow = dgActiveWORs.CurrentCell.RowIndex;
+                    WORactiveColumn = dgActiveWORs.CurrentCell.ColumnIndex;
+                }
+            }
+
+            //Load DataGridView
             Classes.DataAccess.DashboardDataAccess db = new Classes.DataAccess.DashboardDataAccess();
             purchasingDashboard = db.LoadDashboard();
             dgActiveWORs.DataSource = purchasingDashboard;
@@ -60,13 +73,14 @@ namespace Tracer.Forms.Views.Purchasing
 
             calculatedStatus.CalculateDashboard(purchasingDashboard);
 
-            colorCells();
+            //Format DataGridView
             formatDataGrid();
+
+            //Re-set Current Cell
+            dgActiveWORs.CurrentCell = dgActiveWORs.Rows[WORactiveRow].Cells[WORactiveColumn];
 
             dgActiveWORs.Enabled = true;
 
-            //Re-select current cell
-            dgActiveWORs.CurrentCell = dgActiveWORs.Rows[currentSelectionRow].Cells[currentSelectionColumn];
 
             //Task View Stuff
             dgTaskView.DataSource = null;
@@ -81,105 +95,148 @@ namespace Tracer.Forms.Views.Purchasing
             dgTaskView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
-        private void colorCells()
+        private void dgActiveWORs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            for (int x = 0; x < dgActiveWORs.Rows[0].Cells.Count; x++)
+            if (e.Value != null)
             {
-                for (int y = 0; y < purchasingDashboard.Count(); y++)
+                switch (e.Value.ToString())
                 {
-                    if (dgActiveWORs.Rows[y].Cells[x].Value != null)
-                    {
-                        switch (dgActiveWORs.Rows[y].Cells[x].Value.ToString())
-                        {
-                            case "True":
-                                dgActiveWORs.Rows[y].Cells[x].Value = "";
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                                break;
+                    case "True":
+                        e.Value = "";
+                        e.CellStyle.BackColor = Color.LimeGreen;
+                        break;
 
-                            case "False":
-                                dgActiveWORs.Rows[y].Cells[x].Value = "";
-                                break;
+                    case "False":
+                        e.Value = "";
+                        break;
 
-                            case "!Not Used!":
-                                dgActiveWORs.Rows[y].Cells[x].Value = "";
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Gray;
-                                break;
+                    case "!Not Used!":
+                        e.Value = "";
+                        e.CellStyle.BackColor = Color.Gray;
+                        break;
 
 
-                            case "Not Started":
-                                dgActiveWORs.Rows[y].Cells[x].Value = "";
-                                break;
+                    case "Not Started":
+                        e.Value = "";
+                        break;
 
-                            case "Requested":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
-                                break;
+                    case "Requested":
+                        e.CellStyle.BackColor = Color.LightSteelBlue;
+                        break;
 
-                            case "In Progress":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
-                                break;
+                    case "In Progress":
+                        e.CellStyle.BackColor = Color.Yellow;
+                        break;
 
-                            case "Complete":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                                break;
+                    case "Complete":
+                        e.CellStyle.BackColor = Color.LimeGreen;
+                        break;
 
-                            //Stencils
+                    //Stencils
 
-                            case "Stencils Needed":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
-                                break;
+                    case "Stencils Needed":
+                        e.CellStyle.BackColor = Color.LightSteelBlue;
+                        break;
 
-                            case "Stencils Received":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                                break;
+                    case "Stencils Received":
+                        e.CellStyle.BackColor = Color.LimeGreen;
+                        break;
 
-                            case "Stencils on Order":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
-                                break;
+                    case "Stencils on Order":
+                        e.CellStyle.BackColor = Color.Yellow;
+                        break;
 
-                            //PCBs
+                    //PCBs
 
-                            case "PCBs Needed":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
-                                break;
+                    case "PCBs Needed":
+                        e.CellStyle.BackColor = Color.LightSteelBlue;
+                        break;
 
-                            case "PCBs Received":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                                break;
+                    case "PCBs Received":
+                        e.CellStyle.BackColor = Color.LimeGreen;
+                        break;
 
-                            case "PCBs on Order":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
-                                break;
+                    case "PCBs on Order":
+                        e.CellStyle.BackColor = Color.Yellow;
+                        break;
 
-                            //Parts
+                    //Parts
 
-                            case "Parts Needed":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightSteelBlue;
-                                break;
+                    case "Parts Needed":
+                        e.CellStyle.BackColor = Color.LightSteelBlue;
+                        break;
 
-                            case "Parts Received":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.LightGreen;
-                                break;
+                    case "Parts Received":
+                        e.CellStyle.BackColor = Color.LimeGreen;
+                        break;
 
-                            case "Parts on Order":
-                                dgActiveWORs.Rows[y].Cells[x].Style.BackColor = Color.Yellow;
-                                break;
+                    case "Parts on Order":
+                        e.CellStyle.BackColor = Color.Yellow;
+                        break;
 
-                        }
-                    }
                 }
             }
-            dgActiveWORs.Refresh();
         }
 
         private void formatDataGrid()
         {
-            //Hides any cells that we don't care about. Eventually this will be in a configuration file...
-
-            //WOR Grid...
-
-            dgActiveWORs.Columns[0].HeaderText = "Quote/WOR";
+            //Format Grid-View-------------------------------------------------------------------------------
 
             dgActiveWORs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgActiveWORs.Columns["Comments"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            //Set all minimum column widths
+            for (int i = 0; i < 65; i++)
+            {
+                dgActiveWORs.Columns[i].MinimumWidth = 75;
+            }
+
+            dgActiveWORs.ColumnHeadersDefaultCellStyle.BackColor = Color.LightBlue;
+            dgActiveWORs.EnableHeadersVisualStyles = false;
+
+            //Re-Name Columns--------------------------------------------------------------------------------
+
+            dgActiveWORs.Columns["QuoteOrWOR"].HeaderText = "Quote/WOR";
+            dgActiveWORs.Columns["PartID"].HeaderText = "Part ID";
+            dgActiveWORs.Columns["PartDescription"].HeaderText = "Description";
+            dgActiveWORs.Columns["QuoteConfidence"].HeaderText = "Confidence";
+            dgActiveWORs.Columns["OrderQuantity"].HeaderText = "Quantity";
+            dgActiveWORs.Columns["TurnTime"].HeaderText = "Turn Time";
+            dgActiveWORs.Columns["Consigned"].HeaderText = "C";
+            dgActiveWORs.Columns["Turnkey"].HeaderText = "T";
+
+            dgActiveWORs.Columns["BOMValidationStatus"].HeaderText = "BOM Validation";
+            dgActiveWORs.Columns["PartsReviewStatus"].HeaderText = "Parts Review";
+            dgActiveWORs.Columns["PreBidStatus"].HeaderText = "Pre-Bid";
+            dgActiveWORs.Columns["FinalReviewStatus"].HeaderText = "Final Review";
+
+            dgActiveWORs.Columns["QuoteDueDate"].HeaderText = "Quote Due";
+            dgActiveWORs.Columns["QuoteSent"].HeaderText = "Quote Sent";
+            dgActiveWORs.Columns["QuoteReviewStatus"].HeaderText = "Quote Review";
+
+            dgActiveWORs.Columns["MasterStatus"].HeaderText = "Master";
+            dgActiveWORs.Columns["MasterDueDate"].HeaderText = "Master Due";
+            dgActiveWORs.Columns["MasterReviewStatus"].HeaderText = "Master Review";
+
+            dgActiveWORs.Columns["WORLotReleased"].HeaderText = "WOR Released";
+
+            dgActiveWORs.Columns["TravelerStatus"].HeaderText = "Traveler";
+
+            dgActiveWORs.Columns["KitReleased"].HeaderText = "Kit";
+            dgActiveWORs.Columns["KitDueDate"].HeaderText = "Kit Due";
+
+            dgActiveWORs.Columns["JobDueDate"].HeaderText = "Job Due";
+
+            dgActiveWORs.Columns["PCBStatus"].HeaderText = "PCBs";
+            dgActiveWORs.Columns["PCBArraysApproved"].HeaderText = "PCBs Approved";
+
+            dgActiveWORs.Columns["StencilStatus"].HeaderText = "Stencils";
+            dgActiveWORs.Columns["StencilPlotsApproved"].HeaderText = "Stencils Approved";
+
+            dgActiveWORs.Columns["PartsStatus"].HeaderText = "Parts";
+
+
+            //Show/Hide Columns---------------------------------------------------------
 
             //dgActiveWORs.Columns["QuoteOrWOR"].Visible = false;
             //dgActiveWORs.Columns["WOR"].Visible = false;
@@ -263,13 +320,6 @@ namespace Tracer.Forms.Views.Purchasing
             //dgActiveWORs.Columns["PartsStatus"].Visible = false;
 
 
-        }
-
-        private void dgActiveWORs_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //Update Selected cell so that it doesn't get reset during refresh
-            currentSelectionRow = e.RowIndex;
-            currentSelectionColumn = e.ColumnIndex;
         }
 
         //Task View Handlers----------------------------------------------------------------------------------------------
@@ -415,5 +465,7 @@ namespace Tracer.Forms.Views.Purchasing
             btnEnd.Visible = false;
             btnEnd.Text = "End";
         }
+
+
     }
 }

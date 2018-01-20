@@ -42,6 +42,8 @@
             // 
             this.dgActiveWORs.AllowUserToAddRows = false;
             this.dgActiveWORs.AllowUserToDeleteRows = false;
+            this.dgActiveWORs.AllowUserToResizeColumns = false;
+            this.dgActiveWORs.AllowUserToResizeRows = false;
             this.dgActiveWORs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgActiveWORs.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -51,7 +53,7 @@
             this.dgActiveWORs.ReadOnly = true;
             this.dgActiveWORs.Size = new System.Drawing.Size(1525, 261);
             this.dgActiveWORs.TabIndex = 0;
-            this.dgActiveWORs.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgActiveWORs_CellClick);
+            this.dgActiveWORs.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgActiveWORs_CellFormatting);
             // 
             // label1
             // 
