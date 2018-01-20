@@ -19,6 +19,7 @@ namespace Tracer.Forms.Views.Sales
         public event EventHandler EngineeringRequestButtonClicked;
         public event EventHandler PurchasingRequestButtonClicked;
         public event EventHandler AddPurchaseOrderButtonClicked;
+        public event EventHandler SendQuoteButtonClicked;
         public event EventHandler DeactivateQuoteButtonClicked;
         public event EventHandler HomeButtonClicked;
         public event EventHandler ExitButtonClicked;
@@ -89,6 +90,14 @@ namespace Tracer.Forms.Views.Sales
             }
         }
 
+        private void onSendQuoteButtonClicked()
+        {
+            if (SendQuoteButtonClicked != null)
+            {
+                SendQuoteButtonClicked(this, EventArgs.Empty);
+            }
+        }
+
         private void onDeactivateQuoteButtonClick()
         {
             if (DeactivateQuoteButtonClicked != null)
@@ -144,6 +153,11 @@ namespace Tracer.Forms.Views.Sales
             onAddPurchaseOrderButtonClick();
         }
 
+        private void btnSendQuote_Click(object sender, EventArgs e)
+        {
+            onSendQuoteButtonClicked();
+        }
+
         private void btnDeactivateQuote_Click(object sender, EventArgs e)
         {
             onDeactivateQuoteButtonClick();
@@ -159,6 +173,6 @@ namespace Tracer.Forms.Views.Sales
             onExitButtonClick();
         }
 
-        
+
     }
 }

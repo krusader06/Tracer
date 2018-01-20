@@ -297,6 +297,7 @@ namespace Tracer
                 Forms.Views.Sales.ucSalesMenu.Instance.EngineeringRequestButtonClicked += new EventHandler(showEngineeringRequest);
                 Forms.Views.Sales.ucSalesMenu.Instance.PurchasingRequestButtonClicked += new EventHandler(showPurchasingRequest);
                 Forms.Views.Sales.ucSalesMenu.Instance.AddPurchaseOrderButtonClicked += new EventHandler(showSalesAddPurchaseOrder);
+                Forms.Views.Sales.ucSalesMenu.Instance.SendQuoteButtonClicked += new EventHandler(showSendQuote);
                 Forms.Views.Sales.ucSalesMenu.Instance.DeactivateQuoteButtonClicked += new EventHandler(showDeActivateQuote);
                 Forms.Views.Sales.ucSalesMenu.Instance.HomeButtonClicked += new EventHandler(prepareHomeView);
                 Forms.Views.Sales.ucSalesMenu.Instance.ExitButtonClicked += new EventHandler(exitApplication);
@@ -412,27 +413,7 @@ namespace Tracer
             }
         }
 
-        private void showDeActivateQuote(object sender, EventArgs e)
-        {
-            // Show the Sales Add New Quote Page
-
-            lblMain.Text = "Sales - De-Activate Quote";
-
-            if (!mainContainer.Controls.Contains(Forms.Views.Sales.ucDeActivateQuote.Instance))
-            {
-                mainContainer.Controls.Add(Forms.Views.Sales.ucDeActivateQuote.Instance);
-                Forms.Views.Sales.ucDeActivateQuote.Instance.Dock = DockStyle.Fill;
-                Forms.Views.Sales.ucDeActivateQuote.Instance.BringToFront();
-
-                //Add Event Listeners If Necessary...
-
-            }
-            else
-            {
-                Forms.Views.Sales.ucDeActivateQuote.Instance.BringToFront();
-                Forms.Views.Sales.ucDeActivateQuote.Instance.ShowActiveQuotes();
-            }
-        }
+        
 
         private void showSalesAddPurchaseOrder(object sender, EventArgs e)
         {
@@ -474,6 +455,50 @@ namespace Tracer
             else
             {
                 Forms.Views.Sales.ucAddLot.Instance.BringToFront();
+            }
+        }
+
+        private void showSendQuote(object sender, EventArgs e)
+        {
+            // Show the Sales Add New Quote Page
+
+            lblMain.Text = "Sales - Send Quote to Customer";
+
+            if (!mainContainer.Controls.Contains(Forms.Views.Sales.ucSendQuote.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Sales.ucSendQuote.Instance);
+                Forms.Views.Sales.ucSendQuote.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Sales.ucSendQuote.Instance.BringToFront();
+
+                //Add Event Listeners If Necessary...
+
+            }
+            else
+            {
+                Forms.Views.Sales.ucSendQuote.Instance.BringToFront();
+                Forms.Views.Sales.ucSendQuote.Instance.ShowActiveQuotes();
+            }
+        }
+
+        private void showDeActivateQuote(object sender, EventArgs e)
+        {
+            // Show the Sales Add New Quote Page
+
+            lblMain.Text = "Sales - De-Activate Quote";
+
+            if (!mainContainer.Controls.Contains(Forms.Views.Sales.ucDeActivateQuote.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Sales.ucDeActivateQuote.Instance);
+                Forms.Views.Sales.ucDeActivateQuote.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Sales.ucDeActivateQuote.Instance.BringToFront();
+
+                //Add Event Listeners If Necessary...
+
+            }
+            else
+            {
+                Forms.Views.Sales.ucDeActivateQuote.Instance.BringToFront();
+                Forms.Views.Sales.ucDeActivateQuote.Instance.ShowActiveQuotes();
             }
         }
 

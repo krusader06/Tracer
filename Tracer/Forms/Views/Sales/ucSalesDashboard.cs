@@ -19,6 +19,9 @@ namespace Tracer.Forms.Views.Sales
 
         List<Classes.LotTask> MasterReviewRequests = new List<Classes.LotTask>();
 
+        //Refresh Timer
+        private static Timer timer = new Timer();
+
         //Used to store current cell for active WOR datagrid
         int WORactiveRow;
         int WORactiveColumn;
@@ -49,7 +52,6 @@ namespace Tracer.Forms.Views.Sales
 
         private void setTimer()
         {
-            Timer timer = new Timer();
             timer.Interval = (10 * 1000);
             timer.Tick += new EventHandler(populate);
             timer.Start();
@@ -66,7 +68,7 @@ namespace Tracer.Forms.Views.Sales
                 {
                     case "True":
                         e.Value = "";
-                        e.CellStyle.BackColor = Color.LightGreen;
+                        e.CellStyle.BackColor = Color.LimeGreen;
                         break;
 
                     case "False":
@@ -91,7 +93,7 @@ namespace Tracer.Forms.Views.Sales
                         break;
 
                     case "Complete":
-                        e.CellStyle.BackColor = Color.LightGreen;
+                        e.CellStyle.BackColor = Color.LimeGreen;
                         break;
 
                 }
@@ -114,6 +116,15 @@ namespace Tracer.Forms.Views.Sales
 
             dgActiveWORs.ColumnHeadersDefaultCellStyle.BackColor = Color.LightBlue;
             dgActiveWORs.EnableHeadersVisualStyles = false;
+
+            //Read-Only except for Comments Column
+            dgActiveWORs.ReadOnly = false;
+            for (int i = 0; i < dgActiveWORs.ColumnCount - 1; i++)
+            {
+                dgActiveWORs.Columns[i].ReadOnly = true;
+            }
+
+            dgActiveWORs.Columns["Comments"].ReadOnly = false;
 
             //Re-Name Columns--------------------------------------------------------------------------------
 
@@ -258,18 +269,24 @@ namespace Tracer.Forms.Views.Sales
 
             //Load DataGridView
             Classes.DataAccess.DashboardDataAccess db = new Classes.DataAccess.DashboardDataAccess();
-            engineeringDashboard = db.LoadDashboard();
+            engineeringDashboard = db.LoadDashboard(ckQuotes.Checked, ckWORs.Checked);
             dgActiveWORs.DataSource = engineeringDashboard;
 
             Classes.StatusCalculation calculatedStatus = new Classes.StatusCalculation();
-
             calculatedStatus.CalculateDashboard(engineeringDashboard);
 
             //Format DataGridView
             formatDataGrids();
 
             //Re-set Current Cell
-            dgActiveWORs.CurrentCell = dgActiveWORs.Rows[WORactiveRow].Cells[WORactiveColumn];
+            try
+            {
+                dgActiveWORs.CurrentCell = dgActiveWORs.Rows[WORactiveRow].Cells[WORactiveColumn];
+            }
+            catch
+            {
+
+            }
 
             dgActiveWORs.Enabled = true;
 
@@ -382,6 +399,45 @@ namespace Tracer.Forms.Views.Sales
             btnEnd.Text = "End";
         }
 
+        //Comment Updater----------------------------------------------------------------------------------------------
 
+        private void dgActiveWORs_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.ColumnIndex == 64)
+            {
+                timer.Stop();
+            }
+        }
+
+        private void dgActiveWORs_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            string tempComment = "";
+            string tempType = ""; //Quote or WOR
+            string tempWOR = "";
+            string tempLot = "";
+
+            Classes.DataAccess.DashboardDataAccess db = new Classes.DataAccess.DashboardDataAccess();
+
+            //Store Comment
+            tempComment = dgActiveWORs.Rows[e.RowIndex].Cells["Comments"].Value.ToString();
+            tempType = dgActiveWORs.Rows[e.RowIndex].Cells["QuoteOrWOR"].Value.ToString();
+            tempWOR = dgActiveWORs.Rows[e.RowIndex].Cells["WOR"].Value.ToString();
+            tempLot = dgActiveWORs.Rows[e.RowIndex].Cells["Lot"].Value.ToString();
+
+            db.UpdateComments(tempComment, tempType, tempWOR, tempLot);
+
+            //Start Timer
+            timer.Start();
+        }
+
+        private void ckWORs_CheckedChanged(object sender, EventArgs e)
+        {
+            populate(null, null);
+        }
+
+        private void ckQuotes_CheckedChanged(object sender, EventArgs e)
+        {
+            populate(null, null);
+        }
     }
 }

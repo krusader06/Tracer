@@ -309,7 +309,14 @@ namespace Tracer.Forms.Classes.DataAccess
             }
         }
 
-
+        public void sendQuote(string QuoteWOR)
+        {
+            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+            {
+                //Set QuoteInactive to True
+                connection.Execute($"UPDATE QuoteStatus SET QuoteSent='True' WHERE QuoteWOR='{ QuoteWOR }'");
+            }
+        }
 
 
     }

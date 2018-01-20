@@ -136,6 +136,7 @@
             this.ckWORs.TabIndex = 11;
             this.ckWORs.Text = "Work Orders";
             this.ckWORs.UseVisualStyleBackColor = true;
+            this.ckWORs.CheckedChanged += new System.EventHandler(this.ckWORs_CheckedChanged);
             // 
             // ckQuotes
             // 
@@ -148,6 +149,7 @@
             this.ckQuotes.TabIndex = 12;
             this.ckQuotes.Text = "Quotes";
             this.ckQuotes.UseVisualStyleBackColor = true;
+            this.ckQuotes.CheckedChanged += new System.EventHandler(this.ckQuotes_CheckedChanged);
             // 
             // ucProcessDashboard
             // 

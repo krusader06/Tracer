@@ -221,6 +221,12 @@
     <Compile Include="Forms\Views\Sales\ucSalesTasks.Designer.cs">
       <DependentUpon>ucSalesTasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Views\Sales\ucSendQuote.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Sales\ucSendQuote.Designer.cs">
+      <DependentUpon>ucSendQuote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Views\Default\ucDefaultDashboard.resx">
@@ -291,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Sales\ucSalesTasks.resx">
       <DependentUpon>ucSalesTasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Sales\ucSendQuote.resx">
+      <DependentUpon>ucSendQuote.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -38,6 +38,7 @@
             this.btnPurchasingRequest = new System.Windows.Forms.Button();
             this.btnDeactivateQuote = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
+            this.btnSendQuote = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -195,7 +196,7 @@
             this.btnDeactivateQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeactivateQuote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeactivateQuote.ForeColor = System.Drawing.Color.Gray;
-            this.btnDeactivateQuote.Location = new System.Drawing.Point(0, 402);
+            this.btnDeactivateQuote.Location = new System.Drawing.Point(0, 456);
             this.btnDeactivateQuote.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeactivateQuote.Name = "btnDeactivateQuote";
             this.btnDeactivateQuote.Size = new System.Drawing.Size(200, 50);
@@ -223,11 +224,31 @@
             this.btnHome.UseVisualStyleBackColor = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
+            // btnSendQuote
+            // 
+            this.btnSendQuote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSendQuote.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendQuote.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnSendQuote.FlatAppearance.BorderSize = 0;
+            this.btnSendQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSendQuote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSendQuote.ForeColor = System.Drawing.Color.Gray;
+            this.btnSendQuote.Location = new System.Drawing.Point(0, 402);
+            this.btnSendQuote.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSendQuote.Name = "btnSendQuote";
+            this.btnSendQuote.Size = new System.Drawing.Size(200, 50);
+            this.btnSendQuote.TabIndex = 11;
+            this.btnSendQuote.Text = "Send Quote to Customer";
+            this.btnSendQuote.UseVisualStyleBackColor = false;
+            this.btnSendQuote.Click += new System.EventHandler(this.btnSendQuote_Click);
+            // 
             // ucSalesMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.Controls.Add(this.btnSendQuote);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPurchasingRequest);
             this.Controls.Add(this.btnHome);
@@ -257,5 +278,6 @@
         private System.Windows.Forms.Button btnPurchasingRequest;
         private System.Windows.Forms.Button btnDeactivateQuote;
         private System.Windows.Forms.Button btnHome;
+        private System.Windows.Forms.Button btnSendQuote;
     }
 }

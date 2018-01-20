@@ -16,6 +16,7 @@ namespace Tracer.Forms.Views.Engineering
         List<Classes.DatabaseTables.Dashboard> engineeringDashboard = new List<Classes.DatabaseTables.Dashboard>();
         List<Classes.LotTask> TaskRequests = new List<Classes.LotTask>();
 
+        //Refresh Timer
         private static Timer timer = new Timer();
 
         //Used to store current cell for active WOR datagrid
@@ -267,18 +268,25 @@ namespace Tracer.Forms.Views.Engineering
 
             //Load DataGridView
             Classes.DataAccess.DashboardDataAccess db = new Classes.DataAccess.DashboardDataAccess();
-            engineeringDashboard = db.LoadDashboard();
+
+            engineeringDashboard = db.LoadDashboard(ckQuotes.Checked, ckWORs.Checked);
             dgActiveWORs.DataSource = engineeringDashboard;
 
             Classes.StatusCalculation calculatedStatus = new Classes.StatusCalculation();
-
             calculatedStatus.CalculateDashboard(engineeringDashboard);
 
             //Format DataGridView
             formatDataGrid();
 
             //Re-set Current Cell
-            dgActiveWORs.CurrentCell = dgActiveWORs.Rows[WORactiveRow].Cells[WORactiveColumn];
+            try
+            {
+                dgActiveWORs.CurrentCell = dgActiveWORs.Rows[WORactiveRow].Cells[WORactiveColumn];
+            }
+            catch
+            {
+
+            }
 
             dgActiveWORs.Enabled = true;
 
@@ -504,7 +512,7 @@ namespace Tracer.Forms.Views.Engineering
             string tempWOR = "";
             string tempLot = "";
 
-            Classes.DataAccess.EngineeringDataAccess db = new Classes.DataAccess.EngineeringDataAccess();
+            Classes.DataAccess.DashboardDataAccess db = new Classes.DataAccess.DashboardDataAccess();
 
             //Store Comment
             tempComment = dgActiveWORs.Rows[e.RowIndex].Cells["Comments"].Value.ToString();
@@ -516,6 +524,16 @@ namespace Tracer.Forms.Views.Engineering
 
             //Start Timer
             timer.Start();
+        }
+
+        private void ckWORs_CheckedChanged(object sender, EventArgs e)
+        {
+            populate(null, null);
+        }
+
+        private void ckQuotes_CheckedChanged(object sender, EventArgs e)
+        {
+            populate(null, null);
         }
     }
 }

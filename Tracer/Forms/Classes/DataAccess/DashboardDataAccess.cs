@@ -9,11 +9,13 @@ namespace Tracer.Forms.Classes.DataAccess
 {
     public class DashboardDataAccess
     {
-        public List<DatabaseTables.Dashboard> LoadDashboard()
+        public List<DatabaseTables.Dashboard> LoadDashboard(bool showQuotes, bool showWORs)
         {
-            using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
-            {//Grab all active/high-confidence quotes
-                return connection.Query<DatabaseTables.Dashboard>(
+            string sqlCall = "";
+
+            if (showQuotes)
+            {
+                sqlCall =
 
                     $"SELECT QuoteOrWOR = 'Quote' " +
                     $", ActiveQuotes.QuoteWOR AS WOR " +
@@ -77,9 +79,17 @@ namespace Tracer.Forms.Classes.DataAccess
                     $"INNER JOIN QuoteStatus " +
                     $"ON QuoteStatus.QuoteWOR = ActiveQuotes.QuoteWOR " +
                     $"WHERE " +
-                    $"ActiveQuotes.POReceived = 'False' AND ActiveQuotes.QuoteInactive = 'False' " +
+                    $"ActiveQuotes.POReceived = 'False' AND ActiveQuotes.QuoteInactive = 'False' ";
+            }
+                
+            if (showWORs)
+            {
+                if (showQuotes)
+                {
+                    sqlCall += $"UNION ";
+                }
 
-                    $"UNION " +
+                sqlCall +=
 
                     $"SELECT QuoteOrWOR = 'WOR' " +
                     $", LotNumbers.JobWOR AS WOR " +
@@ -150,13 +160,43 @@ namespace Tracer.Forms.Classes.DataAccess
                     $"ON LotStatus.LotID = LotNumbers.LotID " +
                     $"INNER JOIN LotPurchasingStatus " +
                     $"ON LotPurchasingStatus.LotID = LotNumbers.LotID " +
-                    $"WHERE LotStatus.JobComplete = 'False'"
+                    $"WHERE LotStatus.JobComplete = 'False'";
+            }        
+            
+            if ((showWORs) || (showQuotes))
+            {
+                using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+                {//Grab all active/high-confidence quotes
+                    return connection.Query<DatabaseTables.Dashboard>(sqlCall).ToList();
+                }
+            }
+            else
+            {
+                List<DatabaseTables.Dashboard> tempList = new List<DatabaseTables.Dashboard>();
+                return tempList;
+            }
+        }
 
-                    ).ToList();
+        //Update Comments
+        public void UpdateComments(string newComment, string type, string WOR, string Lot)
+        {
+            //Determines wheter or not this is a Quote or Work Order, then updates the proper table
 
-
-
-
+            if (type == "Quote")
+            {
+                //Update ActiveQuotes.QuoteComments
+                using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+                {
+                    connection.Execute($"UPDATE ActiveQuotes SET QuoteComments='{ newComment }' WHERE QuoteWOR='{ WOR }'");
+                }
+            }
+            else
+            {
+                //Update LotNumbers.JobComments
+                using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
+                {
+                    connection.Execute($"UPDATE LotNumbers SET JobComments='{ newComment }' WHERE JobWOR='{ WOR }' AND Lot='{ Lot }'");
+                }
             }
         }
     }

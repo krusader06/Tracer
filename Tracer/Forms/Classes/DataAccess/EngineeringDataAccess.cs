@@ -31,29 +31,6 @@ namespace Tracer.Forms.Classes.DataAccess
             }
         }
 
-        //Update Comments
-        public void UpdateComments(string newComment, string type, string WOR, string Lot)
-        {
-            //Determines wheter or not this is a Quote or Work Order, then updates the proper table
-
-            if (type == "Quote")
-            {
-                //Update ActiveQuotes.QuoteComments
-                using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
-                {
-                    connection.Execute($"UPDATE ActiveQuotes SET QuoteComments='{ newComment }' WHERE QuoteWOR='{ WOR }'");
-                }
-            }
-            else
-            {
-                //Update LotNumbers.JobComments
-                using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
-                {
-                    connection.Execute($"UPDATE LotNumbers SET JobComments='{ newComment }' WHERE JobWOR='{ WOR }' AND Lot='{ Lot }'");
-                }
-            }
-        }
-
         //Task Queries-----------------------------------------------------------------------------------------------------------------
 
         public List<Classes.LotTask> GetEngineeringTaskList()
@@ -359,8 +336,8 @@ namespace Tracer.Forms.Classes.DataAccess
                 //1. Get LotID from LotNumbers where JobWOR = inputted JobWOR and Lot = inputted Lot
                 var LotID = connection.Query<string>($"SELECT LotID FROM LotNumbers WHERE JobWOR='{ JobWOR }' AND Lot=' { Lot }'").ToList();
 
-                //2. Change TravelerReleased = False, TravelerReturned = True where LotID = returned LotID from previous Call
-                connection.Execute($"UPDATE LotStatus SET TravelerReturned = 'True' WHERE LotID='{ LotID[0] }'");
+                //2. Change TravelerReleased = False, TravelerReturned = True, and JobComplete='true' where LotID = returned LotID from previous Call
+                connection.Execute($"UPDATE LotStatus SET TravelerReturned = 'True', JobComplete = 'True' WHERE LotID='{ LotID[0] }'");
 
             }
         }
