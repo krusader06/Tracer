@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Forms\Classes\DataAccess\DashboardDataAccess.cs" />
     <Compile Include="Forms\Classes\DataAccess\EngineeringDataAccess.cs" />
+    <Compile Include="Forms\Classes\DataAccess\ProductionDataAccess.cs" />
     <Compile Include="Forms\Classes\DataAccess\PurchasingDataAccess.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\ActiveQuotes.cs" />
     <Compile Include="Forms\Classes\DataAccess\SalesDataAccess.cs" />
@@ -113,11 +114,23 @@
     <Compile Include="Forms\Views\Engineering\ucSalesRequest.Designer.cs">
       <DependentUpon>ucSalesRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Views\Executive\ucExecutiveDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Executive\ucExecutiveDashboard.Designer.cs">
+      <DependentUpon>ucExecutiveDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Views\Executive\ucExecutiveMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Views\Executive\ucExecutiveMenu.Designer.cs">
       <DependentUpon>ucExecutiveMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Production\ucProductionDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Production\ucProductionDashboard.Designer.cs">
+      <DependentUpon>ucProductionDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Views\Production\ucProductionMenu.cs">
       <SubType>UserControl</SubType>
@@ -244,8 +257,14 @@
     <EmbeddedResource Include="Forms\Views\Engineering\ucSalesRequest.resx">
       <DependentUpon>ucSalesRequest.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Executive\ucExecutiveDashboard.resx">
+      <DependentUpon>ucExecutiveDashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Executive\ucExecutiveMenu.resx">
       <DependentUpon>ucExecutiveMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Production\ucProductionDashboard.resx">
+      <DependentUpon>ucProductionDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Production\ucProductionMenu.resx">
       <DependentUpon>ucProductionMenu.cs</DependentUpon>

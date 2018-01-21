@@ -72,43 +72,6 @@ namespace Tracer.Forms.Views.Engineering
 
             formAddWOR newWOR = new formAddWOR();
             newWOR.ShowDialog();
-
-
-
-
-
-
-            //string message = "Are you releasing the Work Order for Job Number: " + dgActiveWOR.Rows[quoteRow].Cells[1].Value.ToString() + "/" + dgActiveWOR.Rows[quoteRow].Cells[2].Value.ToString() + "?";
-            //string caption = "Are you sure?";
-            //MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            //DialogResult result;
-
-            //// Displays the MessageBox.
-
-            //result = MessageBox.Show(message, caption, buttons);
-
-            //if (result == System.Windows.Forms.DialogResult.Yes)
-            //{
-            //    //Create a new db connection
-            //    Classes.DataAccess.EngineeringDataAccess db = new Classes.DataAccess.EngineeringDataAccess();
-
-            //    //Set WORLotReleased = True
-            //    db.releaseWorkOrder(dgActiveWOR.Rows[quoteRow].Cells[1].Value.ToString(), dgActiveWOR.Rows[quoteRow].Cells[2].Value.ToString());
-
-            //    //Load Temp Lot Task for status calc
-            //    Classes.LotTask tempLotTask = new Classes.LotTask();
-
-            //    tempLotTask.JobWOR = Int32.Parse(dgActiveWOR.Rows[quoteRow].Cells[1].Value.ToString());
-            //    tempLotTask.Lot = Int32.Parse(dgActiveWOR.Rows[quoteRow].Cells[2].Value.ToString());
-
-            //    //Update Quote Current Status
-            //    Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
-            //    getStatus.CalculateStatus(tempLotTask);
-
-            //    //Refresh
-            //    ShowLotNumbers();
-
-            //}
         }
 
         private void btnReleaseTraveler_Click(object sender, EventArgs e)
@@ -137,8 +100,8 @@ namespace Tracer.Forms.Views.Engineering
                 tempLotTask.Lot = Int32.Parse(dgActiveWOR.Rows[quoteRow].Cells[2].Value.ToString());
 
                 //Update Quote Current Status
-                Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
-                getStatus.CalculateStatus(tempLotTask);
+                //Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
+                //getStatus.CalculateStatus(tempLotTask);
 
                 //Refresh
                 ShowLotNumbers();
@@ -172,8 +135,8 @@ namespace Tracer.Forms.Views.Engineering
                 tempLotTask.Lot = Int32.Parse(dgActiveWOR.Rows[quoteRow].Cells[2].Value.ToString());
 
                 //Update Quote Current Status
-                Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
-                getStatus.CalculateStatus(tempLotTask);
+                //Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
+                //getStatus.CalculateStatus(tempLotTask);
 
                 //Refresh
                 ShowLotNumbers();
@@ -206,8 +169,8 @@ namespace Tracer.Forms.Views.Engineering
                 tempLotTask.Lot = Int32.Parse(dgActiveWOR.Rows[quoteRow].Cells[2].Value.ToString());
 
                 //Update Quote Current Status
-                Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
-                getStatus.CalculateStatus(tempLotTask);
+                //Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
+                //getStatus.CalculateStatus(tempLotTask);
 
                 //Refresh
                 ShowLotNumbers();
@@ -241,8 +204,8 @@ namespace Tracer.Forms.Views.Engineering
                 tempLotTask.Lot = Int32.Parse(dgActiveWOR.Rows[quoteRow].Cells[2].Value.ToString());
 
                 //Update Quote Current Status
-                Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
-                getStatus.CalculateStatus(tempLotTask);
+                //Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
+                //getStatus.CalculateStatus(tempLotTask);
 
                 //Refresh
                 ShowLotNumbers();

@@ -610,7 +610,7 @@ namespace Tracer
 
                 //Listen To Menu Buttons
 
-                //Forms.Views.Purchasing.ucPurchasingMenu.Instance.DashboardButtonClicked += new EventHandler();
+                Forms.Views.Purchasing.ucPurchasingMenu.Instance.DashboardButtonClicked += new EventHandler(showProductionDashboard);
                 Forms.Views.Production.ucProductionMenu.Instance.HomeButtonClicked += new EventHandler(prepareHomeView);
                 Forms.Views.Production.ucProductionMenu.Instance.ExitButtonClicked += new EventHandler(exitApplication);
             }
@@ -624,6 +624,21 @@ namespace Tracer
         {
             // Show the Production Main View Dashboard
             lblMain.Text = "Production - Dashboard";
+
+            if (!mainContainer.Controls.Contains(Forms.Views.Production.ucProductionDashboard.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Production.ucProductionDashboard.Instance);
+                Forms.Views.Production.ucProductionDashboard.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Production.ucProductionDashboard.Instance.BringToFront();
+
+                //Add Event Listeners If Necessary...
+
+            }
+            else
+            {
+                Forms.Views.Production.ucProductionDashboard.Instance.BringToFront();
+                Forms.Views.Production.ucProductionDashboard.Instance.populate(null,null);
+            }
 
         }
 
@@ -654,7 +669,7 @@ namespace Tracer
 
                 //Listen To Menu Buttons
 
-                //Forms.Views.Executive.ucExecutiveMenu.Instance.DashboardButtonClicked += new EventHandler();
+                Forms.Views.Executive.ucExecutiveMenu.Instance.DashboardButtonClicked += new EventHandler(showExecutiveDashboard);
                 //Forms.Views.Executive.ucExecutiveMenu.Instance.SuperHotButtonClicked += new EventHandler();
                 Forms.Views.Executive.ucExecutiveMenu.Instance.HomeButtonClicked += new EventHandler(prepareHomeView);
                 Forms.Views.Executive.ucExecutiveMenu.Instance.ExitButtonClicked += new EventHandler(exitApplication);
@@ -670,6 +685,20 @@ namespace Tracer
             // Show the Executive Main View Dashboard
             lblMain.Text = "Executive - Dashboard";
 
+            if (!mainContainer.Controls.Contains(Forms.Views.Executive.ucExecutiveDashboard.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Executive.ucExecutiveDashboard.Instance);
+                Forms.Views.Executive.ucExecutiveDashboard.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Executive.ucExecutiveDashboard.Instance.BringToFront();
+
+                //Add Event Listeners If Necessary...
+
+            }
+            else
+            {
+                Forms.Views.Executive.ucExecutiveDashboard.Instance.BringToFront();
+                Forms.Views.Executive.ucExecutiveDashboard.Instance.populate(null, null);
+            }
         }
 
 

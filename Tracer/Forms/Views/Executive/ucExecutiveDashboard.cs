@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Tracer.Forms.Views.Engineering
+namespace Tracer.Forms.Views.Executive
 {
-    public partial class ucProcessDashboard : UserControl
+    public partial class ucExecutiveDashboard : UserControl
     {
-        private static ucProcessDashboard _instance;
+        private static ucExecutiveDashboard _instance;
         List<Classes.DatabaseTables.Dashboard> engineeringDashboard = new List<Classes.DatabaseTables.Dashboard>();
         List<Classes.LotTask> TaskRequests = new List<Classes.LotTask>();
 
@@ -26,17 +26,17 @@ namespace Tracer.Forms.Views.Engineering
         //Used for Task View
         int activeRow;
 
-        public static ucProcessDashboard Instance
+        public static ucExecutiveDashboard Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new ucProcessDashboard();
+                    _instance = new ucExecutiveDashboard();
                 return _instance;
             }
         }
 
-        public ucProcessDashboard()
+        public ucExecutiveDashboard()
         {
             InitializeComponent();
             setTimer();
@@ -70,6 +70,7 @@ namespace Tracer.Forms.Views.Engineering
                         e.CellStyle.BackColor = Color.Gray;
                         break;
 
+
                     case "Not Started":
                         e.Value = "";
                         break;
@@ -84,6 +85,48 @@ namespace Tracer.Forms.Views.Engineering
 
                     case "Complete":
                         e.CellStyle.BackColor = Color.LimeGreen;
+                        break;
+
+                    //Stencils
+
+                    case "Stencils Needed":
+                        e.CellStyle.BackColor = Color.LightSteelBlue;
+                        break;
+
+                    case "Stencils Received":
+                        e.CellStyle.BackColor = Color.LimeGreen;
+                        break;
+
+                    case "Stencils on Order":
+                        e.CellStyle.BackColor = Color.Yellow;
+                        break;
+
+                    //PCBs
+
+                    case "PCBs Needed":
+                        e.CellStyle.BackColor = Color.LightSteelBlue;
+                        break;
+
+                    case "PCBs Received":
+                        e.CellStyle.BackColor = Color.LimeGreen;
+                        break;
+
+                    case "PCBs on Order":
+                        e.CellStyle.BackColor = Color.Yellow;
+                        break;
+
+                    //Parts
+
+                    case "Parts Needed":
+                        e.CellStyle.BackColor = Color.LightSteelBlue;
+                        break;
+
+                    case "Parts Received":
+                        e.CellStyle.BackColor = Color.LimeGreen;
+                        break;
+
+                    case "Parts on Order":
+                        e.CellStyle.BackColor = Color.Yellow;
                         break;
 
                 }
@@ -101,7 +144,7 @@ namespace Tracer.Forms.Views.Engineering
             //Set all minimum column widths
             for (int i = 0; i < 65; i++)
             {
-                dgActiveWORs.Columns[i].MinimumWidth = 75;
+                dgActiveWORs.Columns[i].MinimumWidth = 100;
             }
 
             dgActiveWORs.ColumnHeadersDefaultCellStyle.BackColor = Color.LightBlue;
@@ -167,15 +210,15 @@ namespace Tracer.Forms.Views.Engineering
             //dgActiveWORs.Columns["Customer"].Visible = false;
             dgActiveWORs.Columns["PartDescription"].Visible = false;
             dgActiveWORs.Columns["QuoteConfidence"].Visible = false;
-            dgActiveWORs.Columns["OrderQuantity"].Visible = false;
-            dgActiveWORs.Columns["TurnTime"].Visible = false;
+            //dgActiveWORs.Columns["OrderQuantity"].Visible = false;
+            //dgActiveWORs.Columns["TurnTime"].Visible = false;
             dgActiveWORs.Columns["Consigned"].Visible = false;
             dgActiveWORs.Columns["Turnkey"].Visible = false;
 
             dgActiveWORs.Columns["BOMValidationRequest"].Visible = false;
             dgActiveWORs.Columns["BOMValidationInProgress"].Visible = false;
             dgActiveWORs.Columns["BOMValidationComplete"].Visible = false;
-            //dgActiveWORs.Columns["BOMValidationStatus"].Visible = false;
+            dgActiveWORs.Columns["BOMValidationStatus"].Visible = false;
 
             dgActiveWORs.Columns["PartsReviewRequest"].Visible = false;
             dgActiveWORs.Columns["PartsReviewInProgress"].Visible = false;
@@ -185,15 +228,15 @@ namespace Tracer.Forms.Views.Engineering
             dgActiveWORs.Columns["PreBidRequest"].Visible = false;
             dgActiveWORs.Columns["PreBidInProgress"].Visible = false;
             dgActiveWORs.Columns["PreBidComplete"].Visible = false;
-            //dgActiveWORs.Columns["PreBidStatus"].Visible = false;
+            dgActiveWORs.Columns["PreBidStatus"].Visible = false;
 
             dgActiveWORs.Columns["FinalReviewRequest"].Visible = false;
             dgActiveWORs.Columns["FinalReviewInProgress"].Visible = false;
             dgActiveWORs.Columns["FinalReviewComplete"].Visible = false;
             dgActiveWORs.Columns["FinalReviewStatus"].Visible = false;
 
-            dgActiveWORs.Columns["QuoteDueDate"].Visible = false;
-            dgActiveWORs.Columns["QuoteSent"].Visible = false;
+            //dgActiveWORs.Columns["QuoteDueDate"].Visible = false;
+            //dgActiveWORs.Columns["QuoteSent"].Visible = false;
 
             dgActiveWORs.Columns["QuoteReviewRequest"].Visible = false;
             dgActiveWORs.Columns["QuoteReviewInProgress"].Visible = false;
@@ -209,7 +252,7 @@ namespace Tracer.Forms.Views.Engineering
             dgActiveWORs.Columns["MasterReviewRequest"].Visible = false;
             dgActiveWORs.Columns["MasterReviewInProgress"].Visible = false;
             dgActiveWORs.Columns["MasterReviewComplete"].Visible = false;
-            //dgActiveWORs.Columns["MasterReviewStatus"].Visible = false;
+            dgActiveWORs.Columns["MasterReviewStatus"].Visible = false;
 
             //dgActiveWORs.Columns["WORLotReleased"].Visible = false;
 
@@ -227,19 +270,19 @@ namespace Tracer.Forms.Views.Engineering
             dgActiveWORs.Columns["PCBRequired"].Visible = false;
             dgActiveWORs.Columns["PCBOrdered"].Visible = false;
             dgActiveWORs.Columns["PCBReceived"].Visible = false;
-            dgActiveWORs.Columns["PCBStatus"].Visible = false;
-            //dgActiveWORs.Columns["PCBArraysApproved"].Visible = false;
+            //dgActiveWORs.Columns["PCBStatus"].Visible = false;
+            dgActiveWORs.Columns["PCBArraysApproved"].Visible = false;
 
             dgActiveWORs.Columns["StencilsRequired"].Visible = false;
             dgActiveWORs.Columns["StencilsOrdered"].Visible = false;
             dgActiveWORs.Columns["StencilsReceived"].Visible = false;
-            dgActiveWORs.Columns["StencilStatus"].Visible = false;
-            //dgActiveWORs.Columns["StencilPlotsApproved"].Visible = false;
+            //dgActiveWORs.Columns["StencilStatus"].Visible = false;
+            dgActiveWORs.Columns["StencilPlotsApproved"].Visible = false;
 
             dgActiveWORs.Columns["PartsRequired"].Visible = false;
             dgActiveWORs.Columns["PartsOrdered"].Visible = false;
             dgActiveWORs.Columns["PartsReceived"].Visible = false;
-            dgActiveWORs.Columns["PartsStatus"].Visible = false;
+            //dgActiveWORs.Columns["PartsStatus"].Visible = false;
 
             //dgActiveWORs.Columns["Comments"].Visible = false;
 
@@ -290,209 +333,6 @@ namespace Tracer.Forms.Views.Engineering
 
             dgActiveWORs.Enabled = true;
 
-            //Task View Stuff
-            dgTaskView.DataSource = null;
-
-            Classes.DataAccess.EngineeringDataAccess dbEng = new Classes.DataAccess.EngineeringDataAccess();
-            TaskRequests = dbEng.GetEngineeringTaskList();
-
-            dgTaskView.DataSource = TaskRequests;
-            dgTaskView.Columns["Owner"].Visible = false;
-
-            dgTaskView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgTaskView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        }
-
-        //Task View Handlers----------------------------------------------------------------------------------------------
-
-        private void dgTaskView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                //Store Row Details
-                activeRow = e.RowIndex;
-
-                switch (dgTaskView[3, e.RowIndex].Value.ToString())
-                {
-                    case "BOM Validation Requested":
-                        btnStart.Enabled = true;
-                        btnStart.Visible = true;
-                        btnEnd.Enabled = false;
-                        btnEnd.Visible = false;
-
-                        btnStart.Text = "Start BOM Validation for Quote: " + dgTaskView[0, activeRow].Value.ToString();
-                        break;
-
-                    case "BOM Validation In Progress":
-                        btnStart.Enabled = false;
-                        btnStart.Visible = false;
-                        btnEnd.Enabled = true;
-                        btnEnd.Visible = true;
-
-                        btnEnd.Text = "BOM Validation is Complete for Quote: " + dgTaskView[0, activeRow].Value.ToString();
-                        break;
-
-                    case "Master Creation Requested":
-                        btnStart.Enabled = true;
-                        btnStart.Visible = true;
-                        btnEnd.Enabled = false;
-                        btnEnd.Visible = false;
-
-                        btnStart.Text = "Start Master Creation for WOR: " + dgTaskView[0, activeRow].Value.ToString() + "/" + dgTaskView[1, activeRow].Value.ToString();
-                        break;
-
-                    case "Master Creation In Progress":
-                        btnStart.Enabled = false;
-                        btnStart.Visible = false;
-                        btnEnd.Enabled = true;
-                        btnEnd.Visible = true;
-
-                        btnEnd.Text = "Master Creation is Complete for WOR: " + dgTaskView[0, activeRow].Value.ToString() + "/" + dgTaskView[1, activeRow].Value.ToString();
-                        break;
-
-                    case "Quote Review Requested":
-                        btnStart.Enabled = true;
-                        btnStart.Visible = true;
-                        btnEnd.Enabled = false;
-                        btnEnd.Visible = false;
-
-                        btnStart.Text = "Start Quote Review for WOR: " + dgTaskView[0, activeRow].Value.ToString() + "/" + dgTaskView[1, activeRow].Value.ToString();
-                        break;
-
-                    case "Quote Review In Progress":
-                        btnStart.Enabled = false;
-                        btnStart.Visible = false;
-                        btnEnd.Enabled = true;
-                        btnEnd.Visible = true;
-
-                        btnEnd.Text = "Quote Review is Complete for WOR: " + dgTaskView[0, activeRow].Value.ToString() + "/" + dgTaskView[1, activeRow].Value.ToString();
-                        break;
-
-                    case "Pre-Bid Review Requested":
-                        btnStart.Enabled = true;
-                        btnStart.Visible = true;
-                        btnEnd.Enabled = false;
-                        btnEnd.Visible = false;
-
-                        btnStart.Text = "Start Pre-Bid Review for Quote: " + dgTaskView[0, activeRow].Value.ToString();
-                        break;
-
-                    case "Pre-Bid Review In Progress":
-                        btnStart.Enabled = false;
-                        btnStart.Visible = false;
-                        btnEnd.Enabled = true;
-                        btnEnd.Visible = true;
-
-                        btnEnd.Text = "Pre-Bid Review is Complete for Quote: " + dgTaskView[0, activeRow].Value.ToString();
-                        break;
-
-                    default:
-                        btnStart.Enabled = false;
-                        btnStart.Visible = true;
-                        btnEnd.Enabled = false;
-                        btnEnd.Visible = false;
-                        break;
-                }
-            }
-        }
-
-        private void btnStart_Click(object sender, EventArgs e)
-        {
-            //Grab an Instance of SalesDataAccess
-            Classes.DataAccess.EngineeringDataAccess db = new Classes.DataAccess.EngineeringDataAccess();
-            //Prepare currentTask
-            Classes.LotTask currentTask = new Classes.LotTask();
-            currentTask.JobWOR = Int32.Parse(dgTaskView[0, activeRow].Value.ToString());
-            currentTask.Lot = Int32.Parse(dgTaskView[1, activeRow].Value.ToString());
-
-            switch (dgTaskView[3, activeRow].Value.ToString())
-            {
-                case "BOM Validation Requested":
-                    //Change the BOMValidationInProgress Flag to True
-                    db.UpdateBOMValidationInProgress(currentTask);
-
-                    break;
-                case "Master Creation Requested":
-                    //Change the MasterInProgress Flag to True and Time-Stamp LotTimeTracking.MasterStart
-                    db.UpdateMasterInProgress(currentTask);
-
-                    break;
-                case "Quote Review Requested":
-                    //Change the QuoteReviewInProgress Flag to True and Time-Stamp LotTimeTracking.QuoteReviewStart
-                    db.UpdateQuoteReviewInProgress(currentTask);
-
-                    break;
-                case "Pre-Bid Review Requested":
-                    //Change the PreBidInProgress Flag to True
-                    db.UpdatePreBidInProgress(currentTask);
-
-                    break;
-            }
-
-            //Re-Calculate the JobStatus
-            //Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
-            //getStatus.CalculateStatus(currentTask);
-
-            //Update the GridView
-            populate(null, null);
-
-            //Reset Buttons
-            btnStart.Enabled = false;
-            btnStart.Visible = true;
-            btnStart.Text = "Start";
-            btnEnd.Enabled = false;
-            btnEnd.Visible = false;
-            btnEnd.Text = "End";
-        }
-
-        private void btnEnd_Click(object sender, EventArgs e)
-        {
-            //Grab an Instance of SalesDataAccess
-            Classes.DataAccess.EngineeringDataAccess db = new Classes.DataAccess.EngineeringDataAccess();
-
-            //Prepare currentTask
-            Classes.LotTask currentTask = new Classes.LotTask();
-            currentTask.JobWOR = Int32.Parse(dgTaskView[0, activeRow].Value.ToString());
-            currentTask.Lot = Int32.Parse(dgTaskView[1, activeRow].Value.ToString());
-
-            switch (dgTaskView[3, activeRow].Value.ToString())
-            {
-                case "BOM Validation In Progress":
-                    //Set BOMValidationComplete=True, BOMValidationRequest=False, BOMValidationInProgress=False; Eventually, Time-Tracking will happen here too...
-                    db.UpdateBOMValidationComplete(currentTask);
-
-                    break;
-                case "Master Creation In Progress":
-                    //Change the MasterInProgress Flag to True and Time-Stamp LotTimeTracking.MasterEnd
-                    db.UpdateMasterComplete(currentTask);
-
-                    break;
-                case "Quote Review In Progress":
-                    //Update QuoteReviewComplete Flag to True and Time-stamp LotTimeTracking.QuoteReviewEnd
-                    db.UpdateQuoteReviewComplete(currentTask);
-
-                    break;
-                case "Pre-Bid Review In Progress":
-                    //Update PreBidComplete Flag to True
-                    db.UpdatePreBidComplete(currentTask);
-
-                    break;
-            }
-
-            //Re-Calculate the JobStatus
-            //Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
-            //getStatus.CalculateStatus(currentTask);
-
-            //Update the GridView
-            populate(null, null);
-
-            //Reset Buttons
-            btnStart.Enabled = false;
-            btnStart.Visible = true;
-            btnStart.Text = "Start";
-            btnEnd.Enabled = false;
-            btnEnd.Visible = false;
-            btnEnd.Text = "End";
         }
 
         //Comment Updater----------------------------------------------------------------------------------------------

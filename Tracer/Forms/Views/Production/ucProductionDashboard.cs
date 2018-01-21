@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Tracer.Forms.Views.Engineering
+namespace Tracer.Forms.Views.Production
 {
-    public partial class ucProcessDashboard : UserControl
+    public partial class ucProductionDashboard : UserControl
     {
-        private static ucProcessDashboard _instance;
+        private static ucProductionDashboard _instance;
         List<Classes.DatabaseTables.Dashboard> engineeringDashboard = new List<Classes.DatabaseTables.Dashboard>();
         List<Classes.LotTask> TaskRequests = new List<Classes.LotTask>();
 
@@ -26,17 +26,17 @@ namespace Tracer.Forms.Views.Engineering
         //Used for Task View
         int activeRow;
 
-        public static ucProcessDashboard Instance
+        public static ucProductionDashboard Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new ucProcessDashboard();
+                    _instance = new ucProductionDashboard();
                 return _instance;
             }
         }
 
-        public ucProcessDashboard()
+        public ucProductionDashboard()
         {
             InitializeComponent();
             setTimer();
@@ -167,15 +167,15 @@ namespace Tracer.Forms.Views.Engineering
             //dgActiveWORs.Columns["Customer"].Visible = false;
             dgActiveWORs.Columns["PartDescription"].Visible = false;
             dgActiveWORs.Columns["QuoteConfidence"].Visible = false;
-            dgActiveWORs.Columns["OrderQuantity"].Visible = false;
-            dgActiveWORs.Columns["TurnTime"].Visible = false;
-            dgActiveWORs.Columns["Consigned"].Visible = false;
-            dgActiveWORs.Columns["Turnkey"].Visible = false;
+            //dgActiveWORs.Columns["OrderQuantity"].Visible = false;
+            //dgActiveWORs.Columns["TurnTime"].Visible = false;
+            //dgActiveWORs.Columns["Consigned"].Visible = false;
+            //dgActiveWORs.Columns["Turnkey"].Visible = false;
 
             dgActiveWORs.Columns["BOMValidationRequest"].Visible = false;
             dgActiveWORs.Columns["BOMValidationInProgress"].Visible = false;
             dgActiveWORs.Columns["BOMValidationComplete"].Visible = false;
-            //dgActiveWORs.Columns["BOMValidationStatus"].Visible = false;
+            dgActiveWORs.Columns["BOMValidationStatus"].Visible = false;
 
             dgActiveWORs.Columns["PartsReviewRequest"].Visible = false;
             dgActiveWORs.Columns["PartsReviewInProgress"].Visible = false;
@@ -203,13 +203,13 @@ namespace Tracer.Forms.Views.Engineering
             dgActiveWORs.Columns["MasterRequest"].Visible = false;
             dgActiveWORs.Columns["MasterInProgress"].Visible = false;
             dgActiveWORs.Columns["MasterComplete"].Visible = false;
-            //dgActiveWORs.Columns["MasterStatus"].Visible = false;
-            //dgActiveWORs.Columns["MasterDueDate"].Visible = false;
+            dgActiveWORs.Columns["MasterStatus"].Visible = false;
+            dgActiveWORs.Columns["MasterDueDate"].Visible = false;
 
             dgActiveWORs.Columns["MasterReviewRequest"].Visible = false;
             dgActiveWORs.Columns["MasterReviewInProgress"].Visible = false;
             dgActiveWORs.Columns["MasterReviewComplete"].Visible = false;
-            //dgActiveWORs.Columns["MasterReviewStatus"].Visible = false;
+            dgActiveWORs.Columns["MasterReviewStatus"].Visible = false;
 
             //dgActiveWORs.Columns["WORLotReleased"].Visible = false;
 
@@ -228,13 +228,13 @@ namespace Tracer.Forms.Views.Engineering
             dgActiveWORs.Columns["PCBOrdered"].Visible = false;
             dgActiveWORs.Columns["PCBReceived"].Visible = false;
             dgActiveWORs.Columns["PCBStatus"].Visible = false;
-            //dgActiveWORs.Columns["PCBArraysApproved"].Visible = false;
+            dgActiveWORs.Columns["PCBArraysApproved"].Visible = false;
 
             dgActiveWORs.Columns["StencilsRequired"].Visible = false;
             dgActiveWORs.Columns["StencilsOrdered"].Visible = false;
             dgActiveWORs.Columns["StencilsReceived"].Visible = false;
             dgActiveWORs.Columns["StencilStatus"].Visible = false;
-            //dgActiveWORs.Columns["StencilPlotsApproved"].Visible = false;
+            dgActiveWORs.Columns["StencilPlotsApproved"].Visible = false;
 
             dgActiveWORs.Columns["PartsRequired"].Visible = false;
             dgActiveWORs.Columns["PartsOrdered"].Visible = false;
@@ -293,7 +293,7 @@ namespace Tracer.Forms.Views.Engineering
             //Task View Stuff
             dgTaskView.DataSource = null;
 
-            Classes.DataAccess.EngineeringDataAccess dbEng = new Classes.DataAccess.EngineeringDataAccess();
+            Classes.DataAccess.ProductionDataAccess dbEng = new Classes.DataAccess.ProductionDataAccess();
             TaskRequests = dbEng.GetEngineeringTaskList();
 
             dgTaskView.DataSource = TaskRequests;
@@ -314,60 +314,6 @@ namespace Tracer.Forms.Views.Engineering
 
                 switch (dgTaskView[3, e.RowIndex].Value.ToString())
                 {
-                    case "BOM Validation Requested":
-                        btnStart.Enabled = true;
-                        btnStart.Visible = true;
-                        btnEnd.Enabled = false;
-                        btnEnd.Visible = false;
-
-                        btnStart.Text = "Start BOM Validation for Quote: " + dgTaskView[0, activeRow].Value.ToString();
-                        break;
-
-                    case "BOM Validation In Progress":
-                        btnStart.Enabled = false;
-                        btnStart.Visible = false;
-                        btnEnd.Enabled = true;
-                        btnEnd.Visible = true;
-
-                        btnEnd.Text = "BOM Validation is Complete for Quote: " + dgTaskView[0, activeRow].Value.ToString();
-                        break;
-
-                    case "Master Creation Requested":
-                        btnStart.Enabled = true;
-                        btnStart.Visible = true;
-                        btnEnd.Enabled = false;
-                        btnEnd.Visible = false;
-
-                        btnStart.Text = "Start Master Creation for WOR: " + dgTaskView[0, activeRow].Value.ToString() + "/" + dgTaskView[1, activeRow].Value.ToString();
-                        break;
-
-                    case "Master Creation In Progress":
-                        btnStart.Enabled = false;
-                        btnStart.Visible = false;
-                        btnEnd.Enabled = true;
-                        btnEnd.Visible = true;
-
-                        btnEnd.Text = "Master Creation is Complete for WOR: " + dgTaskView[0, activeRow].Value.ToString() + "/" + dgTaskView[1, activeRow].Value.ToString();
-                        break;
-
-                    case "Quote Review Requested":
-                        btnStart.Enabled = true;
-                        btnStart.Visible = true;
-                        btnEnd.Enabled = false;
-                        btnEnd.Visible = false;
-
-                        btnStart.Text = "Start Quote Review for WOR: " + dgTaskView[0, activeRow].Value.ToString() + "/" + dgTaskView[1, activeRow].Value.ToString();
-                        break;
-
-                    case "Quote Review In Progress":
-                        btnStart.Enabled = false;
-                        btnStart.Visible = false;
-                        btnEnd.Enabled = true;
-                        btnEnd.Visible = true;
-
-                        btnEnd.Text = "Quote Review is Complete for WOR: " + dgTaskView[0, activeRow].Value.ToString() + "/" + dgTaskView[1, activeRow].Value.ToString();
-                        break;
-
                     case "Pre-Bid Review Requested":
                         btnStart.Enabled = true;
                         btnStart.Visible = true;
@@ -399,7 +345,7 @@ namespace Tracer.Forms.Views.Engineering
         private void btnStart_Click(object sender, EventArgs e)
         {
             //Grab an Instance of SalesDataAccess
-            Classes.DataAccess.EngineeringDataAccess db = new Classes.DataAccess.EngineeringDataAccess();
+            Classes.DataAccess.ProductionDataAccess db = new Classes.DataAccess.ProductionDataAccess();
             //Prepare currentTask
             Classes.LotTask currentTask = new Classes.LotTask();
             currentTask.JobWOR = Int32.Parse(dgTaskView[0, activeRow].Value.ToString());
@@ -407,21 +353,6 @@ namespace Tracer.Forms.Views.Engineering
 
             switch (dgTaskView[3, activeRow].Value.ToString())
             {
-                case "BOM Validation Requested":
-                    //Change the BOMValidationInProgress Flag to True
-                    db.UpdateBOMValidationInProgress(currentTask);
-
-                    break;
-                case "Master Creation Requested":
-                    //Change the MasterInProgress Flag to True and Time-Stamp LotTimeTracking.MasterStart
-                    db.UpdateMasterInProgress(currentTask);
-
-                    break;
-                case "Quote Review Requested":
-                    //Change the QuoteReviewInProgress Flag to True and Time-Stamp LotTimeTracking.QuoteReviewStart
-                    db.UpdateQuoteReviewInProgress(currentTask);
-
-                    break;
                 case "Pre-Bid Review Requested":
                     //Change the PreBidInProgress Flag to True
                     db.UpdatePreBidInProgress(currentTask);
@@ -430,8 +361,8 @@ namespace Tracer.Forms.Views.Engineering
             }
 
             //Re-Calculate the JobStatus
-            //Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
-            //getStatus.CalculateStatus(currentTask);
+            Classes.StatusCalculation getStatus = new Classes.StatusCalculation();
+            getStatus.CalculateStatus(currentTask);
 
             //Update the GridView
             populate(null, null);
@@ -448,7 +379,7 @@ namespace Tracer.Forms.Views.Engineering
         private void btnEnd_Click(object sender, EventArgs e)
         {
             //Grab an Instance of SalesDataAccess
-            Classes.DataAccess.EngineeringDataAccess db = new Classes.DataAccess.EngineeringDataAccess();
+            Classes.DataAccess.ProductionDataAccess db = new Classes.DataAccess.ProductionDataAccess();
 
             //Prepare currentTask
             Classes.LotTask currentTask = new Classes.LotTask();
@@ -457,21 +388,6 @@ namespace Tracer.Forms.Views.Engineering
 
             switch (dgTaskView[3, activeRow].Value.ToString())
             {
-                case "BOM Validation In Progress":
-                    //Set BOMValidationComplete=True, BOMValidationRequest=False, BOMValidationInProgress=False; Eventually, Time-Tracking will happen here too...
-                    db.UpdateBOMValidationComplete(currentTask);
-
-                    break;
-                case "Master Creation In Progress":
-                    //Change the MasterInProgress Flag to True and Time-Stamp LotTimeTracking.MasterEnd
-                    db.UpdateMasterComplete(currentTask);
-
-                    break;
-                case "Quote Review In Progress":
-                    //Update QuoteReviewComplete Flag to True and Time-stamp LotTimeTracking.QuoteReviewEnd
-                    db.UpdateQuoteReviewComplete(currentTask);
-
-                    break;
                 case "Pre-Bid Review In Progress":
                     //Update PreBidComplete Flag to True
                     db.UpdatePreBidComplete(currentTask);
@@ -494,6 +410,7 @@ namespace Tracer.Forms.Views.Engineering
             btnEnd.Visible = false;
             btnEnd.Text = "End";
         }
+
 
         //Comment Updater----------------------------------------------------------------------------------------------
 
