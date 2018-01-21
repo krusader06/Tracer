@@ -184,6 +184,155 @@ namespace Tracer.Forms.Views.Purchasing
 
                 }
             }
+
+            //Date Color Formatting----------------------------------------------------------------------------------------------
+
+            DateTime dt = new DateTime();
+            double tempDays;
+
+            if ((e.ColumnIndex == dgActiveWORs.Columns["QuoteDueDate"].Index) && (e.Value.ToString() != ""))
+            {
+                //Grab and convert the cell value to a date
+                dt = Convert.ToDateTime(e.Value.ToString());
+                tempDays = (dt - DateTime.Now).TotalDays;
+
+                //find out if Quote has been sent
+                if ((dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["QuoteSent"].Index].Value != null) && (dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["QuoteSent"].Index].Value.ToString() == "True"))
+                {
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    //evaluate time remaining
+                    if (tempDays <= 1)
+                    {
+                        e.CellStyle.ForeColor = Color.Red;
+                        e.CellStyle.BackColor = Color.LightPink;
+                    }
+                    else
+                    {
+                        if (tempDays < 4)
+                        {
+                            e.CellStyle.ForeColor = Color.Brown;
+                            e.CellStyle.BackColor = Color.Gold;
+                        }
+                        else
+                        {
+                            if (tempDays >= 4)
+                            {
+                                e.CellStyle.ForeColor = Color.DarkGreen;
+                                e.CellStyle.BackColor = Color.LightGreen;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if ((e.ColumnIndex == dgActiveWORs.Columns["MasterDueDate"].Index) && (e.Value.ToString() != ""))
+            {
+                //Grab and convert the cell value to a date
+                dt = Convert.ToDateTime(e.Value.ToString());
+                tempDays = (dt - DateTime.Now).TotalDays;
+
+                //find out if master is complete
+                if ((dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["MasterStatus"].Index].Value != null) && (dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["MasterStatus"].Index].Value.ToString() == "Complete"))
+                {
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    //evaluate time remaining
+                    if (tempDays <= 1)
+                    {
+                        e.CellStyle.ForeColor = Color.Red;
+                        e.CellStyle.BackColor = Color.LightPink;
+                    }
+                    else
+                    {
+                        if (tempDays < 4)
+                        {
+                            e.CellStyle.ForeColor = Color.Brown;
+                            e.CellStyle.BackColor = Color.Gold;
+                        }
+                        else
+                        {
+                            if (tempDays >= 4)
+                            {
+                                e.CellStyle.ForeColor = Color.DarkGreen;
+                                e.CellStyle.BackColor = Color.LightGreen;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if ((e.ColumnIndex == dgActiveWORs.Columns["KitDueDate"].Index) && (e.Value.ToString() != ""))
+            {
+                //Grab and convert the cell value to a date
+                dt = Convert.ToDateTime(e.Value.ToString());
+                tempDays = (dt - DateTime.Now).TotalDays;
+
+                //find out if Kit has been released
+                if ((dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["KitReleased"].Index].Value != null) && (dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["KitReleased"].Index].Value.ToString() == "True"))
+                {
+                    e.CellStyle.ForeColor = Color.Black;
+                }
+                else
+                {
+                    //evaluate time remaining
+                    if (tempDays <= 1)
+                    {
+                        e.CellStyle.ForeColor = Color.Red;
+                        e.CellStyle.BackColor = Color.LightPink;
+                    }
+                    else
+                    {
+                        if (tempDays < 4)
+                        {
+                            e.CellStyle.ForeColor = Color.Brown;
+                            e.CellStyle.BackColor = Color.Gold;
+                        }
+                        else
+                        {
+                            if (tempDays >= 4)
+                            {
+                                e.CellStyle.ForeColor = Color.DarkGreen;
+                                e.CellStyle.BackColor = Color.LightGreen;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if ((e.ColumnIndex == dgActiveWORs.Columns["JobDueDate"].Index) && (e.Value.ToString() != ""))
+            {
+                //Grab and convert the cell value to a date
+                dt = Convert.ToDateTime(e.Value.ToString());
+                tempDays = (dt - DateTime.Now).TotalDays;
+
+                //evaluate time remaining
+                if (tempDays <= 1)
+                {
+                    e.CellStyle.ForeColor = Color.Red;
+                    e.CellStyle.BackColor = Color.LightPink;
+                }
+                else
+                {
+                    if (tempDays < 4)
+                    {
+                        e.CellStyle.ForeColor = Color.Brown;
+                        e.CellStyle.BackColor = Color.Gold;
+                    }
+                    else
+                    {
+                        if (tempDays >= 4)
+                        {
+                            e.CellStyle.ForeColor = Color.DarkGreen;
+                            e.CellStyle.BackColor = Color.LightGreen;
+                        }
+                    }
+                }
+            }
         }
 
         private void formatDataGrid()
