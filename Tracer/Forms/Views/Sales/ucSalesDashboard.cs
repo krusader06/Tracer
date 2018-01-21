@@ -25,6 +25,9 @@ namespace Tracer.Forms.Views.Sales
         //Used to store current cell for active WOR datagrid
         int WORactiveRow;
         int WORactiveColumn;
+        //Task DGV current cell holders
+        int TaskActiveRow;
+        int TaskActiveColumn;
 
         //Used to store datagridview selected row
         int activeRow;
@@ -97,6 +100,14 @@ namespace Tracer.Forms.Views.Sales
                         break;
 
                 }
+            }
+
+            //SuperHot Color Formatting------------------------------------------------------------------------------------------
+
+            if (dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["SuperHot"].Index].Value.ToString() == "True")
+            {
+                dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["QuoteOrWOR"].Index].Style.BackColor = Color.Crimson;
+                dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["QuoteOrWOR"].Index].Style.ForeColor = Color.WhiteSmoke;
             }
 
             //Date Color Formatting----------------------------------------------------------------------------------------------
@@ -432,24 +443,62 @@ namespace Tracer.Forms.Views.Sales
             {
                 dgActiveWORs.CurrentCell = dgActiveWORs.Rows[WORactiveRow].Cells[WORactiveColumn];
             }
-            catch
-            {
-
-            }
+            catch { }
 
             dgActiveWORs.Enabled = true;
+
+
+            //Task View Stuff
+            dgTaskView.Enabled = false;
+
+            //Get Current Selection Location
+            if (dgTaskView.CurrentCell != null)
+            {
+                if (dgTaskView.CurrentCell.ColumnIndex > 0)
+                {
+                    TaskActiveRow = dgTaskView.CurrentCell.RowIndex;
+                    TaskActiveColumn = dgTaskView.CurrentCell.ColumnIndex;
+                }
+            }
 
             //Task View Handler
             dgTaskView.DataSource = null;
             Classes.DataAccess.SalesDataAccess dbSales = new Classes.DataAccess.SalesDataAccess();
             MasterReviewRequests = dbSales.GetMasterReviewRequests();
-
             dgTaskView.DataSource = MasterReviewRequests;
+
+            //Format Task View Data Grid
             dgTaskView.Columns["Owner"].Visible = false;
+            dgTaskView.Columns["SuperHot"].Visible = false;
+
+            //Re-Select Current Cell
+            try
+            {
+                dgTaskView.CurrentCell = dgTaskView.Rows[TaskActiveRow].Cells[TaskActiveColumn];
+            }
+            catch { }
+
+            dgTaskView.Enabled = true;
 
             dgTaskView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgTaskView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+        }
+
+        private void dgTaskView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgTaskView.Rows[e.RowIndex].Cells[dgTaskView.Columns["SuperHot"].Index].Value.ToString() == "1")
+            {
+                //Highlight the row if it is SuperHot
+                dgTaskView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.LightPink;
+                dgTaskView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Red;
+
+            }
+            else
+            {
+                dgTaskView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.White;
+                dgTaskView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Black;
+            }
         }
 
 

@@ -13,5 +13,7 @@ namespace Tracer.Forms.Classes
         public string PartID { get; set; }
         public string JobStatus { get; set; }
         public string Owner { get; set; }
+        public string DueDate { get; set; }
+        public double SuperHot { get; set; }
     }
 }

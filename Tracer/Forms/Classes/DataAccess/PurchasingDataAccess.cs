@@ -41,6 +41,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", Lot = '0' " +
                     $", ActiveQuotes.PartID " +
                     $", JobStatus = 'Parts Review Requested' " +
+                    $", QuoteDueDate AS DueDate " +
+                    $", SuperHot = '0' " +
                     $"FROM ActiveQuotes " +
                     $"INNER JOIN QuoteStatus " +
                     $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
@@ -55,6 +57,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", Lot = '0' " +
                     $", ActiveQuotes.PartID " +
                     $", JobStatus = 'Parts Review In Progress' " +
+                    $", QuoteDueDate AS DueDate " +
+                    $", SuperHot = '0' " +
                     $"FROM ActiveQuotes " +
                     $"INNER JOIN QuoteStatus " +
                     $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
@@ -69,6 +73,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotNumbers.Lot " +
                     $", LotNumbers.PartID " +
                     $", JobStatus = 'Order Parts' " +
+                    $", JobDueDate AS DueDate " +
+                    $", SuperHot " +
                     $"FROM LotNumbers " +
                     $"INNER JOIN LotStatus " +
                     $"ON LotNumbers.LotID = LotStatus.LotID " +
@@ -84,6 +90,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotNumbers.Lot " +
                     $", LotNumbers.PartID " +
                     $", JobStatus = 'Order PCBs' " +
+                    $", JobDueDate AS DueDate " +
+                    $", SuperHot " +
                     $"FROM LotNumbers " +
                     $"INNER JOIN LotStatus " +
                     $"ON LotNumbers.LotID = LotStatus.LotID " +
@@ -99,6 +107,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotNumbers.Lot " +
                     $", LotNumbers.PartID " +
                     $", JobStatus = 'Order Stencils' " +
+                    $", JobDueDate AS DueDate " +
+                    $", SuperHot " +
                     $"FROM LotNumbers " +
                     $"INNER JOIN LotStatus " +
                     $"ON LotNumbers.LotID = LotStatus.LotID " +
@@ -107,7 +117,9 @@ namespace Tracer.Forms.Classes.DataAccess
                     $"WHERE LotStatus.WORLotReleased = 'True' " +
                     $"AND LotPurchasingStatus.StencilsRequired = 'True' " +
                     $"AND LotPurchasingStatus.StencilsOrdered = 'False' " +
-                    $"AND LotPurchasingStatus.PCBArraysApproved = 'True'").ToList();
+                    $"AND LotPurchasingStatus.PCBArraysApproved = 'True' " +
+
+                    $"ORDER BY SuperHot DESC, DueDate, JobWOR, Lot").ToList();
 
 
             }

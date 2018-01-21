@@ -22,6 +22,9 @@ namespace Tracer.Forms.Views.Production
         //Used to store current cell for active WOR datagrid
         int WORactiveRow;
         int WORactiveColumn;
+        //Task DGV current cell holders
+        int TaskActiveRow;
+        int TaskActiveColumn;
 
         //Used for Task View
         int activeRow;
@@ -87,6 +90,14 @@ namespace Tracer.Forms.Views.Production
                         break;
 
                 }
+            }
+
+            //SuperHot Color Formatting------------------------------------------------------------------------------------------
+
+            if (dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["SuperHot"].Index].Value.ToString() == "True")
+            {
+                dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["QuoteOrWOR"].Index].Style.BackColor = Color.Crimson;
+                dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["QuoteOrWOR"].Index].Style.ForeColor = Color.WhiteSmoke;
             }
 
             //Date Color Formatting----------------------------------------------------------------------------------------------
@@ -440,16 +451,42 @@ namespace Tracer.Forms.Views.Production
             dgActiveWORs.Enabled = true;
 
             //Task View Stuff
-            dgTaskView.DataSource = null;
+            dgTaskView.Enabled = false;
+
+            //Get Current Selection Location
+            if (dgTaskView.CurrentCell != null)
+            {
+                if (dgTaskView.CurrentCell.ColumnIndex > 0)
+                {
+                    TaskActiveRow = dgTaskView.CurrentCell.RowIndex;
+                    TaskActiveColumn = dgTaskView.CurrentCell.ColumnIndex;
+                }
+            }
 
             Classes.DataAccess.ProductionDataAccess dbEng = new Classes.DataAccess.ProductionDataAccess();
-            TaskRequests = dbEng.GetEngineeringTaskList();
-
+            TaskRequests = dbEng.GetProductionTaskList();
             dgTaskView.DataSource = TaskRequests;
+
+            //Format Task View Data Grid
             dgTaskView.Columns["Owner"].Visible = false;
+            dgTaskView.Columns["SuperHot"].Visible = false;
+
+            //Re-Select Current Cell
+            try
+            {
+                dgTaskView.CurrentCell = dgTaskView.Rows[TaskActiveRow].Cells[TaskActiveColumn];
+            }
+            catch { }
+
+            dgTaskView.Enabled = true;
 
             dgTaskView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgTaskView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private void dgTaskView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
         }
 
         //Task View Handlers----------------------------------------------------------------------------------------------

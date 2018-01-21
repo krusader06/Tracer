@@ -22,6 +22,9 @@ namespace Tracer.Forms.Views.Engineering
         //Used to store current cell for active WOR datagrid
         int WORactiveRow;
         int WORactiveColumn;
+        //Task DGV current cell holders
+        int TaskActiveRow;
+        int TaskActiveColumn;
 
         //Used for Task View
         int activeRow;
@@ -48,6 +51,104 @@ namespace Tracer.Forms.Views.Engineering
             timer.Interval = (10 * 1000);
             timer.Tick += new EventHandler(populate);
             timer.Start();
+        }
+
+        public void populate(object sender, EventArgs e)
+        {
+            loadActiveWORs();
+            loadTasks();
+        }
+
+        //Populate Helper Tasks------------------------------------------------------------------------------------------
+
+        private void loadActiveWORs()
+        {
+            dgActiveWORs.Enabled = false;
+
+            //Get Current Selection Location
+            if (dgActiveWORs.CurrentCell != null)
+            {
+                if (dgActiveWORs.CurrentCell.ColumnIndex > 0)
+                {
+                    WORactiveRow = dgActiveWORs.CurrentCell.RowIndex;
+                    WORactiveColumn = dgActiveWORs.CurrentCell.ColumnIndex;
+                }
+            }
+
+            //Load DataGridView
+            Classes.DataAccess.DashboardDataAccess db = new Classes.DataAccess.DashboardDataAccess();
+
+            engineeringDashboard = db.LoadDashboard(ckQuotes.Checked, ckWORs.Checked);
+            dgActiveWORs.DataSource = engineeringDashboard;
+
+            Classes.StatusCalculation calculatedStatus = new Classes.StatusCalculation();
+            calculatedStatus.CalculateDashboard(engineeringDashboard);
+
+            //Format DataGridView
+            formatDataGrid();
+
+            //Re-select Current Cell
+            try
+            {
+                dgActiveWORs.CurrentCell = dgActiveWORs.Rows[WORactiveRow].Cells[WORactiveColumn];
+            }
+            catch { }
+
+            dgActiveWORs.Enabled = true;
+        }
+
+        private void loadTasks()
+        {
+            //Task View Stuff
+            dgTaskView.Enabled = false;
+
+            //Get Current Selection Location
+            if (dgTaskView.CurrentCell != null)
+            {
+                if (dgTaskView.CurrentCell.ColumnIndex > 0)
+                {
+                    TaskActiveRow = dgTaskView.CurrentCell.RowIndex;
+                    TaskActiveColumn = dgTaskView.CurrentCell.ColumnIndex;
+                }
+            }
+
+            //Load Task View
+            Classes.DataAccess.EngineeringDataAccess dbEng = new Classes.DataAccess.EngineeringDataAccess();
+            TaskRequests = dbEng.GetEngineeringTaskList();
+            dgTaskView.DataSource = TaskRequests;
+
+            //Format Task View Data Grid
+            dgTaskView.Columns["Owner"].Visible = false;
+            dgTaskView.Columns["SuperHot"].Visible = false;
+
+            //Re-Select Current Cell
+            try
+            {
+                dgTaskView.CurrentCell = dgTaskView.Rows[TaskActiveRow].Cells[TaskActiveColumn];
+            }
+            catch { }
+
+            dgTaskView.Enabled = true;
+
+            dgTaskView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgTaskView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        //Cell Formatting-----------------------------------------------------------------------------------------------------------
+        private void dgTaskView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgTaskView.Rows[e.RowIndex].Cells[dgTaskView.Columns["SuperHot"].Index].Value.ToString() == "1")
+            {
+                //Highlight the row if it is SuperHot
+                dgTaskView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.LightPink;
+                dgTaskView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Red;
+
+            }
+            else
+            {
+                dgTaskView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.White;
+                dgTaskView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Black;
+            }
         }
 
         private void dgActiveWORs_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -88,6 +189,14 @@ namespace Tracer.Forms.Views.Engineering
                         e.CellStyle.BackColor = Color.LimeGreen;
                         break;
 
+                }
+
+                //SuperHot Color Formatting------------------------------------------------------------------------------------------
+
+                if (dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["SuperHot"].Index].Value.ToString() == "True")
+                {
+                    dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["QuoteOrWOR"].Index].Style.BackColor = Color.Crimson;
+                    dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["QuoteOrWOR"].Index].Style.ForeColor = Color.WhiteSmoke;
                 }
 
                 //Date Color Formatting----------------------------------------------------------------------------------------------
@@ -395,58 +504,6 @@ namespace Tracer.Forms.Views.Engineering
             //dgActiveWORs.Columns["Comments"].Visible = false;
 
 
-        }
-
-        public void populate(object sender, EventArgs e)
-        {
-
-            dgActiveWORs.Enabled = false;
-
-            //Get Current Selection Location
-            if (dgActiveWORs.CurrentCell != null)
-            {
-                if (dgActiveWORs.CurrentCell.ColumnIndex > 0)
-                {
-                    WORactiveRow = dgActiveWORs.CurrentCell.RowIndex;
-                    WORactiveColumn = dgActiveWORs.CurrentCell.ColumnIndex;
-                }
-            }
-
-            //Load DataGridView
-            Classes.DataAccess.DashboardDataAccess db = new Classes.DataAccess.DashboardDataAccess();
-
-            engineeringDashboard = db.LoadDashboard(ckQuotes.Checked, ckWORs.Checked);
-            dgActiveWORs.DataSource = engineeringDashboard;
-
-            Classes.StatusCalculation calculatedStatus = new Classes.StatusCalculation();
-            calculatedStatus.CalculateDashboard(engineeringDashboard);
-
-            //Format DataGridView
-            formatDataGrid();
-
-            //Re-set Current Cell
-            try
-            {
-                dgActiveWORs.CurrentCell = dgActiveWORs.Rows[WORactiveRow].Cells[WORactiveColumn];
-            }
-            catch
-            {
-
-            }
-
-            dgActiveWORs.Enabled = true;
-
-            //Task View Stuff
-            dgTaskView.DataSource = null;
-
-            Classes.DataAccess.EngineeringDataAccess dbEng = new Classes.DataAccess.EngineeringDataAccess();
-            TaskRequests = dbEng.GetEngineeringTaskList();
-
-            dgTaskView.DataSource = TaskRequests;
-            dgTaskView.Columns["Owner"].Visible = false;
-
-            dgTaskView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgTaskView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         //Task View Handlers----------------------------------------------------------------------------------------------

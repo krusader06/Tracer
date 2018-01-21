@@ -124,6 +124,7 @@
             this.dgTaskView.Size = new System.Drawing.Size(1525, 374);
             this.dgTaskView.TabIndex = 9;
             this.dgTaskView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTaskView_CellClick);
+            this.dgTaskView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgTaskView_CellFormatting);
             // 
             // ckWORs
             // 

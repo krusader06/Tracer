@@ -670,7 +670,7 @@ namespace Tracer
                 //Listen To Menu Buttons
 
                 Forms.Views.Executive.ucExecutiveMenu.Instance.DashboardButtonClicked += new EventHandler(showExecutiveDashboard);
-                //Forms.Views.Executive.ucExecutiveMenu.Instance.SuperHotButtonClicked += new EventHandler();
+                Forms.Views.Executive.ucExecutiveMenu.Instance.SuperHotButtonClicked += new EventHandler(showSuperHot);
                 Forms.Views.Executive.ucExecutiveMenu.Instance.HomeButtonClicked += new EventHandler(prepareHomeView);
                 Forms.Views.Executive.ucExecutiveMenu.Instance.ExitButtonClicked += new EventHandler(exitApplication);
             }
@@ -698,6 +698,27 @@ namespace Tracer
             {
                 Forms.Views.Executive.ucExecutiveDashboard.Instance.BringToFront();
                 Forms.Views.Executive.ucExecutiveDashboard.Instance.populate(null, null);
+            }
+        }
+
+        private void showSuperHot(object sender, EventArgs e)
+        {
+            // Show the Executive Main View Dashboard
+            lblMain.Text = "Executive - Set Super Hot Priority";
+
+            if (!mainContainer.Controls.Contains(Forms.Views.Executive.ucSuperHot.Instance))
+            {
+                mainContainer.Controls.Add(Forms.Views.Executive.ucSuperHot.Instance);
+                Forms.Views.Executive.ucSuperHot.Instance.Dock = DockStyle.Fill;
+                Forms.Views.Executive.ucSuperHot.Instance.BringToFront();
+
+                //Add Event Listeners If Necessary...
+
+            }
+            else
+            {
+                Forms.Views.Executive.ucSuperHot.Instance.BringToFront();
+                Forms.Views.Executive.ucSuperHot.Instance.ShowLotNumbers();
             }
         }
 

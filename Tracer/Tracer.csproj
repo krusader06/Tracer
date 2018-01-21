@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Forms\Classes\DataAccess\DashboardDataAccess.cs" />
     <Compile Include="Forms\Classes\DataAccess\EngineeringDataAccess.cs" />
+    <Compile Include="Forms\Classes\DataAccess\ExecutiveDataAccess.cs" />
     <Compile Include="Forms\Classes\DataAccess\ProductionDataAccess.cs" />
     <Compile Include="Forms\Classes\DataAccess\PurchasingDataAccess.cs" />
     <Compile Include="Forms\Classes\DatabaseTables\ActiveQuotes.cs" />
@@ -125,6 +126,12 @@
     </Compile>
     <Compile Include="Forms\Views\Executive\ucExecutiveMenu.Designer.cs">
       <DependentUpon>ucExecutiveMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Views\Executive\ucSuperHot.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\Executive\ucSuperHot.Designer.cs">
+      <DependentUpon>ucSuperHot.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Views\Production\ucProductionDashboard.cs">
       <SubType>UserControl</SubType>
@@ -262,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Executive\ucExecutiveMenu.resx">
       <DependentUpon>ucExecutiveMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Views\Executive\ucSuperHot.resx">
+      <DependentUpon>ucSuperHot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Views\Production\ucProductionDashboard.resx">
       <DependentUpon>ucProductionDashboard.cs</DependentUpon>

@@ -9,7 +9,7 @@ namespace Tracer.Forms.Classes.DataAccess
 {
     public class ProductionDataAccess
     {
-        public List<Classes.LotTask> GetEngineeringTaskList()
+        public List<Classes.LotTask> GetProductionTaskList()
         {
             using (System.Data.IDbConnection connection = new System.Data.SqlClient.SqlConnection(Classes.Helper.CnnVal("TracerDB")))
             {   //Responsible for returning all 4 Engineering Task types and compiling them under a lotTask list
@@ -22,6 +22,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", Lot = '0' " +
                     $", ActiveQuotes.PartID " +
                     $", JobStatus = 'Pre-Bid Review Requested' " +
+                    $", QuoteDueDate AS DueDate " +
+                    $", SuperHot = '0' " +
                     $"FROM ActiveQuotes INNER JOIN QuoteStatus " +
                     $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
                     $"WHERE QuoteStatus.PreBidRequest = 'True' " +
@@ -35,14 +37,16 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", Lot = '0' " +
                     $", ActiveQuotes.PartID " +
                     $", JobStatus = 'Pre-Bid Review In Progress' " +
+                    $", QuoteDueDate AS DueDate " +
+                    $", SuperHot = '0' " +
                     $"FROM ActiveQuotes INNER JOIN QuoteStatus " +
                     $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
                     $"WHERE QuoteStatus.PreBidRequest = 'True' " +
                     $"AND QuoteStatus.PreBidInProgress = 'True' " +
                     $"AND ActiveQuotes.QuoteInactive = 'False' " +
-                    $"AND ActiveQuotes.POReceived = 'False' "
+                    $"AND ActiveQuotes.POReceived = 'False' " +
 
-                    ).ToList();
+                    $"ORDER BY SuperHot DESC, DueDate, JobWOR, Lot").ToList();
             }
         }
 

@@ -13,7 +13,7 @@ namespace Tracer.Forms.Views.Executive
     public partial class ucExecutiveDashboard : UserControl
     {
         private static ucExecutiveDashboard _instance;
-        List<Classes.DatabaseTables.Dashboard> engineeringDashboard = new List<Classes.DatabaseTables.Dashboard>();
+        List<Classes.DatabaseTables.Dashboard> executiveDashboard = new List<Classes.DatabaseTables.Dashboard>();
         List<Classes.LotTask> TaskRequests = new List<Classes.LotTask>();
 
         //Refresh Timer
@@ -22,9 +22,6 @@ namespace Tracer.Forms.Views.Executive
         //Used to store current cell for active WOR datagrid
         int WORactiveRow;
         int WORactiveColumn;
-
-        //Used for Task View
-        int activeRow;
 
         public static ucExecutiveDashboard Instance
         {
@@ -131,6 +128,15 @@ namespace Tracer.Forms.Views.Executive
 
                 }
             }
+
+            //SuperHot Color Formatting------------------------------------------------------------------------------------------
+
+            if (dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["SuperHot"].Index].Value.ToString() == "True")
+            {
+                dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["QuoteOrWOR"].Index].Style.BackColor = Color.Crimson;
+                dgActiveWORs.Rows[e.RowIndex].Cells[dgActiveWORs.Columns["QuoteOrWOR"].Index].Style.ForeColor = Color.WhiteSmoke;
+            }
+
 
             //Date Color Formatting----------------------------------------------------------------------------------------------
 
@@ -461,11 +467,11 @@ namespace Tracer.Forms.Views.Executive
             //Load DataGridView
             Classes.DataAccess.DashboardDataAccess db = new Classes.DataAccess.DashboardDataAccess();
 
-            engineeringDashboard = db.LoadDashboard(ckQuotes.Checked, ckWORs.Checked);
-            dgActiveWORs.DataSource = engineeringDashboard;
+            executiveDashboard = db.LoadDashboard(ckQuotes.Checked, ckWORs.Checked);
+            dgActiveWORs.DataSource = executiveDashboard;
 
             Classes.StatusCalculation calculatedStatus = new Classes.StatusCalculation();
-            calculatedStatus.CalculateDashboard(engineeringDashboard);
+            calculatedStatus.CalculateDashboard(executiveDashboard);
 
             //Format DataGridView
             formatDataGrid();

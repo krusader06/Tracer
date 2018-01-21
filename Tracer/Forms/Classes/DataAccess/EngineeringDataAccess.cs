@@ -45,6 +45,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", Lot = '0' " +
                     $", ActiveQuotes.PartID " +
                     $", JobStatus = 'BOM Validation Requested' " +
+                    $", QuoteDueDate AS DueDate " +
+                    $", SuperHot = '0' " +
                     $"FROM ActiveQuotes INNER JOIN QuoteStatus " +
                     $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
                     $"WHERE QuoteStatus.BOMValidationRequest = 'True' " +
@@ -58,6 +60,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", Lot = '0' " +
                     $", ActiveQuotes.PartID " +
                     $", JobStatus = 'BOM Validation In Progress' " +
+                    $", QuoteDueDate AS DueDate " +
+                    $", SuperHot = '0' " +
                     $"FROM ActiveQuotes INNER JOIN QuoteStatus " +
                     $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
                     $"WHERE QuoteStatus.BOMValidationRequest = 'True' " +
@@ -71,6 +75,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", Lot = '0' " +
                     $", ActiveQuotes.PartID " +
                     $", JobStatus = 'Pre-Bid Review Requested' " +
+                    $", QuoteDueDate AS DueDate " +
+                    $", SuperHot = '0' " +
                     $"FROM ActiveQuotes INNER JOIN QuoteStatus " +
                     $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
                     $"WHERE QuoteStatus.PreBidRequest = 'True' " +
@@ -84,6 +90,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", Lot = '0' " +
                     $", ActiveQuotes.PartID " +
                     $", JobStatus = 'Pre-Bid Review In Progress' " +
+                    $", QuoteDueDate AS DueDate " +
+                    $", SuperHot = '0' " +
                     $"FROM ActiveQuotes INNER JOIN QuoteStatus " +
                     $"ON ActiveQuotes.QuoteWOR = QuoteStatus.QuoteWOR " +
                     $"WHERE QuoteStatus.PreBidRequest = 'True' " +
@@ -97,6 +105,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotNumbers.Lot " +
                     $", LotNumbers.PartID " +
                     $", JobStatus = 'Quote Review Requested' " +
+                    $", JobDueDate AS DueDate " +
+                    $", SuperHot " +
                     $"FROM LotNumbers INNER JOIN LotStatus " +
                     $"ON LotNumbers.LotID = LotStatus.LotID " +
                     $"WHERE LotStatus.QuoteReviewRequest = 'True' " +
@@ -109,6 +119,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotNumbers.Lot " +
                     $", LotNumbers.PartID " +
                     $", JobStatus = 'Quote Review In Progress' " +
+                    $", JobDueDate AS DueDate " +
+                    $", SuperHot " +
                     $"FROM LotNumbers INNER JOIN LotStatus " +
                     $"ON LotNumbers.LotID = LotStatus.LotID " +
                     $"WHERE LotStatus.QuoteReviewRequest = 'True' " +
@@ -121,6 +133,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotNumbers.Lot " +
                     $", LotNumbers.PartID " +
                     $", JobStatus = 'Master Creation Requested' " +
+                    $", JobDueDate AS DueDate " +
+                    $", SuperHot " +
                     $"FROM LotNumbers INNER JOIN LotStatus " +
                     $"ON LotNumbers.LotID = LotStatus.LotID " +
                     $"WHERE LotStatus.MasterRequest = 'True' " +
@@ -133,11 +147,15 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotNumbers.Lot " +
                     $", LotNumbers.PartID " +
                     $", JobStatus = 'Master Creation In Progress' " +
+                    $", JobDueDate AS DueDate " +
+                    $", SuperHot " +
                     $"FROM LotNumbers INNER JOIN LotStatus " +
                     $"ON LotNumbers.LotID = LotStatus.LotID " +
                     $"WHERE LotStatus.MasterRequest = 'True' " +
                     $"AND LotStatus.MasterInProgress = 'True' " +
-                    $"AND LotStatus.JobComplete = 'False'").ToList();
+                    $"AND LotStatus.JobComplete = 'False' " +
+
+                    $"ORDER BY SuperHot DESC, DueDate, JobWOR, Lot ").ToList();
             }
         }
 

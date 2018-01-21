@@ -72,6 +72,8 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotNumbers.Lot " +
                     $", LotNumbers.PartID " +
                     $", JobStatus = 'Master Review Requested' " +
+                    $", JobDueDate AS DueDate " +
+                    $", SuperHot " +
                     $"FROM LotNumbers " +
                     $"INNER JOIN LotStatus " +
                     $"ON LotNumbers.LotID = LotStatus.LotID " +
@@ -85,12 +87,16 @@ namespace Tracer.Forms.Classes.DataAccess
                     $", LotNumbers.Lot " +
                     $", LotNumbers.PartID " +
                     $", JobStatus = 'Master Review In Progress' " +
+                    $", JobDueDate AS DueDate " +
+                    $", SuperHot " +
                     $"FROM LotNumbers " +
                     $"INNER JOIN LotStatus " +
                     $"ON LotNumbers.LotID = LotStatus.LotID " +
                     $"WHERE LotStatus.MasterReviewRequest = 'True' " +
                     $"AND LotStatus.MasterReviewInProgress = 'True' " +
-                    $"AND LotStatus.JobComplete = 'False'").ToList();
+                    $"AND LotStatus.JobComplete = 'False'" +
+
+                    $"ORDER BY SuperHot DESC, DueDate, JobWOR, Lot ").ToList();
             }
         }
 
