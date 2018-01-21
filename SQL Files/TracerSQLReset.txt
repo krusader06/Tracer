@@ -1,0 +1,16 @@
+Delete from LotTimeTracking
+Delete from PurchasingTimeTracking
+Delete from LotStatus
+Delete from LotPurchasingStatus
+Delete from LotNumbers
+Delete from WorkOrders
+Delete from QuoteStatus
+Delete from	ActiveQuotes
+DBCC CHECKIDENT (LotTimeTracking, RESEED, 0)
+DBCC CHECKIDENT (PurchasingTimeTracking, RESEED, 0)
+DBCC CHECKIDENT (LotStatus, RESEED, 0)
+DBCC CHECKIDENT (LotPurchasingStatus, RESEED, 0)
+DBCC CHECKIDENT (LotNumbers, RESEED, 0)
+DBCC CHECKIDENT (WorkOrders, RESEED, 0)
+DBCC CHECKIDENT (QuoteStatus, RESEED, 0)
+DBCC CHECKIDENT (ActiveQuotes, RESEED, 0)
