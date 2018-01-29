@@ -61,8 +61,6 @@ namespace Tracer.Forms.Views.Sales
             dgNewLots.DataSource = currentLots;
         }
 
-
-
         private void InitializeFields()
         {
             dtJobDueDate.Format = DateTimePickerFormat.Custom;
@@ -113,6 +111,21 @@ namespace Tracer.Forms.Views.Sales
             }
 
             newLotNumber.JobComments = txtJobComments.Text;
+        }
+
+        private void clearFields()
+        {
+            txtLotNumber.Text = "";
+            txtOrderQuantity.Text = "";
+            dtJobDueDate.Text = "";
+            dtMasterDueDate.Text = "";
+            dtKitDueDate.Text = "";
+            txtTurnTime.Text = "";
+
+            ckConsigned.Checked = false;
+            ckTurnkey.Checked = false;
+
+            txtJobComments.Text = "";
         }
 
         private void LoadLotStatus()
@@ -208,8 +221,18 @@ namespace Tracer.Forms.Views.Sales
             AddLotNumber();
             //Bring in the New Lot Number
             ShowCurrentLotNumbers();
+
+            //Store Lot Number
+            int tempLot = Int32.Parse(txtLotNumber.Text) + 1;
+            //Clear the window
+            clearFields();
+            //Restore new lot number
+            txtLotNumber.Text = tempLot.ToString();
         }
 
-        
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            clearFields();
+        }
     }
 }
